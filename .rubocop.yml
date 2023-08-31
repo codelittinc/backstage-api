@@ -1,0 +1,18 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.2 # adjust this to match your Ruby version
+
+Rails:
+  Enabled: true
+
+# custom configuration
+Style/Documentation:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: true
+  Exclude:
+    - bin
