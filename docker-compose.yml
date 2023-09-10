@@ -2,7 +2,7 @@ version: '2'
 services:
   db:
     image: postgres
-    container_name: rails-db
+    container_name: backstage-db
     volumes:
       - .:/app
     env_file:
@@ -11,13 +11,13 @@ services:
       - '5432:5432'
 
   redis:
-    container_name: rails-redis
+    container_name: backstage-redis
     image: "redis:alpine"
     ports:
       - '6379:6379'
 
   app:
-    container_name: rails-api
+    container_name: backstage-api
     tty: true
     stdin_open: true
     build:
@@ -44,7 +44,7 @@ services:
       - redis
 
   box:
-    container_name: rails-bundle-box
+    container_name: backstage-bundle-box
     image: busybox
     volumes:
       - /box
