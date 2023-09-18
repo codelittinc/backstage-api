@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-rails
 
@@ -16,3 +18,10 @@ Metrics/CyclomaticComplexity:
   Enabled: true
   Exclude:
     - bin
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"

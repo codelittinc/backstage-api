@@ -1,4 +1,34 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  before_action :authenticate
+  attr_reader :current_user
+
+  def authenticate
+    user = User.find_or_initialize_by(user_params)
+    return user_invalid! unless user.valid?
+
+    user.save! if user.new_record?
+    @current_user = user
+  end
+
+  def user_invalid!
+    render_error('Invalid user', :unauthorized)
+  end
+
+  def render_error(message, status)
+    render json: { error: message }, status:
+  end
+
+  def user_data
+    @user_data ||= JSON.parse(Base64.decode64(request.headers['Authentication']))
+  end
+
+  def user_params
+    @user_params ||= user_data['user']
+  end
+
+  def valid_email_domain?
+    user_params.match?(ENV.fetch('VALID_USER_DOMAIN', nil))
+  end
 end
