@@ -21,7 +21,9 @@ class ApplicationController < ActionController::API
   end
 
   def user_data
-    @user_data ||= JSON.parse(Base64.decode64(request.headers['Authentication']))
+    authorization_header = request.headers['Authorization']
+    token = authorization_header.gsub('Bearer ', '')
+    @user_data ||= JSON.parse(Base64.decode64(token))
   end
 
   def user_params
