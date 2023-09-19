@@ -11,4 +11,18 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:google_id) }
     it { is_expected.to validate_uniqueness_of(:google_id) }
   end
+
+  context 'when creating a new user' do
+    it 'defines the slug value as the full name' do
+      user = FactoryBot.create(:user)
+      expect(user.slug).to eql("#{user.first_name}-#{user.last_name}".downcase)
+    end
+  end
+
+  context 'when using a slug to identify the user' do
+    it 'finds the correct user' do
+      user = FactoryBot.create(:user)
+      expect(User.friendly.find(user.slug)).to eql(user)
+    end
+  end
 end

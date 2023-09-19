@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true,
@@ -10,4 +13,8 @@ class User < ApplicationRecord
                     }
 
   validates :google_id, presence: true, uniqueness: true
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
