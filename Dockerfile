@@ -8,8 +8,8 @@ EXPOSE 3000
 
 WORKDIR /app
 
-# ADD Gemfile /app/Gemfile
-# ADD Gemfile.lock /app/Gemfile.lock
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 
 RUN bundle config set with 'development'
 # RUN bundle install
