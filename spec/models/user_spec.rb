@@ -12,6 +12,10 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:google_id) }
   end
 
+  describe 'associations' do
+    it { is_expected.to belong_to(:profession).optional(true) }
+  end
+
   context 'when creating a new user' do
     it 'defines the slug value as the full name' do
       user = FactoryBot.create(:user)
