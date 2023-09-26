@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  before_action :set_default_response_format
+
   before_action :authenticate
   attr_reader :current_user
 
@@ -32,5 +34,9 @@ class ApplicationController < ActionController::API
 
   def valid_email_domain?
     user_params.match?(ENV.fetch('VALID_USER_DOMAIN', nil))
+  end
+
+  def set_default_response_format
+    request.format = :json
   end
 end
