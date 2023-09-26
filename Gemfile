@@ -11,6 +11,8 @@ gem 'rails', '~> 7.0.7', '>= 7.0.7.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 
+gem 'rails_admin'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
@@ -55,3 +57,4 @@ group :development do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 end
+gem 'sassc-rails'
