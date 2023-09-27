@@ -33,7 +33,10 @@ class ApplicationController < ActionController::API
   end
 
   def valid_email_domain?
-    user_params.match?(ENV.fetch('VALID_USER_DOMAIN', nil))
+    valid_domain = ENV.fetch('VALID_USER_DOMAIN', nil)
+    return true unless valid_domain
+
+    user_params.match?(valid_domain)
   end
 
   def set_default_response_format
