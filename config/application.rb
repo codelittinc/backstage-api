@@ -40,5 +40,8 @@ module App
     config.middleware.use ActionDispatch::Flash
     config.middleware.use Rack::MethodOverride
     config.middleware.use ActionDispatch::Session::CookieStore, { key: '_app_session' }
+
+    config.active_record.encryption.key_derivation_salt = ENV.fetch('ACTIVE_RECORD_KEY_DERIVATION_SALT', nil)
+    config.active_record.encryption.primary_key = ENV.fetch('ACTIVE_RECORD_ENCRYPTION_PRIVATE_KEY', nil)
   end
 end

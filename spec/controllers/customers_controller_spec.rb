@@ -7,7 +7,9 @@ RSpec.describe CustomersController, type: :controller do
 
   let(:valid_attributes) do
     {
-      name: 'Codelitt'
+      name: 'Codelitt',
+      source_control_token: 'test',
+      notifications_token: 'test'
     }
   end
 

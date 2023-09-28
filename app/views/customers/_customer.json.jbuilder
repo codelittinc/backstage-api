@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.extract! customer, :id, :name, :created_at, :updated_at
+json.extract! customer, :id, :name, :created_at, :updated_at, :source_control_token, :notifications_token
