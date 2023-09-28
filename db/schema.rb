@@ -40,6 +40,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_151106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_projects_on_customer_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
@@ -55,5 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_151106) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "projects", "customers"
   add_foreign_key "users", "professions"
 end
