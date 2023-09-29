@@ -37,4 +37,13 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe 'GET #index' do
+    it 'returns a list of users' do
+      FactoryBot.create_list(:user, 5)
+      get :index
+      # 6 because one is created when we are authenticating
+      expect(response.parsed_body.length).to eql(6)
+    end
+  end
 end
