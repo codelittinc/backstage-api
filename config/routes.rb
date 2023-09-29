@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :projects
+  resources :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :customers
   get 'users/me'
