@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_28_184649) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_01_031426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_184649) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "target", null: false
+    t.string "ability", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "professions", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -46,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_184649) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_projects_on_customer_id"
+  end
+
+  create_table "user_permissions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_user_permissions_on_permission_id"
+    t.index ["user_id"], name: "index_user_permissions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,5 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_184649) do
   end
 
   add_foreign_key "projects", "customers"
+  add_foreign_key "user_permissions", "permissions"
+  add_foreign_key "user_permissions", "users"
   add_foreign_key "users", "professions"
 end

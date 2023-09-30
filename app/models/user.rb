@@ -15,6 +15,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
 
   belongs_to :profession, optional: true
+  has_many :user_permissions
+  has_many :permissions, through: :user_permissions
 
   def full_name
     "#{first_name} #{last_name}"

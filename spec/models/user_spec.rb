@@ -14,6 +14,7 @@ RSpec.describe User, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:profession).optional(true) }
+    it { is_expected.to have_many(:user_permissions).optional(true) }
   end
 
   context 'when creating a new user' do
