@@ -29,7 +29,12 @@ class ApplicationController < ActionController::API
   end
 
   def user_params
-    @user_params ||= user_data['user']
+    return @user_params if @user_params
+
+    @user_params = user_data['user']
+    @user_params['first_name'] = convert_to_utf8(@user_params['first_name'])
+    @user_params['last_name'] = convert_to_utf8(@user_params['last_name'])
+    @user_params
   end
 
   def valid_email_domain?
@@ -38,5 +43,9 @@ class ApplicationController < ActionController::API
 
   def set_default_response_format
     request.format = :json
+  end
+
+  def convert_to_utf8(str)
+    str.force_encoding('ISO-8859-1').encode('UTF-8')
   end
 end
