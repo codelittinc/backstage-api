@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :google_id, presence: true, uniqueness: true
 
   belongs_to :profession, optional: true
+  has_many :user_permissions, dependent: :destroy
+  has_many :permissions, through: :user_permissions
 
   def full_name
     "#{first_name} #{last_name}"
