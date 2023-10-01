@@ -6,6 +6,7 @@ FactoryBot.define do
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }
     google_id { rand(1e9..1e10).to_i.to_s }
+    image_url { FFaker::Avatar.image }
 
     association :profession
   end

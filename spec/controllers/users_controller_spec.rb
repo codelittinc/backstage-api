@@ -35,6 +35,11 @@ RSpec.describe UsersController, type: :controller do
           get :show, params: { id: 'me' }
           expect(response.parsed_body['last_name']).to eql(user_params[:user][:last_name])
         end
+
+        it 'sets the user image_url' do
+          get :show, params: { id: 'me' }
+          expect(response.parsed_body['image_url']).to eql(user_params[:user][:image_url])
+        end
       end
 
       xcontext 'when user email is from a different domain than expected' do
