@@ -13,14 +13,17 @@ class ApplicationController < ActionController::API
                                       })
     return user_invalid! unless user.valid?
 
-    save_user!(user) if user.new_record?
+    save_user!(user)
 
     @current_user = user
   end
 
   def save_user!(user)
-    user.first_name = user_params['first_name']
-    user.last_name = user_params['last_name']
+    if user.new_record?
+      user.first_name = user_params['first_name']
+      user.last_name = user_params['last_name']
+    end
+    user.image_url = user_params['image_url']
     user.save!
   end
 
