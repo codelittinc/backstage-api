@@ -7,11 +7,21 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def authenticate
-    user = User.find_or_initialize_by(user_params)
+    user = User.find_or_initialize_by({
+                                        email: user_params['email'],
+                                        google_id: user_params['google_id']
+                                      })
     return user_invalid! unless user.valid?
 
-    user.save! if user.new_record?
+    save_user!(user) if user.new_record?
+
     @current_user = user
+  end
+
+  def save_user!(user)
+    user.first_name = user_params['first_name']
+    user.last_name = user_params['last_name']
+    user.save!
   end
 
   def user_invalid!

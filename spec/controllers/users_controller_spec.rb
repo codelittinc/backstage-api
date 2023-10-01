@@ -25,6 +25,16 @@ RSpec.describe UsersController, type: :controller do
             get :show, params: { id: 'me' }
           end.to change(User, :count).by(1)
         end
+
+        it 'sets the user first name' do
+          get :show, params: { id: 'me' }
+          expect(response.parsed_body['first_name']).to eql(user_params[:user][:first_name])
+        end
+
+        it 'sets the user last name' do
+          get :show, params: { id: 'me' }
+          expect(response.parsed_body['last_name']).to eql(user_params[:user][:last_name])
+        end
       end
 
       xcontext 'when user email is from a different domain than expected' do
