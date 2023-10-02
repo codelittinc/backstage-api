@@ -8,6 +8,27 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_uniqueness_of(:email) }
     it { is_expected.to validate_presence_of(:google_id) }
     it { is_expected.to validate_uniqueness_of(:google_id) }
+    it { is_expected.to validate_inclusion_of(:seniority).in_array(%w[intern junior midlevel senior]) }
+    it { is_expected.to validate_inclusion_of(:active).in_array([true, false]) }
+
+    it 'validates the seniority' do
+      user = FactoryBot.create(:user)
+      valid_seniority = User::VALID_SENIORITIES.sample
+      user.seniority = valid_seniority
+      expect(user.save).to be_truthy
+    end
+
+    it 'validates the seniority to be potentially nil' do
+      user = FactoryBot.create(:user)
+      user.seniority = nil
+      expect(user.save).to be_truthy
+    end
+
+    it 'validates the contract_type' do
+      user = FactoryBot.create(:user)
+      user.contract_type = nil
+      expect(user.valid?).to be_truthy
+    end
   end
 
   describe 'associations' do
