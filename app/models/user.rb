@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   validates :google_id, presence: true, uniqueness: true
 
+  VALID_SENIORITIES = %w[intern junior midlevel senior].freeze
+  validates :seniority, inclusion: { in: VALID_SENIORITIES, allow_nil: true }
+  validates :active, inclusion: { in: [true, false] }
+
   belongs_to :profession, optional: true
 
   def full_name

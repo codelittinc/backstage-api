@@ -7,6 +7,9 @@ FactoryBot.define do
     last_name { FFaker::Name.last_name }
     google_id { rand(1e9..1e10).to_i.to_s }
     image_url { FFaker::Avatar.image }
+    contract_type { FFaker::Lorem.word }
+    seniority { 'intern' }
+    active { [true, false].sample }
 
     association :profession
   end
