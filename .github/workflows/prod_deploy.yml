@@ -23,3 +23,9 @@ jobs:
           heroku_app_name: prod-backspage-api
           branch: master
           dontuseforce: false
+
+      - uses: codelittinc/action-roadrunner-notify-deploy@master
+        if: always()
+        with:
+          environment: prod
+          identifier: api.backstage.codelitt.dev
