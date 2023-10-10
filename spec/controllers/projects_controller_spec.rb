@@ -4,13 +4,13 @@ require 'rails_helper'
 
 RSpec.describe ProjectsController, type: :controller do
   include_context 'authentication'
+  render_views
 
   let(:valid_attributes) do
     customer = FactoryBot.create(:customer)
     {
       name: 'Project 1',
       customer_id: customer.id
-
     }
   end
 
@@ -34,6 +34,13 @@ RSpec.describe ProjectsController, type: :controller do
       project = Project.create! valid_attributes
       get :show, params: { id: project.to_param }
       expect(response).to be_successful
+    end
+
+    it 'returns the customer' do
+      project = Project.create! valid_attributes
+      get :show, params: { id: project.to_param }, format: :json
+
+      expect(response.parsed_body['customer']['id']).to eq(project.customer.id)
     end
   end
 
