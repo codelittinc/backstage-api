@@ -45,10 +45,6 @@ class ApplicationController < ActionController::API
     return @user_auth_params if @user_auth_params
 
     @user_auth_params = user_data['user']
-    # move this normalization to the model
-    @user_auth_params['first_name'] = convert_to_utf8(@user_auth_params['first_name'])
-    @user_auth_params['last_name'] = convert_to_utf8(@user_auth_params['last_name'])
-    @user_auth_params
   end
 
   def valid_email_domain?
