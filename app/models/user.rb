@@ -46,11 +46,24 @@ class User < ApplicationRecord
   validates :seniority, inclusion: { in: VALID_SENIORITIES, allow_nil: true }
   validates :active, inclusion: { in: [true, false] }
 
+  before_validation :normalize_names
+
   belongs_to :profession, optional: true
   has_many :user_permissions, dependent: :destroy
   has_many :permissions, through: :user_permissions
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def normalize_names
+    self.first_name = convert_to_utf8(first_name)
+    self.last_name = convert_to_utf8(last_name)
+  end
+
+  def convert_to_utf8(str)
+    return str if str.nil?
+
+    str.force_encoding('ISO-8859-1').encode('UTF-8')
   end
 end
