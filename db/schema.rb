@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_004814) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["permission_id"], name: "index_user_permissions_on_permission_id"
+    t.index ["user_id", "permission_id"], name: "index_user_permissions_on_user_id_and_permission_id", unique: true
     t.index ["user_id"], name: "index_user_permissions_on_user_id"
   end
 
@@ -76,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_004814) do
     t.string "image_url"
     t.string "contract_type"
     t.string "seniority"
-    t.boolean "active", default: false, null: false
+    t.boolean "active", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["google_id"], name: "index_users_on_google_id", unique: true
     t.index ["profession_id"], name: "index_users_on_profession_id"

@@ -23,6 +23,8 @@ Rails/I18nLocaleTexts:
 Metrics/BlockLength:
   Exclude:
     - "spec/**/*"
+    - "config/initializers/*"
+    - "lib/tasks/*"
 
 Metrics/MethodLength:
   Exclude:
