@@ -8,8 +8,8 @@ class ApplicationController < ActionController::API
 
   def authenticate
     user = User.find_or_initialize_by({
-                                        email: user_params['email'],
-                                        google_id: user_params['google_id']
+                                        email: user_auth_params['email'],
+                                        google_id: user_auth_params['google_id']
                                       })
     return user_invalid! unless user.valid?
 
@@ -20,10 +20,10 @@ class ApplicationController < ActionController::API
 
   def save_user!(user)
     if user.new_record?
-      user.first_name = user_params['first_name']
-      user.last_name = user_params['last_name']
+      user.first_name = user_auth_params['first_name']
+      user.last_name = user_auth_params['last_name']
     end
-    user.image_url = user_params['image_url']
+    user.image_url = user_auth_params['image_url']
     user.save!
   end
 
@@ -41,17 +41,18 @@ class ApplicationController < ActionController::API
     @user_data ||= JSON.parse(Base64.decode64(token))
   end
 
-  def user_params
-    return @user_params if @user_params
+  def user_auth_params
+    return @user_auth_params if @user_auth_params
 
-    @user_params = user_data['user']
-    @user_params['first_name'] = convert_to_utf8(@user_params['first_name'])
-    @user_params['last_name'] = convert_to_utf8(@user_params['last_name'])
-    @user_params
+    @user_auth_params = user_data['user']
+    # move this normalization to the model
+    @user_auth_params['first_name'] = convert_to_utf8(@user_auth_params['first_name'])
+    @user_auth_params['last_name'] = convert_to_utf8(@user_auth_params['last_name'])
+    @user_auth_params
   end
 
   def valid_email_domain?
-    user_params.match?(ENV.fetch('VALID_USER_DOMAIN', nil))
+    user_auth_params.match?(ENV.fetch('VALID_USER_DOMAIN', nil))
   end
 
   def set_default_response_format
