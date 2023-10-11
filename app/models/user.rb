@@ -34,7 +34,7 @@ class User < ApplicationRecord
   friendly_id :full_name, use: :slugged
 
   # @TODO: decide if email is unique or not
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   # , format: {
   #                     with: /\A[\w+\-.]+@#{ENV.fetch('VALID_USER_DOMAIN', nil)}\z/i,
   #                     message: "must be a #{ENV.fetch('VALID_USER_DOMAIN', nil)} account"

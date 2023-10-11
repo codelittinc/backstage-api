@@ -4,6 +4,7 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   include_context 'authentication'
+  render_views
 
   describe 'GET #show' do
     context 'when user is logged in' do
@@ -68,6 +69,45 @@ RSpec.describe UsersController, type: :controller do
       get :index
       # 6 because one is created when we are authenticating
       expect(response.parsed_body.length).to eql(6)
+    end
+  end
+
+  describe 'PUT #update' do
+    let(:user) do
+      FactoryBot.create(:user)
+    end
+
+    context 'when user is logged in' do
+      context 'with valid attributes' do
+        let(:new_attributes) { { first_name: 'Updated', last_name: 'Name' } }
+
+        it 'updates the user' do
+          put :update, params: { id: user.id, user: new_attributes }
+          user.reload
+          expect(user.first_name).to eq('Updated')
+          expect(user.last_name).to eq('Name')
+        end
+
+        it 'returns http success' do
+          put :update, params: { id: user.id, user: new_attributes }
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context 'with invalid attributes' do
+        let(:invalid_attributes) { { email: 'not_an_email' } }
+
+        it 'does not update the user' do
+          put :update, params: { id: user.id, user: invalid_attributes }
+          user.reload
+          expect(user.email).not_to eq('not_an_email')
+        end
+
+        it 'returns http unprocessable_entity status' do
+          put :update, params: { id: user.id, user: invalid_attributes }
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+      end
     end
   end
 end

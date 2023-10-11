@@ -31,13 +31,13 @@
 #
 FactoryBot.define do
   factory :user do
-    email { "#{FFaker::Name.first_name}.#{FFaker::Name.last_name}@#{ENV.fetch('VALID_USER_DOMAIN', nil)}" }
+    email { FFaker::Internet.email }
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }
     google_id { rand(1e9..1e10).to_i.to_s }
     image_url { FFaker::Avatar.image }
     contract_type { FFaker::Lorem.word }
-    seniority { 'intern' }
+    seniority { %w[intern junior midlevel senior].sample }
     active { [true, false].sample }
 
     association :profession
