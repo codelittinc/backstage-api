@@ -1,5 +1,34 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: users
+#
+#  id            :bigint           not null, primary key
+#  active        :boolean          default(TRUE), not null
+#  contract_type :string
+#  email         :string
+#  first_name    :string
+#  image_url     :string
+#  last_name     :string
+#  seniority     :string
+#  slug          :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  google_id     :string
+#  profession_id :bigint
+#
+# Indexes
+#
+#  index_users_on_email          (email) UNIQUE
+#  index_users_on_google_id      (google_id) UNIQUE
+#  index_users_on_profession_id  (profession_id)
+#  index_users_on_slug           (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (profession_id => professions.id)
+#
 FactoryBot.define do
   factory :user do
     email { "#{FFaker::Name.first_name}.#{FFaker::Name.last_name}@#{ENV.fetch('VALID_USER_DOMAIN', nil)}" }
