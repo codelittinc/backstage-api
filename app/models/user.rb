@@ -7,6 +7,7 @@
 #  id            :bigint           not null, primary key
 #  active        :boolean          default(TRUE), not null
 #  contract_type :string
+#  country       :string
 #  email         :string
 #  first_name    :string
 #  image_url     :string
@@ -42,7 +43,7 @@ class User < ApplicationRecord
 
   validates :google_id, presence: true, uniqueness: true
 
-  VALID_SENIORITIES = %w[intern junior midlevel senior].freeze
+  VALID_SENIORITIES = %w[Intern Junior Midlevel Senior].freeze
   validates :seniority, inclusion: { in: VALID_SENIORITIES, allow_nil: true }
   validates :active, inclusion: { in: [true, false] }
 
