@@ -29,6 +29,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:active, :contract_type, :email, :first_name, :last_name, :image_url, :seniority,
-                                 :google_id, :profession_id, :country)
+                                 :google_id, :profession_id, :country,
+                                 user_service_identifiers_attributes: %i[id identifier service_name customer_id])
   end
 end

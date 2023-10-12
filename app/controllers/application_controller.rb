@@ -7,6 +7,8 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def authenticate
+    return user_invalid! unless authorization_header
+
     user = User.find_or_initialize_by({
                                         email: user_auth_params['email'],
                                         google_id: user_auth_params['google_id']
@@ -36,9 +38,12 @@ class ApplicationController < ActionController::API
   end
 
   def user_data
-    authorization_header = request.headers['Authorization']
     token = authorization_header.gsub('Bearer ', '')
     @user_data ||= JSON.parse(Base64.decode64(token))
+  end
+
+  def authorization_header
+    request.headers['Authorization']
   end
 
   def user_auth_params
