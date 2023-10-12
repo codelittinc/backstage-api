@@ -14,6 +14,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_190753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "certifications", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_certifications_on_user_id"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -96,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_12_190753) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "certifications", "users"
   add_foreign_key "projects", "customers"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
