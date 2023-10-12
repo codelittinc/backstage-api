@@ -50,6 +50,8 @@ class User < ApplicationRecord
   belongs_to :profession, optional: true
   has_many :user_permissions, dependent: :destroy
   has_many :permissions, through: :user_permissions
+  has_many :user_service_identifiers, dependent: :destroy
+  accepts_nested_attributes_for :user_service_identifiers
 
   def full_name
     "#{first_name} #{last_name}"

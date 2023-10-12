@@ -4,4 +4,4 @@ json.customer do |json|
   json.partial! 'customers/customer', customer: project.customer
 end
 
-json.extract! project, :id, :name, :created_at, :updated_at
+json.extract! project, :id, :name
