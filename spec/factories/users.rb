@@ -7,6 +7,7 @@
 #  id            :bigint           not null, primary key
 #  active        :boolean          default(TRUE), not null
 #  contract_type :string
+#  country       :string
 #  email         :string
 #  first_name    :string
 #  image_url     :string
@@ -37,7 +38,7 @@ FactoryBot.define do
     google_id { rand(1e9..1e10).to_i.to_s }
     image_url { FFaker::Avatar.image }
     contract_type { FFaker::Lorem.word }
-    seniority { %w[intern junior midlevel senior].sample }
+    seniority { %w[Intern Junior Midlevel Senior].sample }
     active { [true, false].sample }
 
     association :profession

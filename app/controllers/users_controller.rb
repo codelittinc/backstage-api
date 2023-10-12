@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      # This will use app/views/users/show.json.jbuilder (since it's rendering a single user)
+      render :show # This will use app/views/users/show.json.jbuilder (since it's rendering a single user)
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -29,6 +29,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:active, :contract_type, :email, :first_name, :last_name, :image_url, :seniority,
-                                 :google_id, :profession_id)
+                                 :google_id, :profession_id, :country)
   end
 end
