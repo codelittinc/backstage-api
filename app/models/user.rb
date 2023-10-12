@@ -52,6 +52,7 @@ class User < ApplicationRecord
   has_many :permissions, through: :user_permissions
   has_many :user_service_identifiers, dependent: :destroy
   accepts_nested_attributes_for :user_service_identifiers
+  has_many :certifications, dependent: :destroy
 
   def full_name
     "#{first_name} #{last_name}"
