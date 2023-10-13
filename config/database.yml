@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: app_development
+  database: backstage_development
   host: <%= ENV["POSTGRES_HOST"] %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
   user: <%= ENV["POSTGRES_USER"] %>
