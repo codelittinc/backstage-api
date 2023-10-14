@@ -24,9 +24,9 @@
 #
 FactoryBot.define do
   factory :user_service_identifier do
-    service_name { 'MyString' }
-    customer { nil }
-    user { nil }
-    identifier { 'MyString' }
+    service_name { 'github' }
+    customer
+    user
+    identifier { FFaker::Internet.user_name }
   end
 end

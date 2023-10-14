@@ -80,4 +80,12 @@ RSpec.describe User, type: :model do
       expect(User.friendly.find(user.slug)).to eql(user)
     end
   end
+
+  context '#by_external_identifier' do
+    it 'returns the user by the identifier' do
+      user = FactoryBot.create(:user)
+      user_service_identifier = FactoryBot.create(:user_service_identifier, user:, identifier: 'codelittinc')
+      expect(User.by_external_identifier(user_service_identifier.identifier).first).to eql(user)
+    end
+  end
 end

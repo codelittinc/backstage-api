@@ -6,6 +6,28 @@ RSpec.describe UsersController, type: :controller do
   include_context 'authentication'
   render_views
 
+  describe 'GET #index' do
+    before(:each) do
+      FactoryBot.create_list(:user_service_identifier, 5)
+    end
+
+    context 'when there is no identifier' do
+      it 'returns all users' do
+        get :index
+        expect(response.parsed_body.size).to eql(6)
+      end
+    end
+
+    context 'when there is a identifier' do
+      it 'returns only the user with the identifier' do
+        user_service_identifier = FactoryBot.create(:user_service_identifier)
+        user = user_service_identifier.user
+        get :index, params: { identifier: user_service_identifier.identifier }
+        expect(response.parsed_body.first['id']).to eql(user.id)
+      end
+    end
+  end
+
   describe 'GET #show' do
     context 'when user is logged in' do
       context 'and id is me' do
