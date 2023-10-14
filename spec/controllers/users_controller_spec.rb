@@ -20,10 +20,14 @@ RSpec.describe UsersController, type: :controller do
 
     context 'when there is a identifier' do
       it 'returns only the user with the identifier' do
-        user_service_identifier = FactoryBot.create(:user_service_identifier)
-        user = user_service_identifier.user
-        get :index, params: { identifier: user_service_identifier.identifier }
-        expect(response.parsed_body.first['id']).to eql(user.id)
+        user_service_identifier1 = FactoryBot.create(:user_service_identifier)
+        user1 = user_service_identifier1.user
+        user_service_identifier2 = FactoryBot.create(:user_service_identifier)
+        user2 = user_service_identifier2.user
+        get :index, params: { query: [user_service_identifier1.identifier, user_service_identifier2.identifier] }
+        expect(response.parsed_body.first['id']).to eql(user1.id)
+        expect(response.parsed_body.last['id']).to eql(user2.id)
+        expect(response.parsed_body.size).to eql(2)
       end
     end
   end
