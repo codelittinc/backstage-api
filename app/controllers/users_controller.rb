@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
 
   def index
-    identifier = params['identifier']
+    identifier = params['query']
     @users = if identifier
                User.by_external_identifier(identifier)
              else
