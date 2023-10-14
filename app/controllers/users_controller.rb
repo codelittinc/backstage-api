@@ -4,8 +4,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
 
   def index
-    @users = User.all
-    # This will use app/views/users/index.json.jbuilder
+    identifier = params['identifier']
+    @users = if identifier
+               User.by_external_identifier(identifier)
+             else
+               User.all
+             end
   end
 
   def show

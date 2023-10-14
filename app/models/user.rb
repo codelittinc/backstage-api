@@ -56,4 +56,9 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  scope :by_external_identifier, lambda { |identifier|
+                                   joins(:user_service_identifiers)
+                                     .where(user_service_identifiers: { identifier: })
+                                 }
 end
