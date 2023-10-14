@@ -86,6 +86,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_200941) do
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
+  create_table "skills", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "permission_id", null: false
@@ -105,6 +111,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_200941) do
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_user_service_identifiers_on_customer_id"
     t.index ["user_id"], name: "index_user_service_identifiers_on_user_id"
+  end
+
+  create_table "user_skills", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "skill_id", null: false
+    t.string "level"
+    t.integer "last_applied_in_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skill_id"], name: "index_user_skills_on_skill_id"
+    t.index ["user_id"], name: "index_user_skills_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,5 +152,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_200941) do
   add_foreign_key "user_permissions", "users"
   add_foreign_key "user_service_identifiers", "customers"
   add_foreign_key "user_service_identifiers", "users"
+  add_foreign_key "user_skills", "skills"
+  add_foreign_key "user_skills", "users"
   add_foreign_key "users", "professions"
 end

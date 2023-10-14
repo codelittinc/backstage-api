@@ -52,6 +52,8 @@ class User < ApplicationRecord
   has_many :user_service_identifiers, dependent: :destroy
   accepts_nested_attributes_for :user_service_identifiers
   has_many :certifications, dependent: :destroy
+  has_many :user_skills, dependent: :destroy
+  has_many :skills, through: :user_skills
 
   def full_name
     "#{first_name}-#{last_name}"
