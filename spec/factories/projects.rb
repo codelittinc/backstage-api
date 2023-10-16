@@ -4,11 +4,15 @@
 #
 # Table name: projects
 #
-#  id          :bigint           not null, primary key
-#  name        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  customer_id :bigint           not null
+#  id            :bigint           not null, primary key
+#  billable      :boolean          default(TRUE), not null
+#  end_date      :date
+#  name          :string
+#  slack_channel :string
+#  start_date    :date
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  customer_id   :bigint           not null
 #
 # Indexes
 #
@@ -20,7 +24,11 @@
 #
 FactoryBot.define do
   factory :project do
-    name { 'MyString' }
-    customer { nil }
+    name { FFaker::Lorem.word }
+    billable { true }
+    slack_channel { FFaker::Lorem.word }
+    start_date { Time.zone.today }
+    end_date { Time.zone.today + 1.month }
+    customer
   end
 end
