@@ -38,6 +38,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :customer_id)
+    params.require(:project).permit(:name, :customer_id, :billable, :slack_channel, :start_date,
+                                    :end_date)
   end
 end

@@ -10,14 +10,22 @@ RSpec.describe ProjectsController, type: :controller do
     customer = FactoryBot.create(:customer)
     {
       name: 'Project 1',
-      customer_id: customer.id
+      customer_id: customer.id,
+      billable: true,
+      slack_channel: 'project-1',
+      start_date: Time.zone.today,
+      end_date: Time.zone.today + 1.month
     }
   end
 
   let(:invalid_attributes) do
     {
       customer_id: 0,
-      name: ''
+      name: '',
+      billable: nil,
+      slack_channel: '',
+      start_date: '',
+      end_date: ''
     }
   end
 
