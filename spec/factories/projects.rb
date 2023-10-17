@@ -7,6 +7,7 @@
 #  id            :bigint           not null, primary key
 #  billable      :boolean          default(TRUE), not null
 #  end_date      :date
+#  metadata      :json
 #  name          :string
 #  slack_channel :string
 #  start_date    :date
