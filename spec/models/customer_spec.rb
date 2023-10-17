@@ -4,12 +4,13 @@
 #
 # Table name: customers
 #
-#  id                   :bigint           not null, primary key
-#  name                 :string           not null
-#  notifications_token  :string
-#  source_control_token :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  id                           :bigint           not null, primary key
+#  name                         :string           not null
+#  notifications_token          :string
+#  source_control_token         :string
+#  ticket_tracking_system_token :string
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
 #
 # Indexes
 #

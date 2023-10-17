@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_16_004824) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_171759) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "certifications", force: :cascade do |t|
@@ -28,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_004824) do
     t.datetime "updated_at", null: false
     t.string "notifications_token"
     t.string "source_control_token"
+    t.string "ticket_tracking_system_token"
     t.index ["name"], name: "index_customers_on_name", unique: true
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_16_004824) do
     t.string "slack_channel"
     t.date "start_date"
     t.date "end_date"
+    t.json "metadata"
     t.index ["customer_id"], name: "index_projects_on_customer_id"
   end
 

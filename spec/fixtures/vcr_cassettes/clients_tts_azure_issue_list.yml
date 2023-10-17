@@ -1,0 +1,684 @@
+---
+http_interactions:
+  - request:
+      method: post
+      uri: https://dev.azure.com/ministrybrands/1ES/_apis/wit/wiql?api-version=6.0
+      body:
+        encoding: UTF-8
+        string:
+          '{"query":"SELECT [System.Id], [System.Title], [System.WorkItemType],
+          [System.BoardColumn] FROM workitems WHERE [System.TeamProject] = ''1ES'' AND
+          [System.AreaPath] = ''1ES\\DDC UI Refresh\\2023''"}'
+      headers:
+        Content-Type:
+          - application/json
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - application/json
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic [Authorization]
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "34951"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=6.0
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%22759388fc-f552-4cd6-b9b5-81cac0c0b145%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:28 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - 6b57f2eb-21dc-403b-a004-52985c335653
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 13a8f883-2099-47f8-a34b-cfa4ae414945
+        X-Tfs-Session:
+          - 13a8f883-2099-47f8-a34b-cfa4ae414945
+        X-Vss-E2eid:
+          - 13a8f883-2099-47f8-a34b-cfa4ae414945
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: 22B13ECDD2AF43B3881408FC3A8BBBE1 Ref B: RIO03EDGE0407 Ref C: 2023-10-17T18:10:28Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:27 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"queryType":"flat","queryResultType":"workItem","asOf":"2023-10-17T18:10:28.107Z","columns":[{"referenceName":"System.Id","name":"ID","url":"https://dev.azure.com/ministrybrands/_apis/wit/fields/System.Id"},{"referenceName":"System.Title","name":"Title","url":"https://dev.azure.com/ministrybrands/_apis/wit/fields/System.Title"},{"referenceName":"System.WorkItemType","name":"Work
+          Item Type","url":"https://dev.azure.com/ministrybrands/_apis/wit/fields/System.WorkItemType"},{"referenceName":"System.BoardColumn","name":"Board
+          Column","url":"https://dev.azure.com/ministrybrands/_apis/wit/fields/System.BoardColumn"}],"workItems":[{"id":144733,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733"},{"id":144738,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738"},{"id":144739,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739"},{"id":144740,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740"},{"id":144741,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741"},{"id":144742,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742"},{"id":144752,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144752"},{"id":144757,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144757"},{"id":144758,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144758"},{"id":144759,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144759"},{"id":144760,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144760"},{"id":144761,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144761"},{"id":144762,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144762"},{"id":144765,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144765"},{"id":144773,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144773"},{"id":144777,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144777"},{"id":144784,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144784"},{"id":144791,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144791"},{"id":144792,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144792"},{"id":144800,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144800"},{"id":144809,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144809"},{"id":144816,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144816"},{"id":144902,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144902"},{"id":144907,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144907"},{"id":144921,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144921"},{"id":144926,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144926"},{"id":144931,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144931"},{"id":144933,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144933"},{"id":144949,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144949"},{"id":144968,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144968"},{"id":144969,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144969"},{"id":145058,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145058"},{"id":145061,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145061"},{"id":145065,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145065"},{"id":145073,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145073"},{"id":145078,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145078"},{"id":145081,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145081"},{"id":145246,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145246"},{"id":145247,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145247"},{"id":145248,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145248"},{"id":145250,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145250"},{"id":145299,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145299"},{"id":145377,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145377"},{"id":145382,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145382"},{"id":145384,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145384"},{"id":145388,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145388"},{"id":145393,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145393"},{"id":145394,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145394"},{"id":145403,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145403"},{"id":145405,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145405"},{"id":145576,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145576"},{"id":145665,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145665"},{"id":145674,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145674"},{"id":145675,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145675"},{"id":145899,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145899"},{"id":145901,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145901"},{"id":145902,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145902"},{"id":145903,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/145903"},{"id":146413,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146413"},{"id":146443,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146443"},{"id":146444,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146444"},{"id":146445,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146445"},{"id":146446,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146446"},{"id":146447,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146447"},{"id":146450,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146450"},{"id":146549,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146549"},{"id":146550,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146550"},{"id":146551,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146551"},{"id":146552,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146552"},{"id":146553,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146553"},{"id":146554,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146554"},{"id":146555,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146555"},{"id":146566,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146566"},{"id":146570,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146570"},{"id":146571,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146571"},{"id":146572,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146572"},{"id":146574,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146574"},{"id":146581,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146581"},{"id":146582,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146582"},{"id":146655,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146655"},{"id":146694,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146694"},{"id":146718,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146718"},{"id":146789,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146789"},{"id":146790,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146790"},{"id":146791,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146791"},{"id":146864,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146864"},{"id":146883,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/146883"},{"id":147130,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147130"},{"id":147556,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147556"},{"id":147663,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147663"},{"id":147664,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147664"},{"id":147665,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147665"},{"id":147666,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147666"},{"id":147669,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147669"},{"id":147673,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147673"},{"id":147676,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147676"},{"id":147710,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147710"},{"id":147712,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147712"},{"id":147713,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147713"},{"id":147714,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147714"},{"id":147787,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147787"},{"id":147794,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147794"},{"id":147828,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147828"},{"id":147829,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147829"},{"id":147830,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147830"},{"id":147831,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147831"},{"id":147832,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147832"},{"id":147920,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147920"},{"id":147921,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147921"},{"id":147922,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147922"},{"id":147924,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147924"},{"id":147925,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/147925"},{"id":148007,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148007"},{"id":148020,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148020"},{"id":148021,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148021"},{"id":148033,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148033"},{"id":148034,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148034"},{"id":148046,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148046"},{"id":148055,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148055"},{"id":148132,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148132"},{"id":148134,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148134"},{"id":148138,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148138"},{"id":148285,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148285"},{"id":148353,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148353"},{"id":148354,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148354"},{"id":148381,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148381"},{"id":148383,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148383"},{"id":148384,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148384"},{"id":148385,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148385"},{"id":148431,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148431"},{"id":148454,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148454"},{"id":148455,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148455"},{"id":148504,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148504"},{"id":148543,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148543"},{"id":148566,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148566"},{"id":148622,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148622"},{"id":148643,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148643"},{"id":148644,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148644"},{"id":148694,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148694"},{"id":148696,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148696"},{"id":148697,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148697"},{"id":148698,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148698"},{"id":148709,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148709"},{"id":148716,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148716"},{"id":148717,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148717"},{"id":148756,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148756"},{"id":148858,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148858"},{"id":148860,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148860"},{"id":148861,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148861"},{"id":148885,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148885"},{"id":148958,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148958"},{"id":148959,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148959"},{"id":148970,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/148970"},{"id":149021,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149021"},{"id":149234,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149234"},{"id":149238,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149238"},{"id":149337,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149337"},{"id":149338,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149338"},{"id":149482,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149482"},{"id":149501,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149501"},{"id":149596,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149596"},{"id":149599,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149599"},{"id":149601,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149601"},{"id":149602,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149602"},{"id":149603,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149603"},{"id":149604,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149604"},{"id":149605,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149605"},{"id":149606,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149606"},{"id":149607,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149607"},{"id":149625,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149625"},{"id":149652,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149652"},{"id":149653,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149653"},{"id":149654,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149654"},{"id":149660,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149660"},{"id":149729,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149729"},{"id":149745,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149745"},{"id":149861,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149861"},{"id":149862,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149862"},{"id":149863,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149863"},{"id":149867,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149867"},{"id":149868,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149868"},{"id":149869,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149869"},{"id":149870,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149870"},{"id":149871,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149871"},{"id":149913,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/149913"},{"id":150042,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150042"},{"id":150044,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150044"},{"id":150050,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150050"},{"id":150068,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150068"},{"id":150090,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150090"},{"id":150181,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150181"},{"id":150194,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150194"},{"id":150209,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150209"},{"id":150210,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150210"},{"id":150220,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150220"},{"id":150223,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150223"},{"id":150229,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150229"},{"id":150232,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150232"},{"id":150236,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150236"},{"id":150237,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150237"},{"id":150238,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150238"},{"id":150239,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150239"},{"id":150242,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150242"},{"id":150249,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150249"},{"id":150252,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150252"},{"id":150253,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150253"},{"id":150254,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150254"},{"id":150255,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150255"},{"id":150256,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150256"},{"id":150265,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150265"},{"id":150267,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150267"},{"id":150268,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150268"},{"id":150291,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150291"},{"id":150318,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150318"},{"id":150319,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150319"},{"id":150320,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150320"},{"id":150321,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150321"},{"id":150322,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150322"},{"id":150323,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150323"},{"id":150384,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150384"},{"id":150479,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150479"},{"id":150481,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150481"},{"id":150482,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150482"},{"id":150483,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150483"},{"id":150484,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150484"},{"id":150588,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150588"},{"id":150602,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150602"},{"id":150613,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150613"},{"id":150812,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150812"},{"id":150823,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150823"},{"id":150824,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150824"},{"id":150829,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150829"},{"id":150830,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150830"},{"id":150957,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150957"},{"id":150958,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150958"},{"id":150987,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/150987"},{"id":151020,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151020"},{"id":151048,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151048"},{"id":151049,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151049"},{"id":151148,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151148"},{"id":151149,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151149"},{"id":151155,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151155"},{"id":151159,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151159"},{"id":151161,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151161"},{"id":151169,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151169"},{"id":151170,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151170"},{"id":151171,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151171"},{"id":151220,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151220"},{"id":151225,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151225"},{"id":151226,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151226"},{"id":151238,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151238"},{"id":151252,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151252"},{"id":151256,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151256"},{"id":151259,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151259"},{"id":151265,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151265"},{"id":151293,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151293"},{"id":151294,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151294"},{"id":151318,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151318"},{"id":151362,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151362"},{"id":151388,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151388"},{"id":151412,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151412"},{"id":151460,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151460"},{"id":151461,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151461"},{"id":151462,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151462"},{"id":151463,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151463"},{"id":151464,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151464"},{"id":151465,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151465"},{"id":151466,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151466"},{"id":151472,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151472"},{"id":151481,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151481"},{"id":151482,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151482"},{"id":151508,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151508"},{"id":151509,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151509"},{"id":151580,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151580"},{"id":151663,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151663"},{"id":151725,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151725"},{"id":151727,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151727"},{"id":151741,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151741"},{"id":151744,"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/151744"}]}'
+    recorded_at: Tue, 17 Oct 2023 18:10:28 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "5489"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%221ff53f61-2fe1-4233-86af-081ad5423edc%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:28 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - 36607b07-1136-41b7-ad25-8b51abd1dddd
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 23e69851-6859-4a44-85b7-fb54f74b7f96
+        X-Tfs-Session:
+          - 23e69851-6859-4a44-85b7-fb54f74b7f96
+        X-Vss-E2eid:
+          - 23e69851-6859-4a44-85b7-fb54f74b7f96
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: 529E8FD6CC1C4A35B26AEA37FF94BDA6 Ref B: RIO03EDGE0317 Ref C: 2023-10-17T18:10:28Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:28 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144733,"rev":15,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Victor Carvalho","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/21242a22-cbdf-68b7-874e-3e6243dd22ef","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"}},"id":"21242a22-cbdf-68b7-874e-3e6243dd22ef","uniqueName":"victor.carvalho@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm","descriptor":"aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"},"System.CreatedDate":"2023-08-14T21:00:09.157Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-09-06T14:06:51.537Z","System.ChangedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.CommentCount":0,"System.Title":"Running
+          DDC-StudioEnterprise Locally","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-09-06T14:06:51.537Z","Microsoft.VSTS.Common.ClosedDate":"2023-09-06T14:06:51.537Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":8.0,"Microsoft.VSTS.Common.BacklogPriority":1999619889.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Tech
+          Debt","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<div><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;display:inline !important;\">Stiles
+          mentioned that there are instructions to run the application but they could
+          be out dated, so we might need to give a try to run it, he also mentioned
+          running the Database locally is recommended ( we could use the database from
+          the Sales App used for demonstrations ). Update the README file adding instructions
+          if needed.</span><br> </div><div><span style=\"color:rgb(29, 28, 29);font-family:Slack-Lato,
+          Slack-Fractions, appleLogo, sans-serif;font-size:15px;text-align:left;display:inline
+          !important;\"><br></span> </div>"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144733"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144733"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:28 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "5731"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%226ef632f6-145a-4994-9cb6-b2ac1791de6a%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:28 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - 42f76388-f5db-4f0b-b8dd-6a3ded90f456
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - ec8ec143-a05d-4008-bb99-78b6beaf6b92
+        X-Tfs-Session:
+          - ec8ec143-a05d-4008-bb99-78b6beaf6b92
+        X-Vss-E2eid:
+          - ec8ec143-a05d-4008-bb99-78b6beaf6b92
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: 685944304FD8428292641E91860C276D Ref B: RIO03EDGE0512 Ref C: 2023-10-17T18:10:28Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:28 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144738,"rev":11,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023\\UI-V2-S2","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Victor Carvalho","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/21242a22-cbdf-68b7-874e-3e6243dd22ef","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"}},"id":"21242a22-cbdf-68b7-874e-3e6243dd22ef","uniqueName":"victor.carvalho@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm","descriptor":"aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"},"System.CreatedDate":"2023-08-15T11:58:50.393Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-09-12T13:56:15.637Z","System.ChangedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.CommentCount":0,"System.Title":"Add
+          the base project for the new UI","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-09-06T14:06:55.677Z","Microsoft.VSTS.Common.ClosedDate":"2023-09-06T14:06:55.677Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":9.0,"Microsoft.VSTS.Common.BacklogPriority":1999664606.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Tech
+          Debt","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<div><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;display:inline !important;\">We
+          already have an existent React running which we are going to replace for the
+          new front end. The Goal of this task is to put in place the new folder structure
+          for the base project (e.g<span>&nbsp;</span></span><a target=_blank href=\"https://github.com/codelittinc/donor-direct-base-project\"
+          rel=\"noopener noreferrer\" style=\"font-family:Slack-Lato, Slack-Fractions,
+          appleLogo, sans-serif;font-size:15px;text-align:left;\">https://github.com/codelittinc/donor-direct-base-project</a><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;display:inline !important;\"><span>&nbsp;</span>)
+          so we can start to work on the common and generic elements for the project.</span><br>
+          </div>"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144738"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144738"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:28 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "5570"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%22e5170070-c04d-431d-a6b8-e4bd74ba91d8%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:29 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - ee113c80-b542-47c0-8071-d825984abf9d
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 822e02ae-f992-4cfe-8902-0bafb56af4fe
+        X-Tfs-Session:
+          - 822e02ae-f992-4cfe-8902-0bafb56af4fe
+        X-Vss-E2eid:
+          - 822e02ae-f992-4cfe-8902-0bafb56af4fe
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: 68DA630D38F94858B5C883B1FD483A1D Ref B: RIO03EDGE0414 Ref C: 2023-10-17T18:10:29Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:29 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144739,"rev":12,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Victor Carvalho","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/21242a22-cbdf-68b7-874e-3e6243dd22ef","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"}},"id":"21242a22-cbdf-68b7-874e-3e6243dd22ef","uniqueName":"victor.carvalho@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm","descriptor":"aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"},"System.CreatedDate":"2023-08-15T11:59:20.357Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-09-21T13:06:03.163Z","System.ChangedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"System.CommentCount":1,"System.Title":"ISS
+          Web Server Updates","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-09-21T13:06:03.163Z","Microsoft.VSTS.Common.ClosedDate":"2023-09-21T13:06:03.163Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":18.0,"Microsoft.VSTS.Common.BacklogPriority":1999675786.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Tech
+          Debt","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<div><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;background-color:rgb(248, 248, 248);display:inline
+          !important;\">The DDS-StudioEnterprise is a massive application with many
+          modules and features also Stiles has confirmed that the app is running using
+          the ISS as a web server. The goal of this task is to update the ISS configurations
+          to add the new folder structure from the new UI in the application as the
+          new UI. This new front-end should run along with the existing one, so for
+          the existing modules and features that haven''t been rewritten and delivered,
+          we should redirect and display the existing front end.</span><br> </div>","System.Tags":"DDC-M1;
+          DDC-S1-M1; DDC-S2-M1"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144739"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144739"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:29 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "5528"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%223a26931f-771b-4769-be98-bf823a218e2a%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:30 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - c52d8ddc-980b-46d0-840f-6f5483073de4
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 23befbb3-2144-482c-b810-de2d6ac2846f
+        X-Tfs-Session:
+          - 23befbb3-2144-482c-b810-de2d6ac2846f
+        X-Vss-E2eid:
+          - 23befbb3-2144-482c-b810-de2d6ac2846f
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: C2B2562411E74153A0A356EBFF10F0F3 Ref B: RIO03EDGE0611 Ref C: 2023-10-17T18:10:30Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:30 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144740,"rev":12,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Pedro Guimaraes","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/0e31d8c4-3407-65ac-91cb-ccafd88d71c5","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MGUzMWQ4YzQtMzQwNy03NWFjLTkxY2ItY2NhZmQ4OGQ3MWM1"}},"id":"0e31d8c4-3407-65ac-91cb-ccafd88d71c5","uniqueName":"pedro.guimaraes@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MGUzMWQ4YzQtMzQwNy03NWFjLTkxY2ItY2NhZmQ4OGQ3MWM1","descriptor":"aad.MGUzMWQ4YzQtMzQwNy03NWFjLTkxY2ItY2NhZmQ4OGQ3MWM1"},"System.CreatedDate":"2023-08-15T11:59:46.08Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-09-21T16:08:03.17Z","System.ChangedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"System.CommentCount":0,"System.Title":"Create
+          GIT merge strategy: ","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-09-21T16:08:03.17Z","Microsoft.VSTS.Common.ClosedDate":"2023-09-21T16:08:03.17Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":9.0,"Microsoft.VSTS.Common.BacklogPriority":1999681376.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Tech
+          Debt","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<div><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;background-color:rgb(248, 248, 248);display:inline
+          !important;\">We are creating a new FrontEnd for an existing product (which
+          is constantly receiving changes related to maintenance and development of
+          new features). Based on the technical alignments with Stiles, we might need
+          to plan a merge strategy to get the most recent changes from their development
+          team and merge them into our main branch. Check the possibility of creating
+          an automatic process based on a new pipeline to open a Pull Request merging
+          these changes.</span><br> </div>","System.Tags":"DDC-M1; DDC-S1-M1; DDC-S2-M1"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144740"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144740"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:30 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "5254"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%22c3fb8247-6f12-4367-80a7-81e6be7eb79b%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:31 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - a270c61a-d012-4ee2-ab21-75b399f50c9f
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 299e6052-7020-4b0e-a341-64806b146bfc
+        X-Tfs-Session:
+          - 299e6052-7020-4b0e-a341-64806b146bfc
+        X-Vss-E2eid:
+          - 299e6052-7020-4b0e-a341-64806b146bfc
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: 51252D9AA6D045BE9C6F8EB6C87AB69E Ref B: RIO03EDGE0420 Ref C: 2023-10-17T18:10:30Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:31 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144741,"rev":12,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Jadson Dorneles","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/5ebd363d-e338-6e57-8bbd-8a8544e2b8e1","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViZDM2M2QtZTMzOC03ZTU3LThiYmQtOGE4NTQ0ZTJiOGUx"}},"id":"5ebd363d-e338-6e57-8bbd-8a8544e2b8e1","uniqueName":"jadson.dorneles@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViZDM2M2QtZTMzOC03ZTU3LThiYmQtOGE4NTQ0ZTJiOGUx","descriptor":"aad.NWViZDM2M2QtZTMzOC03ZTU3LThiYmQtOGE4NTQ0ZTJiOGUx"},"System.CreatedDate":"2023-08-15T12:00:36.687Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-09-21T16:08:49.03Z","System.ChangedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"System.CommentCount":0,"System.Title":"Add
+          Generic Styles Foundations","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-09-21T16:08:49.03Z","Microsoft.VSTS.Common.ClosedDate":"2023-09-21T16:08:49.03Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":26.0,"Microsoft.VSTS.Common.BacklogPriority":1999678581.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Tech
+          Debt","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<div><span
+          style=\"color:rgb(29, 28, 29);font-family:Slack-Lato, Slack-Fractions, appleLogo,
+          sans-serif;font-size:15px;text-align:left;background-color:rgb(248, 248, 248);display:inline
+          !important;\">Based on the core elements present on our Design System, add
+          the generic elements such as Typograph, Colors, Grid system, Spacing, Logos,
+          Page Skeletons to the Front End project.</span><br> </div>","System.Tags":"DDC-M1;
+          DDC-S1-M1; DDC-S2-M1"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144741"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144741"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:31 GMT
+  - request:
+      method: get
+      uri: https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742
+      body:
+        encoding: US-ASCII
+        string: ""
+      headers:
+        Accept-Encoding:
+          - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+        Accept:
+          - "*/*"
+        User-Agent:
+          - Ruby
+        Authorization:
+          - Basic OjZrbHN6M2N3M3d5Z3MzaDR0MnNmbzJid3c0NHp3anpuNHY2bXo3YWNlamd5Z3lxaGFzMmE=
+    response:
+      status:
+        code: 200
+        message: OK
+      headers:
+        Cache-Control:
+          - no-cache, no-store, must-revalidate
+        Pragma:
+          - no-cache
+        Content-Length:
+          - "14065"
+        Content-Type:
+          - application/json; charset=utf-8; api-version=7.1
+        Expires:
+          - "-1"
+        Vary:
+          - Accept-Encoding
+        P3p:
+          - CP="CAO DSP COR ADMa DEV CONo TELo CUR PSA PSD TAI IVDo OUR SAMi BUS DEM NAV
+            STA UNI COM INT PHY ONL FIN PUR LOC CNT"
+        Set-Cookie:
+          - VstsSession=%7B%22PersistentSessionId%22%3A%222c9ae47a-6948-4845-b408-89bfe75d1d28%22%2C%22PendingAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22CurrentAuthenticationSessionId%22%3A%2200000000-0000-0000-0000-000000000000%22%2C%22SignInState%22%3A%7B%7D%7D;SameSite=None;
+            domain=.dev.azure.com; expires=Wed, 16-Oct-2024 18:10:31 GMT; path=/; secure;
+            HttpOnly
+        X-Tfs-Processid:
+          - c52d8ddc-980b-46d0-840f-6f5483073de4
+        Strict-Transport-Security:
+          - max-age=31536000; includeSubDomains
+        Activityid:
+          - 23bef9bd-2144-482c-b810-de2d6ac2846f
+        X-Tfs-Session:
+          - 23bef9bd-2144-482c-b810-de2d6ac2846f
+        X-Vss-E2eid:
+          - 23bef9bd-2144-482c-b810-de2d6ac2846f
+        X-Vss-Senderdeploymentid:
+          - 371dc223-5e58-9481-da2c-e75ac4f20939
+        X-Vss-Userdata:
+          - 615628a4-3ff5-4553-9707-cd5657149a69:kaio@codelitt.com
+        X-Frame-Options:
+          - SAMEORIGIN
+        Request-Context:
+          - appId=cid-v1:f88d1338-e7ba-4d7b-83e0-e573c40a2f62
+        Access-Control-Expose-Headers:
+          - Request-Context
+        X-Content-Type-Options:
+          - nosniff
+        X-Cache:
+          - CONFIG_NOCACHE
+        X-Msedge-Ref:
+          - "Ref A: F17BC09DC7554C3E8E9DC1724589782E Ref B: RIO03EDGE0311 Ref C: 2023-10-17T18:10:31Z"
+        Date:
+          - Tue, 17 Oct 2023 18:10:30 GMT
+      body:
+        encoding: ASCII-8BIT
+        string:
+          '{"id":144742,"rev":35,"fields":{"System.AreaPath":"1ES\\DDC UI Refresh\\2023","System.TeamProject":"1ES","System.IterationPath":"1ES\\DDC
+          UI Refresh\\2023\\UI-V2-S2","System.WorkItemType":"Product Backlog Item","System.State":"Done","System.Reason":"Work
+          finished","System.AssignedTo":{"displayName":"Victor Carvalho","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/21242a22-cbdf-68b7-874e-3e6243dd22ef","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"}},"id":"21242a22-cbdf-68b7-874e-3e6243dd22ef","uniqueName":"victor.carvalho@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm","descriptor":"aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"},"System.CreatedDate":"2023-08-15T12:10:47.753Z","System.CreatedBy":{"displayName":"ricardo.tinoco","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/67ba93b4-bf1f-4f73-a26c-e025ea4a588e","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"}},"id":"67ba93b4-bf1f-4f73-a26c-e025ea4a588e","uniqueName":"ricardo.tinoco@codelitt.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk","descriptor":"aad.NWViM2FhN2UtN2Q4Yi03N2ZkLWFjMDEtZDc5MzczNjdhMjdk"},"System.ChangedDate":"2023-10-10T16:54:23.333Z","System.ChangedBy":{"displayName":"Victor
+          Carvalho","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/21242a22-cbdf-68b7-874e-3e6243dd22ef","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"}},"id":"21242a22-cbdf-68b7-874e-3e6243dd22ef","uniqueName":"victor.carvalho@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm","descriptor":"aad.MjEyNDJhMjItY2JkZi03OGI3LTg3NGUtM2U2MjQzZGQyMmVm"},"System.CommentCount":8,"System.Title":"[FE]
+          - As any user, I need a login screen to access the DonorDirect platform","System.BoardColumn":"Done","System.BoardColumnDone":false,"Microsoft.VSTS.Common.StateChangeDate":"2023-10-01T16:46:44.26Z","Microsoft.VSTS.Common.ClosedDate":"2023-10-01T16:46:44.26Z","Microsoft.VSTS.Common.ClosedBy":{"displayName":"Vinicius
+          Medeiros","url":"https://spsprodcus3.vssps.visualstudio.com/Ab8eb7e8a-a39e-4162-9297-cc5014f14129/_apis/Identities/a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","_links":{"avatar":{"href":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"}},"id":"a2aa1f41-1c54-6fb7-88cc-494e316ffd7f","uniqueName":"vinicius.medeiros@ministrybrands.com","imageUrl":"https://dev.azure.com/ministrybrands/_apis/GraphProfile/MemberAvatars/aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm","descriptor":"aad.YTJhYTFmNDEtMWM1NC03ZmI3LTg4Y2MtNDk0ZTMxNmZmZDdm"},"Microsoft.VSTS.Common.Priority":2,"Microsoft.VSTS.Common.ValueArea":"Business","Microsoft.VSTS.Scheduling.Effort":42.0,"Microsoft.VSTS.Common.BacklogPriority":1999686965.0,"Custom.ReleaseNotesRequired":false,"Custom.MBEffortType":"Innovation","Custom.MBIntegration":false,"Custom.ClientFunded":false,"Custom.OnProductInitiativeList":"Yes","WEF_486872096E464D55885A90CD6269B452_Kanban.Column":"Done","WEF_486872096E464D55885A90CD6269B452_Kanban.Column.Done":false,"Custom.ProductSubmittedUserStory":false,"Custom.DevAcceptsUserStory":false,"System.Description":"<span
+          style=\"box-sizing:border-box;font-family:Arial;font-size:13.3333px;\">To
+          allow any user to login to the DonorDirect StudioEnterprise platform, a login
+          flow is needed</span><br><div><span style=\"box-sizing:border-box;font-family:Arial;font-size:13.3333px;\"><br></span>
+          </div><div><span style=\"box-sizing:border-box;font-family:Arial;font-size:13.3333px;color:rgb(200,
+          38, 19);\"><b>NOTE: Likely to be split into more stories&nbsp;</b></span>
+          </div><div><span style=\"box-sizing:border-box;font-family:Arial;font-size:13.3333px;\"><span>UserName
+          Password: regular login<br></span><div>Code verification (I''m not sure yet
+          in what scenarios this verification is needed, we might need to confirm it
+          )<br> </div><span>Microsoft AD (active directory) authentication</span><br></span>
+          </div>","Microsoft.VSTS.Common.AcceptanceCriteria":"<div><span style=\"font-size:10pt;font-family:Arial;\"><span
+          style=\"font-weight:bold;\">Acceptance Criteria:<br></span></span> </div><div>
+          </div><div> </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span
+          style=\"font-weight:bold;\"><br>Username Screen:</span><span><br>1. The background
+          for the page should follow design intent of beige and colored semi circles<br>2.
+          The login modal should appear in the center of the screen. Is composed of:<br>2a.
+          DonorDirect logo<br>2b. StudioEnterprise header<br>2c. Username or Email field<br>2d.
+          Continue button<br>2e. Remember me - Checkbox. When selected the username
+          will be saved in the cache.<br>2f. Login with another Account<br>2g. Microsoft
+          logo (AD login options)&nbsp;</span></span> </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><br></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><img src=\"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/attachments/1d554d82-9d7d-44b3-9b0c-59c200a42710?fileName=image.png\"
+          alt=Image style=\"width:370px;\" width=370 height=244><br><br></span><span
+          style=\"font-weight:bold;\">Credential Validation Screens:<br></span><span>1.
+          2-Factor Authentication: <br>1a. Same fields/options presented on the Username
+          Screen, replacing the Username field for &quot;Code&quot;. This field will
+          receive only numeric codes.<br>2. Password:<br>2a. Same fields/options presented
+          on the Username Screen, adding a secondary text field:<br>2a1. The Username
+          field should show the email added/saved. <br>2a2. The Email/Username header
+          will be removed and show and edit icon to change the username/email<br>2a3.
+          The password field should show the password encrypted with the option to view
+          the characters with an eye icon (this last part pending to be confirmed by
+          Barbara)<br>2a4. The &quot;Continue&quot; button changes to &quot;Log In&quot;</span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><br></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><img src=\"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/attachments/f782bf67-e0a6-43b1-938a-124a1a3dc979?fileName=image.png\"
+          alt=Image style=\"width:386px;\" width=386 height=252><br><br></span><span
+          style=\"font-weight:bold;\"><img src=\"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/attachments/358e1c80-5d08-484a-b5e4-d2a060ba5a70?fileName=image.png\"
+          alt=Image style=\"width:386px;\" width=386 height=253><br></span></span> </div><div><span
+          style=\"font-size:10pt;font-family:Arial;\"><span style=\"font-weight:bold;\"><br></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span style=\"font-weight:bold;\">Microsoft
+          AD Login:<br></span><span>1. On the login screen, when the user click the
+          Microsoft logo.<br>2. Clicking the logo sends the user through the Microsoft
+          authentication flow<br></span><span style=\"font-weight:bold;\"><br>Environment
+          Selection: (Open Question for Barbara to define if this screen is for all
+          users)<br></span><span>1. Same fields/options presented on the Username Screen,
+          replacing the Username field with &quot;Select Environment&quot; options.
+          The options are<br>1a. Local Environment<br>1b. StudioEnterprise DEV (Default)<br>1c.
+          DEV INTACCT<br>2. All the options should have a Radio Button selector at the
+          beginning of the option</span></span> </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span>3.&nbsp;</span></span><span
+          style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">If a user is configured
+          for a single environment, they will not see the&nbsp;</span><span style=\"color:rgba(0,
+          0, 0, 0.9);font-size:15px;\">environment selection</span><span style=\"color:rgba(0,
+          0, 0, 0.9);font-size:15px;\">&nbsp;</span><span style=\"color:rgba(0, 0, 0,
+          0.9);font-size:15px;\">screen and will be logged into their single environment</span>
+          </div><div><span style=\"font-size:13.3333px;\"><font face=Arial>4.&nbsp;</font></span><span
+          style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">If a user is configured
+          for more than one environment, they will see</span><span style=\"color:rgba(0,
+          0, 0, 0.9);font-size:15px;\">&nbsp;</span><span style=\"color:rgba(0, 0, 0,
+          0.9);font-size:15px;\">the&nbsp;</span><span style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">environment
+          selection&nbsp;</span><span style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">screen
+          and the radio group options are dynamically populated with their available
+          environments</span><span style=\"font-size:13.3333px;\"><font face=Arial>.&nbsp;</font></span><span
+          style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">There are no static options</span>
+          </div><div><span style=\"font-size:13.3333px;\"><font face=Arial>5,&nbsp;</font></span><span
+          style=\"color:rgba(0, 0, 0, 0.9);font-size:15px;\">When presented with the
+          environment selection screen</span><span style=\"font-size:10pt;font-family:Arial;\"><span><ol
+          style=\"box-sizing:border-box;margin:0px 0px 16px;padding-left:32px;color:rgba(0,
+          0, 0, 0.9);font-size:15px;\"><ol style=\"box-sizing:border-box;margin:0px;padding-left:32px;\"><li
+          style=\"box-sizing:border-box;\">if the user has a default environment, that
+          environment will be automatically selected </li><li style=\"box-sizing:border-box;margin-top:4px;\">if
+          the user does not have a default environment configured, the first environment
+          in the radio group is automatically selected </li> </ol> </ol></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><br></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><img src=\"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/attachments/d28efdb6-b2e1-44e2-92cc-135d0cf26c10?fileName=image.png\"
+          alt=Image style=\"width:392px;\" width=392 height=257><br></span></span> </div><div><span
+          style=\"font-size:10pt;font-family:Arial;\"><span><br></span></span> </div><div><span
+          style=\"font-size:10pt;font-family:Arial;\"><span><b>Designs:&nbsp;<a href=\"https://www.figma.com/file/v1nKKfkv3Yv3hqkfr8ybPl/M1-Accounts?type=design&amp;node-id=462:6759&amp;mode=design&amp;t=qnsbjfzvKI82Scfe-1\">https://www.figma.com/file/v1nKKfkv3Yv3hqkfr8ybPl/M1-Accounts?type=design&amp;node-id=462%3A6759&amp;mode=design&amp;t=qnsbjfzvKI82Scfe-1</a></b></span></span>
+          </div><div><span style=\"font-size:10pt;font-family:Arial;\"><span><br></span></span>
+          </div><div> </div><div><font face=Arial style=\"font-size:13.3333px;\"><br></font>
+          </div><div><font face=Arial><b style=\"font-size:13.3333px;\">Implementation
+          Notes:</b></font><br><ol><li><span>Consider using&nbsp;</span><a href=\"https://github.com/react-hook-form/react-hook-form\">https://github.com/react-hook-form/react-hook-form</a><span>&nbsp;to
+          build the form for login;<br></span> </li><li><span>Let''s create a Service
+          Folder (for this task we could create an authenticationService.ts class) It
+          should contain functions like login, forgotPassword, etc (let''s use Axios
+          to handle the requests );</span> </li><li><span>Consider using&nbsp;<a href=\"https://tanstack.com/query/latest/docs/react/quick-start\">https://tanstack.com/query/latest/docs/react/quick-start</a>&nbsp;to
+          handle the states of the requests;</span> </li><li>For the BE Login ( We need
+          to send a POST request to <b>/login</b> endpoint in the API (<span style=\"color:rgb(189,
+          198, 207);font-family:&quot;.SFNSDisplay-Regular&quot;, &quot;Helvetica Neue&quot;,
+          &quot;Lucida Grande&quot;, sans-serif;font-size:12px;text-align:start;display:inline
+          !important;\"><a href=\"https://dev-next-api.donordirect.com\">https://dev-next-api.donordirect.com</a></span>),
+          and the header needs to contain the username and password encrypted, check
+          <a href=\"https://dev.azure.com/ministrybrands/1ES/_git/DDC-StudioEnterprise?path=/WebUI/app/webapi/LoginModel.js&amp;version=GCd6f4f6219d993afcb2fe1b82d401d02e00d3dcbc&amp;line=51&amp;lineEnd=52&amp;lineStartColumn=1&amp;lineEndColumn=1&amp;lineStyle=plain&amp;_a=contents\">here</a>
+          for more details); </li><ol style=\"list-style:lower-alpha;\"><li>Let''s update
+          the <b>env</b> file and <b>env.example.file</b> </li> </ol> </ol> </div><div><font
+          face=Arial><span style=\"font-size:13.3333px;\"><br></span></font> </div>","System.Tags":"DDC-M1;
+          DDC-S2-M1; DDC-S3-M1"},"_links":{"self":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742"},"workItemUpdates":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742/updates"},"workItemRevisions":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742/revisions"},"workItemComments":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742/comments"},"html":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_workitems/edit/144742"},"workItemType":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItemTypes/Product%20Backlog%20Item"},"fields":{"href":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/fields"}},"url":"https://dev.azure.com/ministrybrands/57f0022b-dc73-4826-b10e-dc5a8a62daac/_apis/wit/workItems/144742"}'
+    recorded_at: Tue, 17 Oct 2023 18:10:31 GMT
+recorded_with: VCR 6.2.0
