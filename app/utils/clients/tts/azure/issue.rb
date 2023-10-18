@@ -7,7 +7,7 @@ module Clients
         def list
           issues_list = ::Request.post(url, customer_authorization, body)
           urls = issues_list['workItems'].pluck('url')
-          work_items = urls[0..5].map { |url| ::Request.get(url, customer_authorization) }
+          work_items = urls.map { |url| ::Request.get(url, customer_authorization) }
           work_items.map do |work_item|
             parser.new(work_item, project)
           end

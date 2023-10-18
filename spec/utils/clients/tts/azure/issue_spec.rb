@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Clients::Tts::Azure::Issue, type: :service do
   let(:customer) do
-    FactoryBot.create(:customer, name: 'Ministry Brands', ticket_tracking_system_token: 'place-real-token-here')
+    FactoryBot.create(:customer, name: 'Ministry Brands', ticket_tracking_system_token: 'insert-token-here')
   end
   let(:user) do
     user = FactoryBot.create(:user)

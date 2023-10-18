@@ -17,7 +17,7 @@ module Clients
           end
 
           def user
-            identifier = json['fields']['System.AssignedTo']['uniqueName']
+            identifier = json.dig('fields', 'System.AssignedTo', 'uniqueName')
             User.by_external_identifier(identifier).first
           end
 
