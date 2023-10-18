@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_17_171759) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_124134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -42,6 +42,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_171759) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.float "effort"
+    t.bigint "user_id", null: false
+    t.string "state"
+    t.datetime "closed_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -112,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_171759) do
   end
 
   add_foreign_key "certifications", "users"
+  add_foreign_key "issues", "users"
   add_foreign_key "projects", "customers"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"

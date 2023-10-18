@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   resources :users
   resources :customers
   resources :professions, only: [:index]
+
+  resources :issues, only: [:index]
 end
