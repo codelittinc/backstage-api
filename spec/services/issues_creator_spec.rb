@@ -25,7 +25,7 @@ RSpec.describe IssuesCreator, type: :service do
         user
         expect do
           IssuesCreator.call(project)
-        end.to change(Issue, :count).by(4)
+        end.to change(Issue, :count).by(40)
       end
     end
   end
