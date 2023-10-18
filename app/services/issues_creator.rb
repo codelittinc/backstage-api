@@ -11,12 +11,8 @@ class IssuesCreator < ApplicationService
     issues.map do |issue|
       next unless issue.user
 
-      Issue.create!(
-        effort: issue.effort,
-        user: issue.user,
-        state: issue.state,
-        closed_date: issue.closed_date
-      )
+      Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
+                    closed_date: issue.closed_date)
     end
   end
 end

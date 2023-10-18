@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_124134) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_18_190054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_124134) do
     t.datetime "closed_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "project_id", null: false
+    t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
@@ -122,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_124134) do
   end
 
   add_foreign_key "certifications", "users"
+  add_foreign_key "issues", "projects"
   add_foreign_key "issues", "users"
   add_foreign_key "projects", "customers"
   add_foreign_key "user_permissions", "permissions"
