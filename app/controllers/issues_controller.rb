@@ -1,55 +1,23 @@
 # frozen_string_literal: true
 
 class IssuesController < ApplicationController
-  before_action :set_issue, only: %i[show update destroy]
+  before_action :set_project, only: %i[index]
 
-  # GET /issues
-  # GET /issues.json
   def index
-    @issues = Issue.where.not(closed_date: nil)
-  end
-
-  # GET /issues/1
-  # GET /issues/1.json
-  def show; end
-
-  # POST /issues
-  # POST /issues.json
-  def create
-    @issue = Issue.new(issue_params)
-
-    if @issue.save
-      render :show, status: :created, location: @issue
-    else
-      render json: @issue.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /issues/1
-  # PATCH/PUT /issues/1.json
-  def update
-    if @issue.update(issue_params)
-      render :show, status: :ok, location: @issue
-    else
-      render json: @issue.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /issues/1
-  # DELETE /issues/1.json
-  def destroy
-    @issue.destroy
+    @issues = Issue.where.not(closed_date: nil).where(project: @project, closed_date: start_date..end_date)
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_issue
-    @issue = Issue.find(params[:id])
+  def set_project
+    @project = Project.find(params[:project_id])
   end
 
-  # Only allow a list of trusted parameters through.
-  def issue_params
-    params.require(:issue).permit(:effort, :user_id, :state, :closed_date)
+  def start_date
+    params[:start_date]
+  end
+
+  def end_date
+    params[:end_date]
   end
 end
