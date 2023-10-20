@@ -32,7 +32,7 @@
 #
 FactoryBot.define do
   factory :user do
-    email { FFaker::Internet.email }
+    email { "#{FFaker::Name.first_name}@codelitt.com" }
     first_name { FFaker::Name.first_name }
     last_name { FFaker::Name.last_name }
     google_id { rand(1e9..1e10).to_i.to_s }
