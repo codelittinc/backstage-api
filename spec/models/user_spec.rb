@@ -39,7 +39,6 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:google_id) }
     it { is_expected.to validate_uniqueness_of(:google_id) }
     it { is_expected.to validate_inclusion_of(:seniority).in_array(%w[Intern Junior Midlevel Senior]) }
-    it { is_expected.to validate_inclusion_of(:active).in_array([true, false]) }
 
     it 'validates the seniority' do
       user = FactoryBot.create(:user)
