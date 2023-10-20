@@ -53,6 +53,7 @@ class ApplicationController < ActionController::API
     # move this normalization to the model
     @user_auth_params['first_name'] = convert_to_utf8(@user_auth_params['first_name'])
     @user_auth_params['last_name'] = convert_to_utf8(@user_auth_params['last_name'])
+    @user_auth_params['image_url'] = @user_auth_params['image_url']
     @user_auth_params
   end
 

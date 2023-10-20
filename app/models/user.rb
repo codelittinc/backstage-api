@@ -55,11 +55,15 @@ class User < ApplicationRecord
   has_many :certifications, dependent: :destroy
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name}-#{last_name}"
   end
 
   scope :by_external_identifier, lambda { |identifier|
                                    joins(:user_service_identifiers)
                                      .where(user_service_identifiers: { identifier: })
                                  }
+
+  def should_generate_new_friendly_id?
+    true
+  end
 end
