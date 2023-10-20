@@ -38,6 +38,6 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:name, :source_control_token, :notifications_token)
+    params.require(:customer).permit(:name, :source_control_token, :notifications_token, :ticket_tracking_system_token)
   end
 end

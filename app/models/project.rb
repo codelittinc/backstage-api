@@ -27,7 +27,7 @@ class Project < ApplicationRecord
   belongs_to :customer
 
   validates :name, presence: true
-  validates :billable, inclusion: { in: [true, false] }, presence: true
+  validates :billable, inclusion: { in: [true, false] }
   validates :slack_channel, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
