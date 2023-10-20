@@ -70,7 +70,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
-      xcontext 'when user email is from a different domain than expected' do
+      context 'when user email is from a different domain than expected' do
         it 'returns an unauthorized access' do
           invalid_user_params = { user: FactoryBot.attributes_for(:user, email: 'codelitt@wrongdomain.con') }
           invalid_user_params_base64 = Base64.encode64(invalid_user_params.to_json)
@@ -80,6 +80,7 @@ RSpec.describe UsersController, type: :controller do
           expect(response).to have_http_status(:unauthorized)
         end
       end
+
       context 'and id is a number' do
         it 'returns the user with that id' do
           user = FactoryBot.create(:user)
