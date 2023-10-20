@@ -26,8 +26,7 @@ RSpec.describe UsersController, type: :controller do
         user2 = user_service_identifier2.user
         get :index,
             params: { query: [user_service_identifier1.identifier, user_service_identifier2.identifier].join(',') }
-        expect(response.parsed_body.first['id']).to eql(user1.id)
-        expect(response.parsed_body.last['id']).to eql(user2.id)
+        expect(response.parsed_body.pluck('id').sort).to eql([user1.id, user2.id].sort)
         expect(response.parsed_body.size).to eql(2)
       end
     end

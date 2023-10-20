@@ -10,6 +10,7 @@ class UsersController < ApplicationController
              else
                User.all
              end
+    @users = @users.order(:first_name, :last_name)
   end
 
   def show
@@ -28,7 +29,7 @@ class UsersController < ApplicationController
 
   def set_user
     id = params['id']
-    @user = id == 'me' ? current_user : User.find(id)
+    @user = id == 'me' ? current_user : User.friendly.find(id)
   end
 
   def user_params
