@@ -10,6 +10,7 @@
 #  metadata      :json
 #  name          :string
 #  slack_channel :string
+#  slug          :string
 #  start_date    :date
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -18,6 +19,7 @@
 # Indexes
 #
 #  index_projects_on_customer_id  (customer_id)
+#  index_projects_on_slug         (slug) UNIQUE
 #
 # Foreign Keys
 #
