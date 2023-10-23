@@ -11,17 +11,28 @@ module Clients
             ::Request.get(project_url(id), customer_authorization)
           end
 
-          asana_user_ids = work_items.map do |work_item|
-            work_item.dig('data', 'assignee', 'gid')
-          end.uniq.compact
+          users = asana_users(work_items)
+          parsed_items(work_items, users)
+        end
 
-          asana_users = asana_user_ids.map do |id|
+        private
+
+        def parsed_items(work_items, users)
+          work_items.map do |work_item|
+            parser.new(work_item, project, users) if work_item.dig('data', 'completed')
+          end.compact
+        end
+
+        def asana_users(work_items)
+          asana_user_ids(work_items).map do |id|
             ::Request.get(user_url(id), customer_authorization)
           end
+        end
 
+        def asana_user_ids(work_items)
           work_items.map do |work_item|
-            parser.new(work_item, project, asana_users) if work_item.dig('data', 'completed')
-          end.compact
+            work_item.dig('data', 'assignee', 'gid')
+          end.uniq.compact
         end
 
         def list_url

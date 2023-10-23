@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Clients::Tts::Asana::Issue, type: :service do
   let(:customer) do
-    FactoryBot.create(:customer, name: 'My Care',
+    FactoryBot.create(:customer, name: 'Taylor Summit',
                                  ticket_tracking_system_token: 'my-cool-key')
   end
 
@@ -19,7 +19,7 @@ RSpec.describe Clients::Tts::Asana::Issue, type: :service do
   describe '#list' do
     it 'finds the correct parser' do
       client = Clients::Tts::Asana::Issue.new(project)
-      expect(client.parser).to be(Clients::Tts::Asana::Parsers::MyCareParser)
+      expect(client.parser).to be(Clients::Tts::Asana::Parsers::TaylorSummitParser)
     end
 
     it 'returns a list of issues properly parsed' do

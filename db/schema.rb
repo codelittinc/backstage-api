@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_20_200941) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_23_165012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_200941) do
     t.string "source_control_token"
     t.string "ticket_tracking_system_token"
     t.string "slug"
+    t.string "ticket_tracking_system"
     t.index ["name"], name: "index_customers_on_name", unique: true
     t.index ["slug"], name: "index_customers_on_slug", unique: true
   end

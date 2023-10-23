@@ -4,7 +4,7 @@ module Clients
   module Tts
     module Asana
       module Parsers
-        class MyCareParser
+        class TaylorSummitParser
           attr_reader :json, :project
 
           def initialize(json, project, asana_users)
@@ -18,8 +18,11 @@ module Clients
           end
 
           def user
-            user_id = json.dig('data', 'assignee', 'gid')
-            asana_user = @asana_users.find { |asana_user| asana_user.dig('data', 'gid') == user_id }
+            assignee = json.dig('data', 'assignee')
+            return nil if assignee.nil?
+
+            user_id = assignee['gid']
+            asana_user = @asana_users.find { |user| user.dig('data', 'gid') == user_id }
             email = asana_user.dig('data', 'email')
             User.by_external_identifier(email).first
           end

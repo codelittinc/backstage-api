@@ -7,12 +7,19 @@ class IssuesCreator < ApplicationService
   end
 
   def call
-    issues = Clients::Tts::Azure::Issue.new(@project).list
+    issues = issues_client_class.new(@project).list
     issues.map do |issue|
       next unless issue.user
 
       Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
                     closed_date: issue.closed_date)
     end
+  end
+
+  private
+
+  def issues_client_class
+    customer = @project.customer
+    Object.const_get("Clients::Tts::#{customer.ticket_tracking_system.capitalize}::Issue")
   end
 end
