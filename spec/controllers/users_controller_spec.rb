@@ -106,13 +106,21 @@ RSpec.describe UsersController, type: :controller do
 
     context 'when user is logged in' do
       context 'with valid attributes' do
-        let(:new_attributes) { { first_name: 'Updated', last_name: 'Name' } }
+        let(:new_attributes) do
+          {
+            first_name: 'Updated',
+            last_name: 'Name',
+            salaries_attributes: [{ yearly_salary: 60_000, start_date: '2023-01-01' }]
+          }
+        end
 
         it 'updates the user' do
           put :update, params: { id: user.id, user: new_attributes }
           user.reload
+
           expect(user.first_name).to eq('Updated')
           expect(user.last_name).to eq('Name')
+          expect(user.salaries.first&.yearly_salary).to eq(60_000)
         end
 
         it 'returns http success' do

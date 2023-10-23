@@ -42,5 +42,9 @@ FactoryBot.define do
     active { [true, false].sample }
 
     association :profession
+
+    after(:create) do |user|
+      create(:salary, user:)
+    end
   end
 end

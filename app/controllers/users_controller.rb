@@ -18,6 +18,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    ApplicationRecord.transaction do
+      @user.salaries.destroy_all
+
+      raise ActiveRecord::Rollback unless @user.update(user_params)
+    end
+
     if @user.update(user_params)
       render :show # This will use app/views/users/show.json.jbuilder (since it's rendering a single user)
     else
@@ -35,6 +41,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:active, :contract_type, :email, :first_name, :last_name, :image_url, :seniority,
                                  :google_id, :profession_id, :country,
-                                 user_service_identifiers_attributes: %i[id identifier service_name customer_id])
+                                 user_service_identifiers_attributes: %i[id identifier service_name customer_id],
+                                 salaries_attributes: %i[yearly_salary start_date])
   end
 end

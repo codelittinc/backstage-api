@@ -54,6 +54,8 @@ class User < ApplicationRecord
   has_many :certifications, dependent: :destroy
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
+  has_many :salaries, dependent: :destroy
+  accepts_nested_attributes_for :salaries
 
   def name
     "#{first_name} #{last_name}"
