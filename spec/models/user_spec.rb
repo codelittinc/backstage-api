@@ -67,6 +67,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:certifications).dependent(:destroy) }
     it { is_expected.to have_many(:user_skills).dependent(:destroy) }
     it { is_expected.to have_many(:skills).through(:user_skills) }
+    it { is_expected.to have_many(:salaries).dependent(:destroy) }
   end
 
   context 'when creating a new user' do

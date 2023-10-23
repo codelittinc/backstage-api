@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -112,6 +111,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
     t.date "end_date"
     t.index ["profession_id"], name: "index_requirements_on_profession_id"
     t.index ["statement_of_work_id"], name: "index_requirements_on_statement_of_work_id"
+  end
+
+  create_table "salaries", force: :cascade do |t|
+    t.float "yearly_salary"
+    t.datetime "start_date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_salaries_on_user_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -223,6 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
   add_foreign_key "projects", "customers"
   add_foreign_key "requirements", "professions"
   add_foreign_key "requirements", "statement_of_works"
+  add_foreign_key "salaries", "users"
   add_foreign_key "statement_of_works", "projects"
   add_foreign_key "time_entries", "statement_of_works"
   add_foreign_key "time_entries", "users"
