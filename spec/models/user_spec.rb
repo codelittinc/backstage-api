@@ -89,5 +89,10 @@ RSpec.describe User, type: :model do
       user_service_identifier = FactoryBot.create(:user_service_identifier, user:, identifier: 'codelittinc')
       expect(User.by_external_identifier(user_service_identifier.identifier).first).to eql(user)
     end
+
+    it 'returns the user by the email' do
+      user = FactoryBot.create(:user, email: 'bruce.wayne@codelitt.com')
+      expect(User.by_external_identifier(user.email).first).to eql(user)
+    end
   end
 end
