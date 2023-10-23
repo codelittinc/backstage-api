@@ -11,6 +11,6 @@
 #
 FactoryBot.define do
   factory :skill do
-    name { Faker::Job.key_skill }
+    name { FFaker::Skill.tech_skill }
   end
 end

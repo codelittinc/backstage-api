@@ -27,6 +27,6 @@ FactoryBot.define do
     user
     skill
     level { UserSkill::VALID_LEVELS.sample }
-    last_applied_in_year { 1 }
+    last_applied_in_year { 2020 }
   end
 end
