@@ -9,6 +9,7 @@
 #  notifications_token          :string
 #  slug                         :string
 #  source_control_token         :string
+#  ticket_tracking_system       :string
 #  ticket_tracking_system_token :string
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
