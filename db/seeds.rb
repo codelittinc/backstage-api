@@ -9,15 +9,18 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # Professions
-
-Profession.create(name: 'Engineer')
-Profession.create(name: 'Quality Assurance Specialist')
-Profession.create(name: 'Designer')
-Profession.create(name: 'UX Researcher')
+if Profession.count.zero?
+  Profession.create(name: 'Engineer')
+  Profession.create(name: 'Quality Assurance Specialist')
+  Profession.create(name: 'Designer')
+  Profession.create(name: 'UX Researcher')
+end
 
 # Skills
 
-Skill.create(name: 'React')
-Skill.create(name: 'Ruby on Rails')
-Skill.create(name: 'Ruby')
-Skill.create(name: 'Javascript')
+if Skill.count.zero?
+  Skill.create(name: 'React')
+  Skill.create(name: 'Ruby on Rails')
+  Skill.create(name: 'Ruby')
+  Skill.create(name: 'Javascript')
+end
