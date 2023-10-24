@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_23_165012) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_24_135952) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "certifications", force: :cascade do |t|
@@ -54,6 +55,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_23_165012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id", null: false
+    t.string "issue_id"
+    t.string "issue_type"
+    t.string "title"
     t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["user_id"], name: "index_issues_on_user_id"
   end

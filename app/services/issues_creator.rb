@@ -12,7 +12,8 @@ class IssuesCreator < ApplicationService
       next unless issue.user
 
       Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
-                    closed_date: issue.closed_date)
+                    closed_date: issue.closed_date, issue_id: issue.issue_id, title: issue.title,
+                    issue_type: issue.issue_type)
     end
   end
 

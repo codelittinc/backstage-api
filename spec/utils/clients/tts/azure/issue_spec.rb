@@ -39,6 +39,41 @@ RSpec.describe Clients::Tts::Azure::Issue, type: :service do
         expect(work_item.user).to eql(user)
         expect(work_item.state).to eql('Done')
         expect(work_item.closed_date).to eql('2023-09-06T14:06:51.537Z')
+        expect(work_item.issue_id).to eql('144733')
+        expect(work_item.title).to eql('Running DDC-StudioEnterprise Locally')
+      end
+    end
+
+    context 'when it has [BUG] on the title' do
+      it 'sets the issue type as bug' do
+        VCR.use_cassette('clients#tts#azure#issue#list') do
+          user
+          result = Clients::Tts::Azure::Issue.new(project).list
+          work_item = result.find { |item| item.issue_id == '151481' }
+          expect(work_item.issue_type).to eql('Bug')
+        end
+      end
+    end
+
+    context 'when work type is product backlog item' do
+      it 'sets the issue type as product backlog item' do
+        VCR.use_cassette('clients#tts#azure#issue#list') do
+          user
+          result = Clients::Tts::Azure::Issue.new(project).list
+          work_item = result.find { |item| item.issue_id == '144733' }
+          expect(work_item.issue_type).to eql('Product Backlog Item')
+        end
+      end
+    end
+
+    context 'when it is neither a product backlog item or a bug' do
+      it 'sets the issue type as task' do
+        VCR.use_cassette('clients#tts#azure#issue#list') do
+          user
+          result = Clients::Tts::Azure::Issue.new(project).list
+          work_item = result.find { |item| item.issue_id == '150042' }
+          expect(work_item.issue_type).to eql('Task')
+        end
       end
     end
   end

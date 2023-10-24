@@ -7,9 +7,12 @@
 #  id          :bigint           not null, primary key
 #  closed_date :datetime
 #  effort      :float
+#  issue_type  :string
 #  state       :string
+#  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  issue_id    :string
 #  project_id  :bigint           not null
 #  user_id     :bigint           not null
 #

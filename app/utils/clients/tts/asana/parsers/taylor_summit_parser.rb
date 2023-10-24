@@ -34,6 +34,13 @@ module Clients
           def closed_date
             @json.dig('data', 'completed_at')
           end
+
+          # @TODO: add the fields below
+          def title; end
+
+          def issue_type; end
+
+          def issue_id; end
         end
       end
     end

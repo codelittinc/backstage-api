@@ -28,6 +28,21 @@ module Clients
           def closed_date
             json['fields']['Microsoft.VSTS.Common.ClosedDate']
           end
+
+          def title
+            json.dig('fields', 'System.Title')
+          end
+
+          def issue_type
+            return 'Bug' if title.match?(/.*Bug.*/i)
+            return 'Product Backlog Item' if json.dig('fields', 'System.WorkItemType') == 'Product Backlog Item'
+
+            'Task'
+          end
+
+          def issue_id
+            json['id'].to_s
+          end
         end
       end
     end
