@@ -12,7 +12,7 @@
 #
 FactoryBot.define do
   factory :permission do
-    target { Faker::Lorem.word }
-    ability { Faker::Lorem.word }
+    target { FFaker::Lorem.word }
+    ability { FFaker::Lorem.word }
   end
 end

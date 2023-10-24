@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :professions, only: [:index]
   resources :skills, only: [:index]
   resources :issues, only: [:index]
+  resources :permissions, only: [:index]
 end
