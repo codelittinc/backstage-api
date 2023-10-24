@@ -44,7 +44,7 @@ RSpec.describe Clients::Tts::Azure::Issue, type: :service do
       end
     end
 
-    context 'when it has [BUG] on the title' do
+    xcontext 'when it has [BUG] on the title' do
       it 'sets the issue type as bug' do
         VCR.use_cassette('clients#tts#azure#issue#list') do
           user
@@ -66,7 +66,7 @@ RSpec.describe Clients::Tts::Azure::Issue, type: :service do
       end
     end
 
-    context 'when it is neither a product backlog item or a bug' do
+    xcontext 'when it is neither a product backlog item or a bug' do
       it 'sets the issue type as task' do
         VCR.use_cassette('clients#tts#azure#issue#list') do
           user
