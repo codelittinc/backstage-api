@@ -24,3 +24,10 @@ if Skill.count.zero?
   Skill.create(name: 'Ruby')
   Skill.create(name: 'Javascript')
 end
+
+if Permission.count.zero?
+  Permission.create(target: 'financial', ability: 'change')
+  Permission.create(target: 'financial', ability: 'view')
+  Permission.create(target: 'analytics', ability: 'view')
+  Permission.create(target: 'user', ability: 'change')
+end
