@@ -23,21 +23,17 @@ services:
     build:
       context: .
       target: development
-
     volumes:
       - .:/app
-
+      - gems:/box/gems
     env_file:
       - .env
-
     ports:
       - '3000:3000'
-
     depends_on:
       - db
       - box
       - redis
-
     links:
       - db
       - box
@@ -47,4 +43,27 @@ services:
     container_name: backstage-bundle-box
     image: busybox
     volumes:
-      - /box
+      - gems:/box/gems
+
+  sidekiq:
+    container_name: backstage-sidekiq
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      target: development
+    command: bundle exec sidekiq
+    volumes:
+      - .:/app
+      - gems:/box/gems
+    env_file:
+      - .env
+    depends_on:
+      - box
+      - redis
+    links:
+      - box
+      - redis
+
+volumes:
+  gems:

@@ -1,0 +1,5 @@
+syncronize_issues:
+  name: issues_job, # must be uniq!
+  cron: "every 1 hour"
+  class: "IssuesJob"
+  queue: default
