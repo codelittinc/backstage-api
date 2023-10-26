@@ -8,7 +8,7 @@
 #  end_date                   :datetime
 #  hour_delivery_schedule     :string
 #  hourly_revenue             :float
-#  limit_by_delivery_schedule :boolean
+#  limit_by_delivery_schedule :boolean          default(TRUE), not null
 #  model                      :string
 #  start_date                 :datetime
 #  total_hours                :float

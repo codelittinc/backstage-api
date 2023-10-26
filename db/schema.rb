@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "certifications", force: :cascade do |t|
@@ -101,7 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
     t.float "total_revenue"
     t.float "total_hours"
     t.string "hour_delivery_schedule"
-    t.boolean "limit_by_delivery_schedule"
+    t.boolean "limit_by_delivery_schedule", default: true, null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "project_id", null: false
