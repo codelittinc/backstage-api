@@ -34,4 +34,9 @@ RSpec.describe Project, type: :model do
     it { should validate_presence_of(:start_date) }
     it { should validate_presence_of(:end_date) }
   end
+
+  context 'associations' do
+    it { should have_many(:issues).dependent(:destroy) }
+    it { should have_many(:statement_of_works).dependent(:destroy) }
+  end
 end
