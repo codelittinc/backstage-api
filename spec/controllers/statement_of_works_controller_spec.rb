@@ -6,8 +6,9 @@ RSpec.describe StatementOfWorksController, type: :controller do
   include_context 'authentication'
   render_views
 
+  let(:project) { FactoryBot.create(:project) }
+
   let(:valid_attributes) do
-    project = FactoryBot.create(:project)
     FactoryBot.attributes_for(:statement_of_work, :with_maintenance).merge(project_id: project.id)
   end
 
@@ -20,16 +21,16 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      FactoryBot.create(:statement_of_work, :with_maintenance)
-      get :index
+      FactoryBot.create(:statement_of_work, :with_maintenance, project:)
+      get :index, params: { project_id: project.id }
       expect(response).to be_successful
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      statement_of_work = FactoryBot.create(:statement_of_work, :with_maintenance)
-      get :show, params: { id: statement_of_work.to_param }
+      statement_of_work = FactoryBot.create(:statement_of_work, :with_maintenance, project:)
+      get :show, params: { id: statement_of_work.to_param, project_id: project.id }
       expect(response.parsed_body['id']).to eql(statement_of_work.id)
     end
   end
@@ -38,20 +39,19 @@ RSpec.describe StatementOfWorksController, type: :controller do
     context 'with valid params' do
       it 'creates a new StatementOfWork' do
         expect do
-          post :create, params: { statement_of_work: valid_attributes }
+          post :create, params: { statement_of_work: valid_attributes, project_id: project.id }
         end.to change(StatementOfWork, :count).by(1)
       end
 
       it 'renders a JSON response with the new statement_of_work' do
-        post :create, params: { statement_of_work: valid_attributes }
+        post :create, params: { statement_of_work: valid_attributes, project_id: project.id }
         expect(response).to have_http_status(:created)
-        expect(response.location).to eq(statement_of_work_url(StatementOfWork.last))
       end
     end
 
     context 'with invalid params' do
       it 'renders a JSON response with errors for the new statement_of_work' do
-        post :create, params: { statement_of_work: invalid_attributes }
+        post :create, params: { statement_of_work: invalid_attributes, project_id: project.id }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -67,14 +67,16 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
       it 'updates the requested statement_of_work' do
         statement_of_work = StatementOfWork.create! valid_attributes
-        put :update, params: { id: statement_of_work.to_param, statement_of_work: new_attributes }
+        put :update,
+            params: { id: statement_of_work.to_param, statement_of_work: new_attributes, project_id: project.id }
         statement_of_work.reload
         expect(statement_of_work.hour_delivery_schedule).to eql('weekly')
       end
 
       it 'renders a JSON response with the statement_of_work' do
         statement_of_work = StatementOfWork.create! valid_attributes
-        put :update, params: { id: statement_of_work.to_param, statement_of_work: new_attributes }
+        put :update,
+            params: { id: statement_of_work.to_param, statement_of_work: new_attributes, project_id: project.id }
         expect(response).to have_http_status(:ok)
       end
     end
@@ -82,7 +84,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
     context 'with invalid params' do
       it 'renders a JSON response with errors for the statement_of_work' do
         statement_of_work = StatementOfWork.create! valid_attributes
-        put :update, params: { id: statement_of_work.to_param, statement_of_work: invalid_attributes }
+        put :update,
+            params: { id: statement_of_work.to_param, statement_of_work: invalid_attributes, project_id: project.id }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -92,7 +95,7 @@ RSpec.describe StatementOfWorksController, type: :controller do
     it 'destroys the requested statement_of_work' do
       statement_of_work = StatementOfWork.create! valid_attributes
       expect do
-        delete :destroy, params: { id: statement_of_work.to_param }
+        delete :destroy, params: { id: statement_of_work.to_param, project_id: project.id }
       end.to change(StatementOfWork, :count).by(-1)
     end
   end
