@@ -31,6 +31,7 @@ class Project < ApplicationRecord
 
   belongs_to :customer
   has_many :issues, dependent: :destroy
+  has_many :statement_of_works, dependent: :destroy
 
   validates :name, presence: true
   validates :billable, inclusion: { in: [true, false] }

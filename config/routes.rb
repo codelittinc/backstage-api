@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :users
   resources :customers
+  resources :statement_of_works
   resources :professions, only: [:index]
   resources :skills, only: [:index]
   resources :issues, only: [:index]

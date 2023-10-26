@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_24_135952) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "certifications", force: :cascade do |t|
@@ -96,6 +95,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_135952) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "statement_of_works", force: :cascade do |t|
+    t.string "model"
+    t.float "hourly_revenue"
+    t.float "total_revenue"
+    t.float "total_hours"
+    t.string "hour_delivery_schedule"
+    t.boolean "limit_by_delivery_schedule"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_statement_of_works_on_project_id"
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "permission_id", null: false
@@ -152,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_24_135952) do
   add_foreign_key "issues", "projects"
   add_foreign_key "issues", "users"
   add_foreign_key "projects", "customers"
+  add_foreign_key "statement_of_works", "projects"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "user_service_identifiers", "customers"

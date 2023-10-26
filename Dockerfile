@@ -20,10 +20,10 @@ ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle config set with 'development'
 RUN bundle install
 
-# Generate binstubs for all gems
-RUN bundle binstubs --all
 
 ADD ./ /app
+
+RUN bundle binstubs rspec-core rubocop
 
 FROM development as production
 
