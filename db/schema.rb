@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_27_195039) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "certifications", force: :cascade do |t|
@@ -88,6 +87,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
     t.string "slug"
     t.index ["customer_id"], name: "index_projects_on_customer_id"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
+  end
+
+  create_table "requirements", force: :cascade do |t|
+    t.bigint "profession_id", null: false
+    t.bigint "statement_of_work_id", null: false
+    t.float "coverage"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profession_id"], name: "index_requirements_on_profession_id"
+    t.index ["statement_of_work_id"], name: "index_requirements_on_statement_of_work_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -167,6 +176,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_25_221849) do
   add_foreign_key "issues", "projects"
   add_foreign_key "issues", "users"
   add_foreign_key "projects", "customers"
+  add_foreign_key "requirements", "professions"
+  add_foreign_key "requirements", "statement_of_works"
   add_foreign_key "statement_of_works", "projects"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
