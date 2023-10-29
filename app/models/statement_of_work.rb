@@ -45,7 +45,7 @@ class StatementOfWork < ApplicationRecord
   def validate_date_range
     return unless start_date && end_date && start_date >= end_date
 
-    errors.add(:start_date, "must be before end date")
-    errors.add(:end_date, "must be after start date")
+    errors.add(:start_date, 'must be before end date')
+    errors.add(:end_date, 'must be after start date')
   end
 end

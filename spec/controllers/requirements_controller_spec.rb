@@ -12,7 +12,7 @@ RSpec.describe RequirementsController, type: :controller do
   let(:valid_attributes) do
     profession = FactoryBot.create(:profession)
     FactoryBot.attributes_for(:requirement, statement_of_work_id: statement_of_work.id,
-                                                    profession_id: profession.id)
+                                            profession_id: profession.id)
   end
 
   describe 'GET #index' do
