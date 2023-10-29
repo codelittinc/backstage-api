@@ -21,15 +21,16 @@
 #  fk_rails_...  (profession_id => professions.id)
 #  fk_rails_...  (statement_of_work_id => statement_of_works.id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Requirement, type: :model do
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:coverage) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:statement_of_work) }
     it { should belong_to(:profession) }
+    it { should have_many(:assignments) }
   end
 end

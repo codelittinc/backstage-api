@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
-require "sidekiq/cron/web"
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => "/admin", as: "rails_admin"
-  mount Sidekiq::Web => "/sidekiq"
+  resources :assignments
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Sidekiq::Web => '/sidekiq'
 
   resources :projects do
     resources :statement_of_works do

@@ -24,6 +24,7 @@
 class Requirement < ApplicationRecord
   belongs_to :profession
   belongs_to :statement_of_work
+  has_many :assignments, dependent: :destroy
 
   validates :coverage, presence: true
 end

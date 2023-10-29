@@ -25,15 +25,15 @@
 #
 #  fk_rails_...  (project_id => projects.id)
 #
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe StatementOfWork, type: :model do
-  describe "validations" do
+  describe 'validations' do
     it { should validate_presence_of(:start_date) }
     it { should validate_presence_of(:end_date) }
   end
 
-  describe "associations" do
+  describe 'associations' do
     it { should belong_to(:project) }
     it { should have_many(:requirements) }
   end
