@@ -36,5 +36,6 @@ RSpec.describe StatementOfWork, type: :model do
   describe 'associations' do
     it { should belong_to(:project) }
     it { should have_many(:requirements) }
+    it { should have_many(:time_entries) }
   end
 end

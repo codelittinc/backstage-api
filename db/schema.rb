@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_28_020018) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_29_194618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,6 +128,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_28_020018) do
     t.index ["project_id"], name: "index_statement_of_works_on_project_id"
   end
 
+  create_table "time_entries", force: :cascade do |t|
+    t.date "date"
+    t.float "hours"
+    t.bigint "user_id", null: false
+    t.bigint "statement_of_work_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statement_of_work_id"], name: "index_time_entries_on_statement_of_work_id"
+    t.index ["user_id"], name: "index_time_entries_on_user_id"
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "permission_id", null: false
@@ -188,6 +199,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_28_020018) do
   add_foreign_key "requirements", "professions"
   add_foreign_key "requirements", "statement_of_works"
   add_foreign_key "statement_of_works", "projects"
+  add_foreign_key "time_entries", "statement_of_works"
+  add_foreign_key "time_entries", "users"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "user_service_identifiers", "customers"
