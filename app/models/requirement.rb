@@ -6,6 +6,8 @@
 #
 #  id                   :bigint           not null, primary key
 #  coverage             :float
+#  end_date             :date
+#  start_date           :date
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profession_id        :bigint           not null
@@ -27,4 +29,6 @@ class Requirement < ApplicationRecord
   has_many :assignments, dependent: :destroy
 
   validates :coverage, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
 end

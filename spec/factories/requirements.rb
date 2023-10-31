@@ -6,6 +6,8 @@
 #
 #  id                   :bigint           not null, primary key
 #  coverage             :float
+#  end_date             :date
+#  start_date           :date
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profession_id        :bigint           not null
