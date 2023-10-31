@@ -20,9 +20,8 @@ class TeamMakerProjectCreator < ApplicationService
 
   def create_time_entires!(team_maker_project_time_entries)
     team_maker_project_time_entries.each do |time_entry|
-      next if User.find_by(email: time_entry.resource).nil?
-
       user = User.find_by(email: time_entry.resource)
+      next if user.nil?
 
       TimeEntry.create!(
         statement_of_work:,
@@ -42,11 +41,11 @@ class TeamMakerProjectCreator < ApplicationService
 
   def create_assignments!(team_maker_project_assignments, requirement)
     team_maker_project_assignments.each do |assignment|
-      next if User.find_by(email: assignment.resource).nil?
+      user = User.find_by(email: assignment.resource)
 
       Assignment.create!(
         requirement:,
-        user: User.find_by(email: assignment.resource),
+        user:,
         start_date: assignment.starts_on,
         end_date: assignment.ends_on,
         coverage: assignment.coverage
@@ -68,7 +67,7 @@ class TeamMakerProjectCreator < ApplicationService
     @professions ||= {
       'Engineering' => Profession.find_by(name: 'Engineer'),
       'Project Management' => Profession.find_by(name: 'Project Manager'),
-      'Designer' => Profession.find_by(name: 'Design')
+      'Design' => Profession.find_by(name: 'Designer')
     }
   end
 

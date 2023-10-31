@@ -3,3 +3,9 @@ syncronize_issues:
   cron: "every 1 hour"
   class: "IssuesJob"
   queue: default
+
+syncronize_time_entries:
+  name: issues_job, # must be uniq!
+  cron: "every 5 minutes"
+  class: "TimeEntriesJob"
+  queue: default
