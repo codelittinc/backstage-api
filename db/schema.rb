@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_29_194618) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_30_223721) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -19,7 +20,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_194618) do
     t.bigint "requirement_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "user_id", null: false
     t.index ["requirement_id"], name: "index_assignments_on_requirement_id"
+    t.index ["user_id"], name: "index_assignments_on_user_id"
   end
 
   create_table "certifications", force: :cascade do |t|
@@ -103,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_194618) do
     t.float "coverage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
     t.index ["profession_id"], name: "index_requirements_on_profession_id"
     t.index ["statement_of_work_id"], name: "index_requirements_on_statement_of_work_id"
   end
@@ -192,6 +199,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_194618) do
   end
 
   add_foreign_key "assignments", "requirements"
+  add_foreign_key "assignments", "users"
   add_foreign_key "certifications", "users"
   add_foreign_key "issues", "projects"
   add_foreign_key "issues", "users"

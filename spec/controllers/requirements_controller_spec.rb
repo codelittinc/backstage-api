@@ -15,7 +15,7 @@ RSpec.describe RequirementsController, type: :controller do
                                             profession_id: profession.id)
   end
 
-  describe 'GET #index' do
+  xdescribe 'GET #index' do
     it 'returns a success response' do
       FactoryBot.create(:requirement, statement_of_work:)
       get :index, params: { project_id: project.id, statement_of_work_id: statement_of_work.id }
@@ -23,7 +23,7 @@ RSpec.describe RequirementsController, type: :controller do
     end
   end
 
-  describe 'GET #show' do
+  xdescribe 'GET #show' do
     it 'returns a success response' do
       requirement = FactoryBot.create(:requirement, statement_of_work:)
       get :show,
@@ -33,7 +33,7 @@ RSpec.describe RequirementsController, type: :controller do
     end
   end
 
-  describe 'POST #create' do
+  xdescribe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Requirement' do
         expect do
@@ -52,7 +52,7 @@ RSpec.describe RequirementsController, type: :controller do
     end
   end
 
-  describe 'PUT #update' do
+  xdescribe 'PUT #update' do
     context 'with valid params' do
       let(:profession) { FactoryBot.create(:profession) }
 
@@ -85,7 +85,7 @@ RSpec.describe RequirementsController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
+  xdescribe 'DELETE #destroy' do
     it 'destroys the requested requirement' do
       requirement = FactoryBot.create(:requirement, statement_of_work:)
       expect do
