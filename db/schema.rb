@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_06_170512) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -152,6 +151,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_06_170512) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "time_offs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "time_off_type_id", null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["time_off_type_id"], name: "index_time_offs_on_time_off_type_id"
+    t.index ["user_id"], name: "index_time_offs_on_user_id"
+  end
+
   create_table "user_permissions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "permission_id", null: false
@@ -215,6 +225,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_06_170512) do
   add_foreign_key "statement_of_works", "projects"
   add_foreign_key "time_entries", "statement_of_works"
   add_foreign_key "time_entries", "users"
+  add_foreign_key "time_offs", "time_off_types"
+  add_foreign_key "time_offs", "users"
   add_foreign_key "user_permissions", "permissions"
   add_foreign_key "user_permissions", "users"
   add_foreign_key "user_service_identifiers", "customers"
