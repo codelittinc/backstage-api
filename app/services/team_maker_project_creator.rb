@@ -20,8 +20,7 @@ class TeamMakerProjectCreator < ApplicationService
 
   def create_time_entires!(team_maker_project_time_entries)
     team_maker_project_time_entries.each do |time_entry|
-      user = User.find_by(email: time_entry.resource)
-      next if user.nil?
+      user = find_user(time_entry.resource)
 
       TimeEntry.create!(
         statement_of_work:,
@@ -41,7 +40,7 @@ class TeamMakerProjectCreator < ApplicationService
 
   def create_assignments!(team_maker_project_assignments, requirement)
     team_maker_project_assignments.each do |assignment|
-      user = User.find_by(email: assignment.resource)
+      user = find_user(assignment.resource)
 
       Assignment.create!(
         requirement:,
@@ -84,5 +83,12 @@ class TeamMakerProjectCreator < ApplicationService
     )
     @statement_of_work.requirements.destroy_all
     @statement_of_work
+  end
+
+  def find_user(email)
+    user = User.find_by(email:)
+    raise StandardError, "User with email #{email} does not exist" if user.nil?
+
+    user
   end
 end
