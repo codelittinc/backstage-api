@@ -11,6 +11,6 @@
 #
 FactoryBot.define do
   factory :time_off_type do
-    name { 'paid time off' }
+    name { TimeOffType::VACATION_TYPE }
   end
 end

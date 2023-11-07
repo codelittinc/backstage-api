@@ -4,7 +4,6 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  resources :time_entries
   resources :assignments
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Sidekiq::Web => '/sidekiq'
@@ -13,6 +12,10 @@ Rails.application.routes.draw do
     resources :statement_of_works do
       resources :requirements
     end
+  end
+
+  namespace :analytics do
+    resources :time_entries, only: [:index]
   end
 
   resources :users

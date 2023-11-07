@@ -10,5 +10,9 @@
 #  updated_at :datetime         not null
 #
 class TimeOffType < ApplicationRecord
-  validates :name, presence: true
+  VACATION_TYPE = 'vacation'
+  SICK_LEAVE_TYPE = 'sick leave'
+  ERRAND_TYPE = 'errand'
+
+  validates :name, presence: true, inclusion: { in: [VACATION_TYPE, SICK_LEAVE_TYPE, ERRAND_TYPE] }
 end

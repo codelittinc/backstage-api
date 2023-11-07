@@ -19,6 +19,8 @@ class TeamMakerProjectCreator < ApplicationService
   private
 
   def create_time_entires!(team_maker_project_time_entries)
+    statement_of_work.time_entries.destroy_all
+
     team_maker_project_time_entries.each do |time_entry|
       user = find_user(time_entry.resource)
 
@@ -81,6 +83,7 @@ class TeamMakerProjectCreator < ApplicationService
       model: 'maintenance', hour_delivery_schedule: 'contract_period',
       total_revenue: 1
     )
+
     @statement_of_work.requirements.destroy_all
     @statement_of_work
   end
