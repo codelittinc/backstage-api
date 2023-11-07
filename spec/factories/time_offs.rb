@@ -25,8 +25,16 @@
 FactoryBot.define do
   factory :time_off do
     user
-    time_of_type
+    time_off_type
     starts_at { '2023-11-06 17:32:01' }
     ends_at { '2023-12-06 17:32:01' }
+
+    trait :vacation do
+      time_off_type { TimeOffType.create(name: TimeOffType::VACATION_TYPE) }
+    end
+
+    trait :sick_leave do
+      time_off_type { TimeOffType.create(name: TimeOffType::SICK_LEAVE_TYPE) }
+    end
   end
 end
