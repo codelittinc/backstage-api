@@ -15,9 +15,27 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe 'GET #index' do
-    it 'returns a success response' do
-      get :index, params: valid_attributes
-      expect(response).to be_successful
+    context 'with the statement of work id' do
+      it 'returns a success response' do
+        valid_attributes = {
+          statement_of_work_id: FactoryBot.create(:statement_of_work, :with_maintenance).id,
+          start_date: Date.yesterday,
+          end_date: Date.tomorrow
+        }
+        get :index, params: valid_attributes
+        expect(response).to be_successful
+      end
+    end
+
+    context 'without the statement of work id' do
+      it 'returns a success response' do
+        valid_attributes = {
+          start_date: Date.yesterday,
+          end_date: Date.tomorrow
+        }
+        get :index, params: valid_attributes
+        expect(response).to be_successful
+      end
     end
   end
 end
