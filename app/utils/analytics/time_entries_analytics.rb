@@ -30,7 +30,11 @@ module Analytics
     def requirements
       return @requirements if @requirements
 
-      @statement_of_work.requirements.active_in_period(@start_date, @end_date)
+      @requirements = if @statement_of_work
+                        @statement_of_work.requirements.active_in_period(@start_date, @end_date)
+                      else
+                        Requirement.all.active_in_period(@start_date, @end_date)
+                      end
     end
 
     def over_delivered_hours(assignment)

@@ -14,7 +14,7 @@ module Analytics
     private
 
     def set_statement_of_work
-      @statement_of_work = StatementOfWork.find(params[:statement_of_work_id])
+      @statement_of_work = StatementOfWork.where(id: params[:statement_of_work_id]).first
     end
   end
 end
