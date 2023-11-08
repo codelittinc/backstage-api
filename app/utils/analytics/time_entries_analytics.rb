@@ -30,7 +30,7 @@ module Analytics
     def requirements
       return @requirements if @requirements
 
-      @statement_of_work.requirements.where('start_date <= ? AND end_date >= ?', @end_date, @start_date)
+      @statement_of_work.requirements.active_in_period(@start_date, @end_date)
     end
 
     def over_delivered_hours(assignment)
@@ -108,9 +108,7 @@ module Analytics
     end
 
     def time_offs_by_user_and_type(user, time_off_type)
-      TimeOff.where(user:, time_off_type:).where(
-        'starts_at <= ? AND ends_at >= ?', @end_date, @start_date
-      )
+      TimeOff.where(user:, time_off_type:).active_in_period(@start_date, @end_date)
     end
   end
 end
