@@ -28,4 +28,6 @@ class TimeOff < ApplicationRecord
 
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+
+  scope :active_in_period, ->(start_date, end_date) { where('starts_at <= ? AND ends_at >= ?', end_date, start_date) }
 end
