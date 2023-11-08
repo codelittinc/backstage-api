@@ -8,7 +8,7 @@ module Analytics
       @end_date = end_date.to_datetime
     end
 
-    # rubocop:disable Style/Metrics/AbcSize
+    # rubocop:disable Metrics/AbcSize
     def data
       {
         labels: users.map(&:name),
@@ -21,15 +21,16 @@ module Analytics
         ]
       }
     end
-    # rubocop:enable Style/Metrics/AbcSize
+    # rubocop:enable Metrics/AbcSize
 
     def assignments
-      @assignments ||= Assignment.where(requirement: requirements)
+      @assignments ||= Assignment.where(requirement: requirements).joins(:user).order('users.first_name')
     end
 
     def requirements
-      @requirements ||=
-        @statement_of_work.requirements.where('start_date <= ? AND end_date >= ?', @start_date, @end_date)
+      return @requirements if @requirements
+
+      @statement_of_work.requirements.where('start_date <= ? AND end_date >= ?', @end_date, @start_date)
     end
 
     def over_delivered_hours(assignment)
@@ -51,7 +52,9 @@ module Analytics
     end
 
     def expected_hours(assignment)
-      days = (@start_date..@end_date).count { |d| !d.sunday? && !d.saturday? }
+      days = ([@start_date, assignment.start_date].max..[@end_date, assignment.end_date].min).count do |d|
+        !d.sunday? && !d.saturday?
+      end
       days * assignment.coverage * 8
     end
 
@@ -71,8 +74,8 @@ module Analytics
       paid_time_off_hours(assignment, sick_leave_type)
     end
 
-    # rubocop:disable Style/Metrics/MethodLength
-    # rubocop:disable Style/Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def paid_time_off_hours(assignment, time_off_type)
       time_offs = time_offs_by_user_and_type(assignment.user, time_off_type)
 
@@ -97,8 +100,8 @@ module Analytics
         accumulator + hours
       end
     end
-    # rubocop:enable Style/Metrics/AbcSize
-    # rubocop:enable Style/Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def users
       @users ||= assignments.map(&:user)
