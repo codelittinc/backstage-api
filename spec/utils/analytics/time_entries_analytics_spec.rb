@@ -116,28 +116,35 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
 
         data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
         data_json = data.to_json
+        sorted_data = {
+          user1.id => [40.0, 0.0, 0, 0, 0.0],
+          user2.id => [20.0, 0.0, 0, 0, 0.0],
+          user3.id => [20.0, 0.0, 0, 0, 0.0]
+        }
+        users = [user1, user2, user3].sort_by(&:first_name)
+
         expected_response_json = {
-          labels: [user1.name, user2.name, user3.name],
+          labels: users.map(&:name),
           datasets: [
             {
               label: 'Worked',
-              data: [40.0, 20.0, 20.0]
+              data: users.map { |user| sorted_data[user.id][0] }
             },
             {
               label: 'Missing',
-              data: [0.0, 0.0, 0.0]
+              data: users.map { |user| sorted_data[user.id][1] }
             },
             {
               label: 'Paid time off',
-              data: [0, 0, 0]
+              data: users.map { |user| sorted_data[user.id][2] }
             },
             {
               label: 'Sick leave',
-              data: [0, 0, 0]
+              data: users.map { |user| sorted_data[user.id][3] }
             },
             {
               label: 'Over delivered',
-              data: [0.0, 0.0, 0.0]
+              data: users.map { |user| sorted_data[user.id][4] }
             }
           ]
         }.to_json
