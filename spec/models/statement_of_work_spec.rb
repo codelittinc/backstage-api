@@ -38,4 +38,43 @@ RSpec.describe StatementOfWork, type: :model do
     it { should have_many(:requirements) }
     it { should have_many(:time_entries) }
   end
+
+  describe 'methods' do
+    context '#active_in_period' do
+      it 'should return true if dates are fully in the period' do
+        FactoryBot.create(:statement_of_work, :with_maintenance, start_date: '2020-01-01',
+                                                                 end_date: '2020-01-31')
+
+        expect(StatementOfWork.active_in_period('2020-01-05', '2020-01-28').length).to eq(1)
+      end
+
+      it 'should return true if start date is in the period but the end date is out' do
+        FactoryBot.create(:statement_of_work, :with_maintenance, start_date: '2020-01-01',
+                                                                 end_date: '2020-01-31')
+
+        expect(StatementOfWork.active_in_period('2020-01-05', '2020-02-28').length).to eq(1)
+      end
+
+      it 'should return true if start date is out of the period but the end date is in' do
+        FactoryBot.create(:statement_of_work, :with_maintenance, start_date: '2020-01-01',
+                                                                 end_date: '2020-01-31')
+
+        expect(StatementOfWork.active_in_period('2019-01-05', '2020-02-28').length).to eq(1)
+      end
+
+      it 'should return true if both dates cover the start and end date' do
+        FactoryBot.create(:statement_of_work, :with_maintenance, start_date: '2020-01-01',
+                                                                 end_date: '2020-01-31')
+
+        expect(StatementOfWork.active_in_period('2019-01-05', '2021-02-28').length).to eq(1)
+      end
+
+      it 'should return false if dates are fully out of the period' do
+        FactoryBot.create(:statement_of_work, :with_maintenance, start_date: '2020-01-01',
+                                                                 end_date: '2020-01-31')
+
+        expect(StatementOfWork.active_in_period('2020-02-01', '2020-02-28').length).to eq(0)
+      end
+    end
+  end
 end
