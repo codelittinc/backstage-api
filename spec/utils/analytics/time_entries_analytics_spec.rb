@@ -38,10 +38,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [40.0]
             },
             {
-              label: 'Missing',
-              data: [0.0]
-            },
-            {
               label: 'Paid time off',
               data: [0]
             },
@@ -51,6 +47,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             },
             {
               label: 'Over delivered',
+              data: [0.0]
+            },
+            {
+              label: 'Missing',
               data: [0.0]
             }
           ]
@@ -131,10 +131,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: users.map { |user| sorted_data[user.id][0] }
             },
             {
-              label: 'Missing',
-              data: users.map { |user| sorted_data[user.id][1] }
-            },
-            {
               label: 'Paid time off',
               data: users.map { |user| sorted_data[user.id][2] }
             },
@@ -145,6 +141,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: users.map { |user| sorted_data[user.id][4] }
+            },
+            {
+              label: 'Missing',
+              data: users.map { |user| sorted_data[user.id][1] }
             }
           ]
         }.to_json
@@ -178,10 +178,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [35.0]
             },
             {
-              label: 'Missing',
-              data: [5.0]
-            },
-            {
               label: 'Paid time off',
               data: [0]
             },
@@ -192,6 +188,11 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: [0]
+            },
+
+            {
+              label: 'Missing',
+              data: [5.0]
             }
           ]
         }.to_json
@@ -202,7 +203,8 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
       it 'returns 8 hours as paid time off' do
         user1 = FactoryBot.create(:user)
 
-        FactoryBot.create(:time_off, :vacation, user: user1, starts_at: start_date, ends_at: start_date)
+        FactoryBot.create(:time_off, :vacation, user: user1, starts_at: start_date.beginning_of_day,
+                                                ends_at: (start_date + 1.day).beginning_of_day)
 
         FactoryBot.create(:time_entry, statement_of_work: sow, date: start_date + 2.days, user: user1, hours: 8)
         FactoryBot.create(:time_entry, statement_of_work: sow, date: start_date + 3.days, user: user1, hours: 8)
@@ -225,12 +227,8 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [32.0]
             },
             {
-              label: 'Missing',
-              data: [0.0]
-            },
-            {
               label: 'Paid time off',
-              data: [8]
+              data: [8.0]
             },
             {
               label: 'Sick leave',
@@ -239,6 +237,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: [0]
+            },
+            {
+              label: 'Missing',
+              data: [0.0]
             }
           ]
         }.to_json
@@ -274,10 +276,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [38.0]
             },
             {
-              label: 'Missing',
-              data: [0.0]
-            },
-            {
               label: 'Paid time off',
               data: [2.0]
             },
@@ -288,6 +286,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: [0]
+            },
+            {
+              label: 'Missing',
+              data: [0.0]
             }
           ]
         }.to_json
@@ -323,10 +325,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [30.0]
             },
             {
-              label: 'Missing',
-              data: [5.0]
-            },
-            {
               label: 'Paid time off',
               data: [5.0]
             },
@@ -337,6 +335,11 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: [0]
+            },
+
+            {
+              label: 'Missing',
+              data: [5.0]
             }
           ]
         }.to_json
@@ -351,7 +354,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         FactoryBot.create(:time_off, :vacation, user: user1, starts_at: start_date + 8.hours,
                                                 ends_at: start_date + 13.hours)
         FactoryBot.create(:time_off, :sick_leave, user: user1, starts_at: start_date + 1.day,
-                                                  ends_at: start_date + 1.day)
+                                                  ends_at: (start_date + 2.days).beginning_of_day)
 
         FactoryBot.create(:time_entry, statement_of_work: sow, date: start_date + 2.days, user: user1, hours: 3)
         FactoryBot.create(:time_entry, statement_of_work: sow, date: start_date + 3.days, user: user1, hours: 3)
@@ -375,19 +378,20 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [30.0]
             },
             {
-              label: 'Missing',
-              data: [0]
-            },
-            {
               label: 'Paid time off',
               data: [5.0]
             },
             {
               label: 'Sick leave',
-              data: [8]
+              data: [8.0]
             },
             {
               label: 'Over delivered',
+              data: [0]
+            },
+
+            {
+              label: 'Missing',
               data: [0]
             }
           ]
@@ -422,10 +426,6 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [40.0]
             },
             {
-              label: 'Missing',
-              data: [0]
-            },
-            {
               label: 'Paid time off',
               data: [0]
             },
@@ -436,6 +436,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Over delivered',
               data: [8.0]
+            },
+            {
+              label: 'Missing',
+              data: [0]
             }
           ]
         }.to_json
@@ -444,47 +448,3 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
     end
   end
 end
-
-# const horizontalBarChartData = {
-#   labels: [
-#     "Rheniery",
-#     "Carlos",
-#     "Albo",
-#     "Marla",
-#     "Carlos",
-#     "Gabriel",
-#     "Rheniery",
-#     "Carlos",
-#     "Albo",
-#     "Marla",
-#     "Carlos",
-#     "Gabriel",
-#   ],
-#   datasets: [
-#     {
-#       label: "Worked",
-#       color: "success",
-#       data: [15, 20, 12, 60, 20, 15, 15, 20, 12, 60, 20, 15],
-#     },
-#     {
-#       label: "Missing",
-#       color: "error",
-#       data: [15, 20, 12, 60, 20, 15, 15, 20, 12, 60, 20, 15],
-#     },
-#     {
-#       label: "Paid time off",
-#       color: "info",
-#       data: [15, 20, 12, 60, 20, 15, 15, 20, 12, 60, 20, 15],
-#     },
-#     {
-#       label: "Sick leave",
-#       color: "warning",
-#       data: [15, 20, 12, 60, 20, 15, 15, 20, 12, 60, 20, 15],
-#     },
-#     {
-#       label: "Over delivered",
-#       color: "dark",
-#       data: [15, 20, 12, 60, 20, 15, 15, 20, 12, 60, 20, 15],
-#     },
-#   ],
-# };

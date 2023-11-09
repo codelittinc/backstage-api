@@ -13,12 +13,25 @@ class TeamMakerProjectCreator < ApplicationService
     return if data.project.nil?
 
     create_requirements!(data.project_requirements)
-    create_time_entires!(data.time_entries)
+    create_time_entries!(data.time_entries)
+    create_time_off_entries!(data.time_offs)
   end
 
   private
 
-  def create_time_entires!(team_maker_project_time_entries)
+  def create_time_off_entries!(time_offs)
+    TimeOff.destroy_all
+    time_offs.each do |time_off|
+      time_off_type = TimeOffType.find_by(name: time_off.type)
+
+      user = User.find_by(email: time_off.resource)
+      next if user.nil? || time_off_type.nil?
+
+      TimeOff.create!(starts_at: time_off.starts_on, ends_at: time_off.ends_on, user:, time_off_type:)
+    end
+  end
+
+  def create_time_entries!(team_maker_project_time_entries)
     statement_of_work.time_entries.destroy_all
 
     team_maker_project_time_entries.each do |time_entry|

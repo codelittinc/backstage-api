@@ -4,8 +4,9 @@ module Analytics
   class TimeEntriesAnalytics
     def initialize(statement_of_work, start_date, end_date)
       @statement_of_work = statement_of_work
-      @start_date = start_date.to_datetime
-      @end_date = end_date.to_datetime
+      @start_date = start_date.to_datetime.beginning_of_day
+      @end_date = end_date.to_datetime.end_of_day
+      @worked_hours_cache = {} # Cache for memoization
     end
 
     # rubocop:disable Metrics/AbcSize
@@ -33,10 +34,10 @@ module Analytics
         labels: worked_hash.keys,
         datasets: [
           { label: 'Worked', data: worked_hash.values },
-          { label: 'Missing', data: missing_hash.values },
           { label: 'Paid time off', data: vacation_hash.values },
           { label: 'Sick leave', data: sick_leave_hash.values },
-          { label: 'Over delivered', data: over_delivered_hash.values }
+          { label: 'Over delivered', data: over_delivered_hash.values },
+          { label: 'Missing', data: missing_hash.values }
         ]
       }
     end
@@ -44,7 +45,8 @@ module Analytics
     # rubocop:enable Metrics/AbcSize
 
     def assignments
-      @assignments ||= Assignment.where(requirement: requirements).joins(:user).order('users.first_name')
+      @assignments ||= Assignment.where(requirement: requirements).joins(:user).order('users.first_name',
+                                                                                      'users.last_name')
     end
 
     def requirements
@@ -69,13 +71,15 @@ module Analytics
     end
 
     def worked_hours(assignment)
+      return @worked_hours_cache[assignment.id] if @worked_hours_cache.key?(assignment.id)
+
       time_entries = TimeEntry.where(
         statement_of_work: assignment.requirement.statement_of_work,
-        date: @start_date..@end_date,
+        date: (@start_date.beginning_of_day)..@end_date.end_of_day,
         user: assignment.user
       )
 
-      time_entries.sum(&:hours)
+      @worked_hours_cache[assignment.id] = time_entries.sum(&:hours)
     end
 
     def expected_hours(assignment)
@@ -93,7 +97,7 @@ module Analytics
     end
 
     def vacation_hours(assignment)
-      vacation_type = TimeOffType.find_by(name: TimeOffType::VACATION_TYPE)
+      vacation_type = TimeOffType.where(name: [TimeOffType::VACATION_TYPE, TimeOffType::ERRAND_TYPE])
       paid_time_off_hours(assignment, vacation_type)
     end
 
@@ -108,20 +112,16 @@ module Analytics
       time_offs = time_offs_by_user_and_type(assignment.user, time_off_type)
 
       time_offs.reduce(0) do |accumulator, time_off|
-        start_date = [time_off.starts_at, @start_date].max
-        end_date = [time_off.ends_at, @end_date].min
+        start_date = [time_off.starts_at, @start_date].max.to_time
+        end_date = [time_off.ends_at, @end_date].min.to_time
         hours = 0
 
         current_date = start_date
-        while current_date <= end_date
-          next(0) if current_date.saturday? || current_date.sunday?
 
-          if current_date == end_date
-            hours = 8
-          else
+        while current_date <= end_date
+          unless current_date.saturday? || current_date.sunday?
             hours += [(end_date - current_date) / 3600, 8].min
           end
-
           current_date = current_date.next_day
         end
 
