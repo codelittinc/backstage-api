@@ -9,18 +9,38 @@ module Analytics
     end
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
     def data
+      # Initialize the hashes to accumulate hours for each user
+      worked_hash = Hash.new(0)
+      missing_hash = Hash.new(0)
+      vacation_hash = Hash.new(0)
+      sick_leave_hash = Hash.new(0)
+      over_delivered_hash = Hash.new(0)
+
+      # Iterate over assignments to sum the hours for each user
+      assignments.each do |assignment|
+        user_name = assignment.user.name
+        worked_hash[user_name] += clean_worked_hours(assignment)
+        missing_hash[user_name] += missing_hours(assignment)
+        vacation_hash[user_name] += vacation_hours(assignment)
+        sick_leave_hash[user_name] += sick_leave_hours(assignment)
+        over_delivered_hash[user_name] += over_delivered_hours(assignment)
+      end
+
+      # Create the labels and datasets from the accumulated hashes
       {
-        labels: users.map(&:name),
+        labels: worked_hash.keys,
         datasets: [
-          { label: 'Worked', data: assignments.map(&method(:clean_worked_hours)) },
-          { label: 'Missing', data: assignments.map(&method(:missing_hours)) },
-          { label: 'Paid time off', data: assignments.map(&method(:vacation_hours)) },
-          { label: 'Sick leave', data: assignments.map(&method(:sick_leave_hours)) },
-          { label: 'Over delivered', data: assignments.map(&method(:over_delivered_hours)) }
+          { label: 'Worked', data: worked_hash.values },
+          { label: 'Missing', data: missing_hash.values },
+          { label: 'Paid time off', data: vacation_hash.values },
+          { label: 'Sick leave', data: sick_leave_hash.values },
+          { label: 'Over delivered', data: over_delivered_hash.values }
         ]
       }
     end
+    # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
 
     def assignments
@@ -49,10 +69,11 @@ module Analytics
     end
 
     def worked_hours(assignment)
-      statement =  @statement_of_work || StatementOfWork.active_in_period(@start_date, @end_date)
-
-      time_entries = TimeEntry.where(statement_of_work: statement, date: @start_date..@end_date,
-                                     user: assignment.user)
+      time_entries = TimeEntry.where(
+        statement_of_work: assignment.requirement.statement_of_work,
+        date: @start_date..@end_date,
+        user: assignment.user
+      )
 
       time_entries.sum(&:hours)
     end
@@ -61,6 +82,7 @@ module Analytics
       days = ([@start_date, assignment.start_date].max..[@end_date, assignment.end_date].min).count do |d|
         !d.sunday? && !d.saturday?
       end
+
       days * assignment.coverage * 8
     end
 
