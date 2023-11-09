@@ -31,3 +31,9 @@ if Permission.count.zero?
   Permission.create(target: 'analytics', ability: 'view')
   Permission.create(target: 'user', ability: 'change')
 end
+
+if TimeOffType.count.zero?
+  TimeOffType.create(name: 'vacation')
+  TimeOffType.create(name: 'sick leave')
+  TimeOffType.create(name: 'errand')
+end
