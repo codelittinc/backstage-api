@@ -49,7 +49,9 @@ module Analytics
     end
 
     def worked_hours(assignment)
-      time_entries = TimeEntry.where(statement_of_work: @statement_of_work, date: @start_date..@end_date,
+      statement =  @statement_of_work || StatementOfWork.active_in_period(@start_date, @end_date)
+
+      time_entries = TimeEntry.where(statement_of_work: statement, date: @start_date..@end_date,
                                      user: assignment.user)
 
       time_entries.sum(&:hours)
