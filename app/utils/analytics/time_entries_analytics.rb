@@ -23,23 +23,36 @@ module Analytics
       # Iterate over assignments to sum the hours for each user
       assignments.each do |assignment|
         user_name = assignment.user.name
-        worked_hash[user_name] += clean_worked_hours(assignment)
+        worked_hash[user_name] += worked_hours(assignment)
         missing_hash[user_name] += missing_hours(assignment)
-        vacation_hash[user_name] += vacation_hours(assignment)
-        sick_leave_hash[user_name] += sick_leave_hours(assignment)
+        vacation_hash[user_name] = vacation_hours(assignment)
+        sick_leave_hash[user_name] = sick_leave_hours(assignment)
         over_delivered_hash[user_name] += over_delivered_hours(assignment)
         expected_hours_hash[user_name] += expected_hours(assignment)
+      end
+
+      final_worked_hash = Hash.new(0)
+      final_missing_hash = Hash.new(0)
+      final_over_delivered_hash = Hash.new(0)
+
+      assignments.each do |assignment|
+        user_name = assignment.user.name
+        final_over_delivered_hash[user_name] = [worked_hash[user_name] - expected_hours_hash[user_name], 0].max
+
+        final_worked_hash[user_name] = [worked_hash[user_name] - final_over_delivered_hash[user_name], 0].max
+
+        final_missing_hash[user_name] = [missing_hash[user_name] - over_delivered_hash[user_name], 0].max
       end
 
       # Create the labels and datasets from the accumulated hashes
       {
         labels: worked_hash.keys,
         datasets: [
-          { label: 'Worked', data: worked_hash.values },
+          { label: 'Worked', data: final_worked_hash.values },
           { label: 'Paid time off', data: vacation_hash.values },
           { label: 'Sick leave', data: sick_leave_hash.values },
-          { label: 'Over delivered', data: over_delivered_hash.values },
-          { label: 'Missing', data: missing_hash.values },
+          { label: 'Over delivered', data: final_over_delivered_hash.values },
+          { label: 'Missing', data: final_missing_hash.values },
           { label: 'Expected Hours', data: expected_hours_hash.values }
         ]
       }
@@ -49,8 +62,9 @@ module Analytics
     # rubocop:enable Metrics/AbcSize
 
     def assignments
-      @assignments ||= Assignment.where(requirement: requirements).joins(:user).order('users.first_name',
-                                                                                      'users.last_name')
+      @assignments ||= Assignment.where(requirement: requirements)
+                                 .active_in_period(@start_date, @end_date).joins(:user).order('users.first_name',
+                                                                                              'users.last_name')
     end
 
     def requirements
