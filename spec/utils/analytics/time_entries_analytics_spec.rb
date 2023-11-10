@@ -52,6 +52,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [0.0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -117,9 +121,9 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
         data_json = data.to_json
         sorted_data = {
-          user1.id => [40.0, 0.0, 0, 0, 0.0],
-          user2.id => [20.0, 0.0, 0, 0, 0.0],
-          user3.id => [20.0, 0.0, 0, 0, 0.0]
+          user1.id => [40.0, 0.0, 0, 0, 0.0, 40.0],
+          user2.id => [20.0, 0.0, 0, 0, 0.0, 20.0],
+          user3.id => [20.0, 0.0, 0, 0, 0.0, 20.0]
         }
         users = [user1, user2, user3].sort_by(&:first_name)
 
@@ -145,6 +149,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: users.map { |user| sorted_data[user.id][1] }
+            },
+            {
+              label: 'Expected Hours',
+              data: users.map { |user| sorted_data[user.id][5] }
             }
           ]
         }.to_json
@@ -193,6 +201,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [5.0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -241,6 +253,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [0.0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -290,6 +306,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [0.0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -340,6 +360,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [5.0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -393,6 +417,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json
@@ -440,6 +468,10 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
             {
               label: 'Missing',
               data: [0]
+            },
+            {
+              label: 'Expected Hours',
+              data: [40.0]
             }
           ]
         }.to_json

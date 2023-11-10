@@ -18,6 +18,7 @@ module Analytics
       vacation_hash = Hash.new(0)
       sick_leave_hash = Hash.new(0)
       over_delivered_hash = Hash.new(0)
+      expected_hours_hash = Hash.new(0)
 
       # Iterate over assignments to sum the hours for each user
       assignments.each do |assignment|
@@ -27,6 +28,7 @@ module Analytics
         vacation_hash[user_name] += vacation_hours(assignment)
         sick_leave_hash[user_name] += sick_leave_hours(assignment)
         over_delivered_hash[user_name] += over_delivered_hours(assignment)
+        expected_hours_hash[user_name] += expected_hours(assignment)
       end
 
       # Create the labels and datasets from the accumulated hashes
@@ -37,7 +39,8 @@ module Analytics
           { label: 'Paid time off', data: vacation_hash.values },
           { label: 'Sick leave', data: sick_leave_hash.values },
           { label: 'Over delivered', data: over_delivered_hash.values },
-          { label: 'Missing', data: missing_hash.values }
+          { label: 'Missing', data: missing_hash.values },
+          { label: 'Expected Hours', data: expected_hours_hash.values }
         ]
       }
     end
