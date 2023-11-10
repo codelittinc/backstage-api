@@ -41,6 +41,7 @@ module Analytics
         ]
       }
     end
+
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
 
@@ -71,23 +72,11 @@ module Analytics
     end
 
     def worked_hours(assignment)
-      return @worked_hours_cache[assignment.id] if @worked_hours_cache.key?(assignment.id)
-
-      time_entries = TimeEntry.where(
-        statement_of_work: assignment.requirement.statement_of_work,
-        date: (@start_date.beginning_of_day)..@end_date.end_of_day,
-        user: assignment.user
-      )
-
-      @worked_hours_cache[assignment.id] = time_entries.sum(&:hours)
+      TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).data
     end
 
     def expected_hours(assignment)
-      days = ([@start_date, assignment.start_date].max..[@end_date, assignment.end_date].min).count do |d|
-        !d.sunday? && !d.saturday?
-      end
-
-      days * assignment.coverage * 8
+      TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data
     end
 
     def missing_hours(assignment)
@@ -98,45 +87,16 @@ module Analytics
 
     def vacation_hours(assignment)
       vacation_type = TimeOffType.where(name: [TimeOffType::VACATION_TYPE, TimeOffType::ERRAND_TYPE])
-      paid_time_off_hours(assignment, vacation_type)
+      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
     end
 
     def sick_leave_hours(assignment)
       sick_leave_type = TimeOffType.find_by(name: TimeOffType::SICK_LEAVE_TYPE)
-      paid_time_off_hours(assignment, sick_leave_type)
+      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, sick_leave_type).data
     end
-
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/AbcSize
-    def paid_time_off_hours(assignment, time_off_type)
-      time_offs = time_offs_by_user_and_type(assignment.user, time_off_type)
-
-      time_offs.reduce(0) do |accumulator, time_off|
-        start_date = [time_off.starts_at, @start_date].max.to_time
-        end_date = [time_off.ends_at, @end_date].min.to_time
-        hours = 0
-
-        current_date = start_date
-
-        while current_date <= end_date
-          unless current_date.saturday? || current_date.sunday?
-            hours += [(end_date - current_date) / 3600, 8].min
-          end
-          current_date = current_date.next_day
-        end
-
-        accumulator + hours
-      end
-    end
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     def users
       @users ||= assignments.map(&:user)
-    end
-
-    def time_offs_by_user_and_type(user, time_off_type)
-      TimeOff.where(user:, time_off_type:).active_in_period(@start_date, @end_date)
     end
   end
 end
