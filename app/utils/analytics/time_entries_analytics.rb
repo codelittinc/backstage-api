@@ -89,17 +89,13 @@ module Analytics
     end
 
     def vacation_hours(assignment)
-      vacation_type = TimeOffType.where(name: [TimeOffType::VACATION_TYPE, TimeOffType::ERRAND_TYPE])
+      vacation_type = TimeOffType.where(name: [TimeOffType::VACATION_TYPE])
       TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
     end
 
     def sick_leave_hours(assignment)
       sick_leave_type = TimeOffType.find_by(name: TimeOffType::SICK_LEAVE_TYPE)
       TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, sick_leave_type).data
-    end
-
-    def users
-      @users ||= assignments.map(&:user)
     end
   end
 end
