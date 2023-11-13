@@ -103,7 +103,7 @@ module Analytics
     end
 
     def vacation_hours(assignment)
-      vacation_type = TimeOffType.where(name: [TimeOffType::VACATION_TYPE])
+      vacation_type = TimeOffType.where(name: TimeOffType::VACATION_TYPE)
       TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
     end
 
