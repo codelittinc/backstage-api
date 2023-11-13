@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :analytics do
     resources :time_entries, only: [:index]
+    resources :finances, only: [:index]
   end
 
   resources :users

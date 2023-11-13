@@ -42,6 +42,7 @@ class StatementOfWork < ApplicationRecord
   validate :validate_date_range
 
   scope :active_in_period, ->(start_date, end_date) { where('start_date <= ? AND end_date >= ?', end_date, start_date) }
+  scope :maintenance, -> { where(model: 'maintenance') }
 
   private
 
