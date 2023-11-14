@@ -7,6 +7,8 @@ module Analytics
       @end_date = end_date.to_datetime.end_of_day
     end
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/AbcSize
     def data
       analytics.map do |project_analytics|
@@ -16,11 +18,14 @@ module Analytics
           expected_hours: project_analytics[:data].sum { |data| data[:expected_hours] },
           executed_income: project_analytics[:data].sum { |data| data[:executed_income] },
           expected_income: project_analytics[:data].sum { |data| data[:expected_income] },
-          paid_time_off_hours: project_analytics[:data].sum { |data| data[:paid_time_off_hours] }
+          paid_time_off_hours: project_analytics[:data].sum { |data| data[:paid_time_off_hours] },
+          executed_cost: project_analytics[:data].sum { |data| data[:executed_cost] }
         }
       end
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/CyclomaticComplexity
+    # rubocop:enable Metrics/MethodLength
 
     private
 

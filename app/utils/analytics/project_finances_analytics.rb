@@ -17,6 +17,7 @@ module Analytics
       expected_hours_hash = Hash.new(0)
       executed_income_hash = Hash.new(0)
       expected_income_hash = Hash.new(0)
+      executed_cost_hash = Hash.new(0)
 
       assignments.each do |assignment|
         user_name = assignment.user.name
@@ -26,6 +27,7 @@ module Analytics
         expected_hours_hash[user_name] += expected_hours(assignment)
         executed_income_hash[user_name] += worked_income(assignment)
         expected_income_hash[user_name] += expected_income(assignment)
+        executed_cost_hash[user_name] += executed_cost(assignment)
       end
 
       name_hash.keys.map do |name|
@@ -37,13 +39,25 @@ module Analytics
           executed_income: executed_income_hash[name],
           expected_income: expected_income_hash[name],
 
-          paid_time_off_hours: paid_time_off_hours_hash[name]
+          paid_time_off_hours: paid_time_off_hours_hash[name],
+
+          executed_cost: executed_cost_hash[name]
         }
       end
     end
 
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
+
+    def executed_cost(assignment)
+      entries = TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).time_entries
+      entries.map do |time_entry|
+        date = time_entry.date
+        salary = assignment.user.salary_on_date(date)
+
+        time_entry.hours * (salary&.hourly_cost || 0)
+      end.sum
+    end
 
     def assignments
       @assignments ||= Assignment.where(requirement: requirements)
