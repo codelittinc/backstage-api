@@ -13,35 +13,34 @@ module Analytics
       end
 
       def data
-        TimeOffType.where(name: [TimeOffType::VACATION_TYPE, TimeOffType::ERRAND_TYPE])
-        paid_time_off_hours(@assignment, @paid_time_off_type)
+        ent = entries
+        ent.sum { |entry| entry[:hours] }
       end
-
-      private
 
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/AbcSize
-      def paid_time_off_hours(assignment, time_off_type)
-        time_offs = time_offs_by_user_and_type(assignment.user, time_off_type)
+      def entries
+        time_offs = time_offs_by_user_and_type(@assignment.user, @paid_time_off_type)
 
-        time_offs.reduce(0) do |accumulator, time_off|
+        final_time_offs = []
+        time_offs.each do |time_off|
           start_date = [time_off.starts_at, @start_date].max.to_time
           end_date = [time_off.ends_at, @end_date].min.to_time
-          hours = 0
 
           current_date = start_date
-
           while current_date <= end_date
             unless current_date.saturday? || current_date.sunday?
-              hours += [(end_date - current_date) / 3600,
-                        EXPECTED_WORK_HOURS_IN_A_DAY].min
+              hours = [(end_date - current_date) / 3600,
+                       EXPECTED_WORK_HOURS_IN_A_DAY].min
+              final_time_offs << { date: current_date, hours: }
             end
             current_date = current_date.next_day
           end
-
-          accumulator + hours
         end
+        final_time_offs
       end
+
+      private
 
       # rubocop:enable Metrics/AbcSize
       # rubocop:enable Metrics/MethodLength

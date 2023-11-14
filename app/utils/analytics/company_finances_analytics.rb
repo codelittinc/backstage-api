@@ -7,6 +7,7 @@ module Analytics
       @end_date = end_date.to_datetime.end_of_day
     end
 
+    # rubocop:disable Metrics/PerceivedComplexity
     # rubocop:disable Metrics/MethodLength
     # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/AbcSize
@@ -19,13 +20,15 @@ module Analytics
           executed_income: project_analytics[:data].sum { |data| data[:executed_income] },
           expected_income: project_analytics[:data].sum { |data| data[:expected_income] },
           paid_time_off_hours: project_analytics[:data].sum { |data| data[:paid_time_off_hours] },
-          executed_cost: project_analytics[:data].sum { |data| data[:executed_cost] }
+          executed_cost: project_analytics[:data].sum { |data| data[:executed_cost] },
+          expected_cost: project_analytics[:data].sum { |data| data[:expected_cost] }
         }
       end
     end
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/PerceivedComplexity
 
     private
 
