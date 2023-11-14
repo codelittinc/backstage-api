@@ -6,6 +6,6 @@ syncronize_issues:
 
 syncronize_time_entries:
   name: time_entries_job, # must be uniq!
-  cron: "every 5 minutes"
+  cron: "every day"
   class: "TimeEntriesJob"
   queue: default
