@@ -17,6 +17,8 @@ module Analytics
       expected_hours_hash = Hash.new(0)
       executed_income_hash = Hash.new(0)
       expected_income_hash = Hash.new(0)
+      expected_cost_hash = Hash.new(0)
+
       executed_cost_hash = Hash.new(0)
 
       assignments.each do |assignment|
@@ -27,6 +29,7 @@ module Analytics
         expected_hours_hash[user_name] += expected_hours(assignment)
         executed_income_hash[user_name] += worked_income(assignment)
         expected_income_hash[user_name] += expected_income(assignment)
+        expected_cost_hash[user_name] += expected_cost(assignment)
         executed_cost_hash[user_name] += executed_cost(assignment)
       end
 
@@ -41,11 +44,35 @@ module Analytics
 
           paid_time_off_hours: paid_time_off_hours_hash[name],
 
-          executed_cost: executed_cost_hash[name]
+          executed_cost: executed_cost_hash[name],
+          expected_cost: expected_cost_hash[name]
         }
       end
     end
 
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Metrics/AbcSize
+
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    def expected_cost(assignment)
+      entries = TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).entries
+      total_cost = entries.map do |time_entry|
+        date = time_entry[:date]
+        salary = assignment.user.salary_on_date(date)
+
+        time_entry[:hours] * (salary&.hourly_cost || 0)
+      end.sum
+
+      pto_entries = TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, TimeOffType.all).entries
+      total_paid_time_off_cost = pto_entries.map do |time_entry|
+        date = time_entry[:date]
+        salary = assignment.user.salary_on_date(date)
+
+        time_entry[:hours] * (salary&.hourly_cost || 0) * assignment.coverage
+      end.sum
+      total_cost - total_paid_time_off_cost
+    end
     # rubocop:enable Metrics/MethodLength
     # rubocop:enable Metrics/AbcSize
 

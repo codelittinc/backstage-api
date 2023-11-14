@@ -12,11 +12,20 @@ module Analytics
       end
 
       def data
-        days = ([@start_date, @assignment.start_date].max..[@end_date, @assignment.end_date].min).count do |d|
+        entries.sum { |e| e[:hours] }
+      end
+
+      def entries
+        days = ([@start_date, @assignment.start_date].max..[@end_date, @assignment.end_date].min).filter do |d|
           !d.sunday? && !d.saturday?
         end
 
-        days * @assignment.coverage * EXPECTED_WORK_HOURS_IN_A_DAY
+        days.map do |day|
+          {
+            date: day,
+            hours: @assignment.coverage * EXPECTED_WORK_HOURS_IN_A_DAY
+          }
+        end
       end
     end
   end
