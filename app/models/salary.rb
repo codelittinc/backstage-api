@@ -24,4 +24,10 @@ class Salary < ApplicationRecord
 
   validates :yearly_salary, numericality: { greater_than: 0 }, presence: true
   validates :start_date, presence: true
+
+  HOURS_PER_YEAR = 2080
+
+  def hourly_cost
+    yearly_salary / HOURS_PER_YEAR
+  end
 end

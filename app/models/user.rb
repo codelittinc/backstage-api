@@ -69,4 +69,8 @@ class User < ApplicationRecord
   def should_generate_new_friendly_id?
     true
   end
+
+  def salary_on_date(date)
+    salaries.where('start_date <= ?', date).order(start_date: :desc).first
+  end
 end
