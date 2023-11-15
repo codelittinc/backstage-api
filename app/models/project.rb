@@ -46,4 +46,8 @@ class Project < ApplicationRecord
                                  .where.not(customers: { ticket_tracking_system_token: nil })
                                  .where.not(customers: { ticket_tracking_system: nil })
                              }
+
+  def should_generate_new_friendly_id?
+    true
+  end
 end
