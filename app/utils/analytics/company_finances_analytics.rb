@@ -7,35 +7,45 @@ module Analytics
       @end_date = end_date.to_datetime.end_of_day
     end
 
-    # rubocop:disable Metrics/PerceivedComplexity
-    # rubocop:disable Metrics/MethodLength
-    # rubocop:disable Metrics/CyclomaticComplexity
-    # rubocop:disable Metrics/AbcSize
     def data
-      analytics.map do |project_analytics|
-        {
-          name: project_analytics[:project].name,
-          executed_hours: project_analytics[:data].sum { |data| data[:executed_hours] },
-          expected_hours: project_analytics[:data].sum { |data| data[:expected_hours] },
-          executed_income: project_analytics[:data].sum { |data| data[:executed_income] },
-          expected_income: project_analytics[:data].sum { |data| data[:expected_income] },
-          paid_time_off_hours: project_analytics[:data].sum { |data| data[:paid_time_off_hours] },
-          executed_cost: project_analytics[:data].sum { |data| data[:executed_cost] },
-          expected_cost: project_analytics[:data].sum { |data| data[:expected_cost] }
+      merged_data = Finances::ProjectCalculator::DEFAULT_DATA
+
+      analytics.each do |project_analytics|
+        totals = project_analytics[:data][:totals]
+        sum_hash_values(merged_data[:totals].keys, merged_data[:totals], totals)
+
+        details = project_analytics[:data][:details]
+
+        project_merged_data = {
+          name: project_analytics[:project].name
         }
+
+        details.each do |detail|
+          Finances::ProjectCalculator::KEYS.each do |key|
+            project_merged_data[key] = detail[key] + (project_merged_data[key] || 0)
+          end
+        end
+
+        Finances::ProjectCalculator::KEYS.each do |key|
+          project_merged_data[key] = project_merged_data[key] || 0
+        end
+
+        merged_data[:details] << project_merged_data
       end
+
+      merged_data
     end
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
-    # rubocop:enable Metrics/MethodLength
-    # rubocop:enable Metrics/PerceivedComplexity
 
     private
 
-    def analytics
-      projects = Project.where(billable: true)
+    def sum_hash_values(keys, hash1, hash2)
+      keys.each do |key|
+        hash1[key] += hash2[key]
+      end
+    end
 
-      projects.map do |project|
+    def analytics
+      Project.where(billable: true).map do |project|
         {
           project:,
           data: Analytics::ProjectFinancesAnalytics.new(@start_date, @end_date, project).data
