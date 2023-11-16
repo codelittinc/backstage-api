@@ -21,11 +21,11 @@ module Analytics
       end
 
       def total_executed_income
-        @executed_income_hash.values.sum
+        income
       end
 
       def total_expected_income
-        @expected_income_hash.values.sum
+        income
       end
 
       def total_expected_cost
@@ -55,6 +55,21 @@ module Analytics
       end
 
       private
+
+      def income
+        (@statement_of_work.hourly_revenue || 0) * (@statement_of_work.total_hours || 0) * months_difference
+      end
+
+      def months_difference
+        start_date = @start_date
+        end_date = @end_date
+
+        month_diff = ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month)
+
+        month_diff += 1 if start_date.day == 1 && end_date.day == Date.new(end_date.year, end_date.month, -1).day
+
+        month_diff
+      end
 
       def calculate!
         assignments.each do |assignment|
