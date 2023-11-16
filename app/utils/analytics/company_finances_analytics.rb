@@ -38,6 +38,10 @@ module Analytics
           project_merged_data[key] = project_merged_data[key] || 0
         end
 
+        project_merged_data[:executed_income] = totals[:total_executed_income]
+        project_merged_data[:expected_income] = totals[:total_expected_income]
+        project_merged_data[:executed_cost] = totals[:total_executed_cost]
+        project_merged_data[:expected_cost] = totals[:total_expected_cost]
         merged_data[:details] << project_merged_data
       end
 
