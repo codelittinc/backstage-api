@@ -17,8 +17,6 @@ module Analytics
         ent.sum { |entry| entry[:hours] }
       end
 
-      # rubocop:disable Metrics/MethodLength
-      # rubocop:disable Metrics/AbcSize
       def entries
         time_offs = time_offs_by_user_and_type(@assignment.user, @paid_time_off_type)
 
@@ -41,9 +39,6 @@ module Analytics
       end
 
       private
-
-      # rubocop:enable Metrics/AbcSize
-      # rubocop:enable Metrics/MethodLength
 
       def time_offs_by_user_and_type(user, time_off_type)
         TimeOff.where(user:, time_off_type:).active_in_period(@start_date, @end_date)

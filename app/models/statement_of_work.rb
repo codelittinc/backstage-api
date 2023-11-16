@@ -43,6 +43,7 @@ class StatementOfWork < ApplicationRecord
 
   scope :active_in_period, ->(start_date, end_date) { where('start_date <= ? AND end_date >= ?', end_date, start_date) }
   scope :maintenance, -> { where(model: 'maintenance') }
+  scope :time_and_materials, -> { where(model: 'time_and_materials') }
 
   private
 
