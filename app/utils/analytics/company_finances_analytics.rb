@@ -8,7 +8,15 @@ module Analytics
     end
 
     def data
-      merged_data = Finances::ProjectCalculator::DEFAULT_DATA
+      merged_data = {
+        totals: {
+          total_expected_income: 0,
+          total_executed_income: 0,
+          total_executed_cost: 0,
+          total_expected_cost: 0
+        },
+        details: []
+      }
 
       analytics.each do |project_analytics|
         totals = project_analytics[:data][:totals]

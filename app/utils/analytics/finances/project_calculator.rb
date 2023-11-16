@@ -13,16 +13,6 @@ module Analytics
         expected_cost
       ].freeze
 
-      DEFAULT_DATA = {
-        totals: {
-          total_expected_income: 0,
-          total_executed_income: 0,
-          total_executed_cost: 0,
-          total_expected_cost: 0
-        },
-        details: []
-      }.freeze
-
       def initialize(project, start_date, end_date)
         @project = project
         @start_date = start_date
@@ -30,7 +20,15 @@ module Analytics
       end
 
       def data
-        data = DEFAULT_DATA
+        data = {
+          totals: {
+            total_expected_income: 0,
+            total_executed_income: 0,
+            total_executed_cost: 0,
+            total_expected_cost: 0
+          },
+          details: []
+        }
 
         statements_of_work.each do |statement_of_work|
           modeCalculator = calculator(statement_of_work).new(statement_of_work, @start_date, @end_date)
