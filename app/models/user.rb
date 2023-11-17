@@ -55,6 +55,9 @@ class User < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :skills, through: :user_skills
   has_many :salaries, dependent: :destroy
+  has_many :time_offs, dependent: :destroy
+  has_many :assignments, dependent: :destroy
+  has_many :time_entries, dependent: :destroy
   accepts_nested_attributes_for :salaries
 
   def name
