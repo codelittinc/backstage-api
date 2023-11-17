@@ -55,4 +55,11 @@ class Project < ApplicationRecord
   def should_generate_new_friendly_id?
     true
   end
+
+  def participants
+    users = statement_of_works.active_in_period(Time.zone.today,
+                                                Time.zone.today).map(&:requirements)
+                              .flatten.map(&:assignments).flatten.map(&:user).flatten
+    User.where(id: users.map(&:id)).distinct
+  end
 end

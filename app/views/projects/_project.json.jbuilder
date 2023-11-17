@@ -4,4 +4,8 @@ json.customer do |json|
   json.partial! 'customers/customer', customer: project.customer
 end
 
+json.participants project.participants.map do |participant|
+  json.extract! participant, :id, :name, :email, :image_url, :slug
+end
+
 json.extract! project, :id, :name, :billable, :slack_channel, :start_date, :end_date, :metadata, :slug, :logo_url
