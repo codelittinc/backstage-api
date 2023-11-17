@@ -20,7 +20,8 @@ module Analytics
       end
 
       def expected_hours(assignment)
-        TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data - paid_time_off_hours(assignment)
+        [TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data - paid_time_off_hours(assignment),
+         0].max
       end
 
       def paid_time_off_hours(assignment)
