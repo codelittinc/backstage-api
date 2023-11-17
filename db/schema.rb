@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_17_204407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_06_173201) do
     t.date "end_date"
     t.json "metadata"
     t.string "slug"
+    t.string "logo_url"
     t.index ["customer_id"], name: "index_projects_on_customer_id"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
