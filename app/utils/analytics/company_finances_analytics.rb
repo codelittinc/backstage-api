@@ -57,7 +57,7 @@ module Analytics
     end
 
     def analytics
-      Project.where(billable: true).map do |project|
+      Project.active_in_period(@start_date, @end_date).where(billable: true).map do |project|
         {
           project:,
           data: Analytics::ProjectFinancesAnalytics.new(@start_date, @end_date, project).data
