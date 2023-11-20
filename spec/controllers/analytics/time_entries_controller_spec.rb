@@ -8,7 +8,7 @@ RSpec.describe AssignmentsController, type: :controller do
 
   let(:valid_attributes) do
     {
-      statement_of_work_id: FactoryBot.create(:statement_of_work, :with_maintenance).id,
+      statement_of_work_id: create(:statement_of_work, :with_maintenance).id,
       start_date: Date.yesterday,
       end_date: Date.tomorrow
     }
@@ -18,7 +18,7 @@ RSpec.describe AssignmentsController, type: :controller do
     context 'with the statement of work id' do
       it 'returns a success response' do
         valid_attributes = {
-          statement_of_work_id: FactoryBot.create(:statement_of_work, :with_maintenance).id,
+          statement_of_work_id: create(:statement_of_work, :with_maintenance).id,
           start_date: Date.yesterday,
           end_date: Date.tomorrow
         }

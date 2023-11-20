@@ -26,7 +26,7 @@
 FactoryBot.define do
   factory :requirement do
     profession
-    association :statement_of_work, factory: %i[statement_of_work with_maintenance]
+    statement_of_work factory: %i[statement_of_work with_maintenance]
     coverage { 1.0 }
   end
 end

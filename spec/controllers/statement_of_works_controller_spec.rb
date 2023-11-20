@@ -6,10 +6,10 @@ RSpec.describe StatementOfWorksController, type: :controller do
   include_context 'authentication'
   render_views
 
-  let(:project) { FactoryBot.create(:project) }
+  let(:project) { create(:project) }
 
   let(:valid_attributes) do
-    FactoryBot.attributes_for(:statement_of_work, :with_maintenance).merge(project_id: project.id)
+    attributes_for(:statement_of_work, :with_maintenance).merge(project_id: project.id)
   end
 
   let(:invalid_attributes) do
@@ -21,7 +21,7 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      FactoryBot.create(:statement_of_work, :with_maintenance, project:)
+      create(:statement_of_work, :with_maintenance, project:)
       get :index, params: { project_id: project.id }
       expect(response).to be_successful
     end
@@ -29,7 +29,7 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      statement_of_work = FactoryBot.create(:statement_of_work, :with_maintenance, project:)
+      statement_of_work = create(:statement_of_work, :with_maintenance, project:)
       get :show, params: { id: statement_of_work.to_param, project_id: project.id }
       expect(response.parsed_body['id']).to eql(statement_of_work.id)
     end

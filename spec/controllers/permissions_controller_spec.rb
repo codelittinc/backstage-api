@@ -13,7 +13,7 @@ RSpec.describe PermissionsController, type: :controller do
     end
 
     it 'returns a list of permissions' do
-      permissions = FactoryBot.create_list(:permission, 3)
+      permissions = create_list(:permission, 3)
       get :index
       expect(response.parsed_body.first['id']).to eq(permissions.first.id)
     end

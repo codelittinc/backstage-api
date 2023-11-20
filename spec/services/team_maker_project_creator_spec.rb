@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe TeamMakerProjectCreator, type: :service do
   let(:project) do
-    FactoryBot.create(:project, id: 2)
+    create(:project, id: 2)
   end
 
   let(:professions) do
@@ -14,15 +14,15 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
   end
 
   let(:users) do
-    FactoryBot.create(:user, email: 'pedro.guimaraes@codelitt.com')
-    FactoryBot.create(:user, email: 'vinicius.medeiros@codelitt.com')
-    FactoryBot.create(:user, email: 'jadson.dorneles@codelitt.com')
-    FactoryBot.create(:user, email: 'victor.carvalho@codelitt.com')
-    FactoryBot.create(:user, email: 'paulo.fernandes@codelitt.com')
-    FactoryBot.create(:user, email: 'gabriel@codelitt.com')
-    FactoryBot.create(:user, email: 'david.warren@codelitt.com')
-    FactoryBot.create(:user, email: 'leonardo.manrique@codelitt.com')
-    FactoryBot.create(:user, email: 'vinicius.aquino@codelitt.com')
+    create(:user, email: 'pedro.guimaraes@codelitt.com')
+    create(:user, email: 'vinicius.medeiros@codelitt.com')
+    create(:user, email: 'jadson.dorneles@codelitt.com')
+    create(:user, email: 'victor.carvalho@codelitt.com')
+    create(:user, email: 'paulo.fernandes@codelitt.com')
+    create(:user, email: 'gabriel@codelitt.com')
+    create(:user, email: 'david.warren@codelitt.com')
+    create(:user, email: 'leonardo.manrique@codelitt.com')
+    create(:user, email: 'vinicius.aquino@codelitt.com')
   end
 
   before do
@@ -151,7 +151,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
         project
         professions
         users
-        FactoryBot.create(:project, id: 100)
+        create(:project, id: 100)
 
         expect do
           Project.all.each do |project|

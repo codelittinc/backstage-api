@@ -41,7 +41,7 @@ FactoryBot.define do
     seniority { %w[Intern Junior Midlevel Senior].sample }
     active { [true, false].sample }
 
-    association :profession
+    profession
 
     after(:create) do |user|
       create(:salary, user:)

@@ -8,13 +8,13 @@ RSpec.describe ProfessionsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      FactoryBot.create_list(:profession, 3)
+      create_list(:profession, 3)
       get :index
       expect(response).to be_successful
     end
 
     it 'returns a list of professions' do
-      list = FactoryBot.create_list(:profession, 3)
+      list = create_list(:profession, 3)
       get :index
       expect(response.parsed_body.first['id']).to eq(list.first.id)
     end

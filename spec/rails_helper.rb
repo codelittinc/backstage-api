@@ -2,6 +2,7 @@
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -15,6 +16,8 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+require 'support/factory_bot'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
