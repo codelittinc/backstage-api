@@ -24,4 +24,6 @@ class Payment < ApplicationRecord
 
   validates :amount, presence: true
   validates :date, presence: true
+
+  scope :executed_between, ->(start_date, end_date) { where('date <= ? AND date >= ?', end_date, start_date) }
 end

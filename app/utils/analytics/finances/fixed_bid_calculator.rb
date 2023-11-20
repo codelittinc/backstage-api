@@ -21,11 +21,11 @@ module Analytics
       end
 
       def total_executed_income
-        @executed_income_hash.values.sum
+        total_payments
       end
 
       def total_expected_income
-        @expected_income_hash.values.sum
+        total_payments
       end
 
       def total_expected_cost
@@ -34,6 +34,10 @@ module Analytics
 
       def total_executed_cost
         @executed_cost_hash.values.sum
+      end
+
+      def total_payments
+        @total_payments ||= @statement_of_work.payments.executed_between(@start_date, @end_date).sum(:amount)
       end
 
       def details
