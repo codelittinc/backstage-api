@@ -33,22 +33,17 @@ module Analytics
       end
 
       def assignment_expected_cost(assignment)
-        entries = TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).entries
-        total_cost = entries.map do |time_entry|
-          date = time_entry[:date]
-          salary = assignment.user.salary_on_date(date)
+        start_date = assignment.start_date
+        end_date = assignment.end_date
+        work_days = ([start_date, @start_date].max...[end_date, @end_date].min).select do |date|
+          (1..5).cover?(date.wday)
+        end
 
-          time_entry[:hours] * (salary&.hourly_cost || 0)
+        work_days.map do |work_day|
+          salary = assignment.user.salary_on_date(work_day)
+
+          8 * (salary&.hourly_cost || 0)
         end.sum
-
-        pto_entries = TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, TimeOffType.all).entries
-        total_paid_time_off_cost = pto_entries.map do |time_entry|
-          date = time_entry[:date]
-          salary = assignment.user.salary_on_date(date)
-
-          time_entry[:hours] * (salary&.hourly_cost || 0) * assignment.coverage
-        end.sum
-        total_cost - total_paid_time_off_cost
       end
 
       def assignment_executed_cost(assignment)
