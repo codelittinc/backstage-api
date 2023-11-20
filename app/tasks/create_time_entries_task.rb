@@ -2,10 +2,10 @@
 
 class CreateTimeEntriesTask
   def self.create!
-    projects = Project.all
+    sows = StatementOfWork.all
 
-    projects.each do |project|
-      TeamMakerProjectCreator.new(project).call
+    sows.each do |sow|
+      TeamMakerProjectCreator.new(sow).call
     end
   end
 end
