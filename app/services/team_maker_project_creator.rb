@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class TeamMakerProjectCreator < ApplicationService
-  attr_reader :project
+  attr_reader :statement_of_work
 
-  def initialize(project)
+  def initialize(statement_of_work)
     super()
-    @project = project
+    @statement_of_work = statement_of_work.reload
   end
 
   def call
-    data = Clients::TeamMaker::Data.new.list(project.id)
+    data = Clients::TeamMaker::Data.new.list(statement_of_work.id)
     return if data.project.nil?
 
     create_requirements!(data.project_requirements)
@@ -21,6 +21,7 @@ class TeamMakerProjectCreator < ApplicationService
 
   def create_time_off_entries!(time_offs)
     TimeOff.destroy_all
+
     time_offs.each do |time_off|
       time_off_type = TimeOffType.find_by(name: time_off.type)
 
@@ -47,6 +48,8 @@ class TeamMakerProjectCreator < ApplicationService
   end
 
   def create_requirements!(team_maker_project_requirements)
+    statement_of_work.requirements.destroy_all
+
     team_maker_project_requirements.each do |requirement|
       req = create_requirement!(requirement)
       create_assignments!(requirement.assignments, req)
@@ -83,22 +86,6 @@ class TeamMakerProjectCreator < ApplicationService
       'Project Management' => Profession.find_by(name: 'Project Manager'),
       'Design' => Profession.find_by(name: 'Designer')
     }
-  end
-
-  def statement_of_work
-    return @statement_of_work if @statement_of_work
-
-    @statement_of_work = @project.statement_of_works.first
-
-    @statement_of_work ||= StatementOfWork.create!(
-      project:,
-      start_date: @project.start_date, end_date: @project.end_date,
-      model: 'maintenance', hour_delivery_schedule: 'contract_period',
-      total_revenue: 1
-    )
-
-    @statement_of_work.requirements.destroy_all
-    @statement_of_work
   end
 
   def find_user(email)
