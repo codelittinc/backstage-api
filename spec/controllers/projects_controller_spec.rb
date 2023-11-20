@@ -7,7 +7,7 @@ RSpec.describe ProjectsController, type: :controller do
   render_views
 
   let(:valid_attributes) do
-    customer = FactoryBot.create(:customer)
+    customer = create(:customer)
     {
       name: 'Project 1',
       customer_id: customer.id,

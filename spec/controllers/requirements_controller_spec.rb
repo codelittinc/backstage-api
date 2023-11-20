@@ -6,18 +6,18 @@ RSpec.describe RequirementsController, type: :controller do
   include_context 'authentication'
   render_views
 
-  let(:project) { FactoryBot.create(:project) }
-  let(:statement_of_work) { FactoryBot.create(:statement_of_work, :with_maintenance, project:) }
+  let(:project) { create(:project) }
+  let(:statement_of_work) { create(:statement_of_work, :with_maintenance, project:) }
 
   let(:valid_attributes) do
-    profession = FactoryBot.create(:profession)
-    FactoryBot.attributes_for(:requirement, statement_of_work_id: statement_of_work.id,
-                                            profession_id: profession.id)
+    profession = create(:profession)
+    attributes_for(:requirement, statement_of_work_id: statement_of_work.id,
+                                 profession_id: profession.id)
   end
 
   xdescribe 'GET #index' do
     it 'returns a success response' do
-      FactoryBot.create(:requirement, statement_of_work:)
+      create(:requirement, statement_of_work:)
       get :index, params: { project_id: project.id, statement_of_work_id: statement_of_work.id }
       expect(response).to be_successful
     end
@@ -25,7 +25,7 @@ RSpec.describe RequirementsController, type: :controller do
 
   xdescribe 'GET #show' do
     it 'returns a success response' do
-      requirement = FactoryBot.create(:requirement, statement_of_work:)
+      requirement = create(:requirement, statement_of_work:)
       get :show,
           params: { project_id: project.id, statement_of_work_id: statement_of_work.id,
                     id: requirement.to_param }
@@ -54,7 +54,7 @@ RSpec.describe RequirementsController, type: :controller do
 
   xdescribe 'PUT #update' do
     context 'with valid params' do
-      let(:profession) { FactoryBot.create(:profession) }
+      let(:profession) { create(:profession) }
 
       let(:new_attributes) do
         {
@@ -63,7 +63,7 @@ RSpec.describe RequirementsController, type: :controller do
       end
 
       it 'updates the requested requirement' do
-        requirement = FactoryBot.create(:requirement, statement_of_work:)
+        requirement = create(:requirement, statement_of_work:)
         put :update,
             params: { project_id: project.id,
                       statement_of_work_id: statement_of_work.id,
@@ -74,7 +74,7 @@ RSpec.describe RequirementsController, type: :controller do
       end
 
       it 'renders a JSON response with the requirement' do
-        requirement = FactoryBot.create(:requirement, statement_of_work:)
+        requirement = create(:requirement, statement_of_work:)
         put :update,
             params: { project_id: project.id,
                       statement_of_work_id: statement_of_work.id,
@@ -87,7 +87,7 @@ RSpec.describe RequirementsController, type: :controller do
 
   xdescribe 'DELETE #destroy' do
     it 'destroys the requested requirement' do
-      requirement = FactoryBot.create(:requirement, statement_of_work:)
+      requirement = create(:requirement, statement_of_work:)
       expect do
         delete :destroy,
                params: { project_id: project.id, statement_of_work_id: statement_of_work.id,

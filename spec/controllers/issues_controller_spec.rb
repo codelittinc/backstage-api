@@ -8,31 +8,31 @@ RSpec.describe IssuesController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a success response' do
-      project = FactoryBot.create(:project)
-      FactoryBot.create(:issue, project:)
+      project = create(:project)
+      create(:issue, project:)
       get :index, params: { project_id: project.id }
       expect(response).to be_successful
     end
 
     it 'only returns issues of a specific project' do
-      project1 = FactoryBot.create(:project)
-      project2 = FactoryBot.create(:project)
+      project1 = create(:project)
+      project2 = create(:project)
 
-      issue = FactoryBot.create(:issue, project: project1)
-      FactoryBot.create(:issue, project: project2)
-      FactoryBot.create(:issue, project: project2)
+      issue = create(:issue, project: project1)
+      create(:issue, project: project2)
+      create(:issue, project: project2)
       get :index, params: { project_id: project1.id }
 
       expect(response.parsed_body.pluck('id')).to eql([issue.id])
     end
 
     it 'when given start_date and end_date only brings the issues in that period' do
-      project = FactoryBot.create(:project)
+      project = create(:project)
 
-      issue = FactoryBot.create(:issue, project:, closed_date: '10/08/2020')
+      issue = create(:issue, project:, closed_date: '10/08/2020')
 
-      FactoryBot.create(:issue, project:, closed_date: '10/05/2020')
-      FactoryBot.create(:issue, project:, closed_date: '11/09/2020')
+      create(:issue, project:, closed_date: '10/05/2020')
+      create(:issue, project:, closed_date: '11/09/2020')
       get :index, params: { project_id: project.id, start_date: '10/07/2020', end_date: '10/9/2020' }
 
       expect(response.parsed_body.pluck('id')).to eql([issue.id])

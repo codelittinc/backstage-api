@@ -4,16 +4,16 @@ require 'rails_helper'
 
 RSpec.describe Clients::Tts::Asana::Issue, type: :service do
   let(:customer) do
-    FactoryBot.create(:customer, name: 'Taylor Summit',
-                                 ticket_tracking_system_token: 'my-cool-key')
+    create(:customer, name: 'Taylor Summit',
+                      ticket_tracking_system_token: 'my-cool-key')
   end
 
   let(:user) do
-    FactoryBot.create(:user, email: 'albo.vieira@codelitt.com')
+    create(:user, email: 'albo.vieira@codelitt.com')
   end
 
   let(:project) do
-    FactoryBot.create(:project, customer:, metadata: { project_id: '1205173534425434' })
+    create(:project, customer:, metadata: { project_id: '1205173534425434' })
   end
 
   describe '#list' do

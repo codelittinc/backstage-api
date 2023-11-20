@@ -3,7 +3,7 @@
 RSpec.shared_context 'authentication' do
   let(:user_params) do
     {
-      user: FactoryBot.attributes_for(:user)
+      user: attributes_for(:user)
     }
   end
 

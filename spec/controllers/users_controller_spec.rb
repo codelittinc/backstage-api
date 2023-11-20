@@ -8,7 +8,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #index' do
     before(:each) do
-      FactoryBot.create_list(:user_service_identifier, 5)
+      create_list(:user_service_identifier, 5)
     end
 
     context 'when there is no identifier' do
@@ -20,9 +20,9 @@ RSpec.describe UsersController, type: :controller do
 
     context 'when there is a identifier' do
       it 'returns only the user with the identifier' do
-        user_service_identifier1 = FactoryBot.create(:user_service_identifier)
+        user_service_identifier1 = create(:user_service_identifier)
         user1 = user_service_identifier1.user
-        user_service_identifier2 = FactoryBot.create(:user_service_identifier)
+        user_service_identifier2 = create(:user_service_identifier)
         user2 = user_service_identifier2.user
         get :index,
             params: { query: [user_service_identifier1.identifier, user_service_identifier2.identifier].join(',') }
@@ -71,7 +71,7 @@ RSpec.describe UsersController, type: :controller do
 
       context 'when user email is from a different domain than expected' do
         it 'returns an unauthorized access' do
-          invalid_user_params = { user: FactoryBot.attributes_for(:user, email: 'codelitt@wrongdomain.con') }
+          invalid_user_params = { user: attributes_for(:user, email: 'codelitt@wrongdomain.con') }
           invalid_user_params_base64 = Base64.encode64(invalid_user_params.to_json)
 
           request.headers.merge!(Authorization: "Bearer #{invalid_user_params_base64}")
@@ -82,7 +82,7 @@ RSpec.describe UsersController, type: :controller do
 
       context 'and id is a number' do
         it 'returns the user with that id' do
-          user = FactoryBot.create(:user)
+          user = create(:user)
           get :show, params: { id: user.id }
           expect(response.parsed_body['email']).to eql(user.email)
         end
@@ -92,7 +92,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a list of users' do
-      FactoryBot.create_list(:user, 5)
+      create_list(:user, 5)
       get :index
       # 6 because one is created when we are authenticating
       expect(response.parsed_body.length).to eql(6)
@@ -101,7 +101,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'PUT #update' do
     let(:user) do
-      FactoryBot.create(:user)
+      create(:user)
     end
 
     context 'when user is logged in' do

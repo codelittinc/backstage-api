@@ -4,18 +4,18 @@ require 'rails_helper'
 
 RSpec.describe Clients::Tts::Azure::Issue, type: :service do
   let(:customer) do
-    FactoryBot.create(:customer, name: 'Ministry Brands', ticket_tracking_system_token: 'insert-token-here')
+    create(:customer, name: 'Ministry Brands', ticket_tracking_system_token: 'insert-token-here')
   end
   let(:user) do
-    user = FactoryBot.create(:user)
-    FactoryBot.create(:user_service_identifier, customer:, user:,
-                                                identifier: 'victor.carvalho@ministrybrands.com')
+    user = create(:user)
+    create(:user_service_identifier, customer:, user:,
+                                     identifier: 'victor.carvalho@ministrybrands.com')
     user
   end
 
   let(:project) do
-    FactoryBot.create(:project, customer:,
-                                metadata: { azure_project_name: '1ES', area_path: '1ES\\DDC UI Refresh\\2023' })
+    create(:project, customer:,
+                     metadata: { azure_project_name: '1ES', area_path: '1ES\\DDC UI Refresh\\2023' })
   end
 
   it 'defines the correct URL' do
