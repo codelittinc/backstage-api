@@ -77,16 +77,12 @@ module Analytics
         end
       end
 
-      def assigned_executed_income(assignment)
-        hours = executed_hours(assignment)
-        hourly_statement = assignment.requirement.statement_of_work.hourly_revenue
-        hours * (hourly_statement || 0)
+      def assigned_executed_income(_assignment)
+        0
       end
 
-      def assigned_expected_income(assignment)
-        hours = expected_hours(assignment)
-        hourly_statement = assignment.requirement.statement_of_work.hourly_revenue
-        hours * (hourly_statement || 0)
+      def assigned_expected_income(_assignment)
+        0
       end
     end
   end
