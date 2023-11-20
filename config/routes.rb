@@ -4,6 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :payments
   resources :assignments
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   if Rails.env.production?

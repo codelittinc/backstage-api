@@ -30,6 +30,7 @@ class StatementOfWork < ApplicationRecord
   belongs_to :project
   has_many :requirements, dependent: :destroy
   has_many :time_entries, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   # existing validations
   validates :start_date, presence: true
