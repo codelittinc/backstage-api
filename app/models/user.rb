@@ -65,8 +65,10 @@ class User < ApplicationRecord
   end
 
   scope :by_external_identifier, lambda { |identifiers|
+    identifiers = [identifiers].flatten.compact.map(&:downcase)
     joins('LEFT JOIN user_service_identifiers ON users.id = user_service_identifiers.user_id')
-      .where('users.email IN (:identifiers) OR user_service_identifiers.identifier IN (:identifiers)', identifiers:)
+      .where('lower(users.email) IN (:identifiers) OR lower(user_service_identifiers.identifier) IN (:identifiers)',
+             identifiers:)
   }
 
   def should_generate_new_friendly_id?
