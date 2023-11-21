@@ -19,6 +19,7 @@ module Analytics
       sick_leave_hash = Hash.new(0)
       over_delivered_hash = Hash.new(0)
       expected_hours_hash = Hash.new(0)
+      errands_hours_hash = Hash.new(0)
 
       # Iterate over assignments to sum the hours for each user
       assignments.each do |assignment|
@@ -42,6 +43,8 @@ module Analytics
         final_worked_hash[user_name] = [worked_hash[user_name] - final_over_delivered_hash[user_name], 0].max
 
         final_missing_hash[user_name] = [missing_hash[user_name] - over_delivered_hash[user_name], 0].max
+
+        errands_hours_hash[user_name] = errands_hours(assignment, final_missing_hash[user_name])
       end
 
       # Create the labels and datasets from the accumulated hashes
@@ -53,6 +56,7 @@ module Analytics
           { label: 'Sick leave', data: sick_leave_hash.values },
           { label: 'Over delivered', data: final_over_delivered_hash.values },
           { label: 'Missing', data: final_missing_hash.values },
+          { label: 'Errands', data: errands_hours_hash.values },
           { label: 'Expected Hours', data: expected_hours_hash.values }
         ]
       }
@@ -104,6 +108,13 @@ module Analytics
 
     def vacation_hours(assignment)
       vacation_type = TimeOffType.where(name: TimeOffType::VACATION_TYPE)
+      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
+    end
+
+    def errands_hours(assignment, missing_hours)
+      return 0 if missing_hours.zero?
+
+      vacation_type = TimeOffType.where(name: TimeOffType::ERRAND_TYPE)
       TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
     end
 
