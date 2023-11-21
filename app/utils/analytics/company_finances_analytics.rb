@@ -25,7 +25,8 @@ module Analytics
         details = project_analytics[:data][:details]
 
         project_merged_data = {
-          name: project_analytics[:project].name
+          name: project_analytics[:project].name,
+          slug: project_analytics[:project].slug
         }
 
         details.each do |detail|
