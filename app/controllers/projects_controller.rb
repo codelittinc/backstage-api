@@ -4,7 +4,9 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show update destroy]
 
   def index
-    @projects = Project.all
+    active_only = filters_params[:active_only] == 'true'
+    @projects = Project.all.order(:name)
+    @projects = @projects.active_in_period(Time.zone.today, Time.zone.today) if active_only
   end
 
   def show; end
@@ -40,5 +42,9 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:id, :name, :customer_id, :billable, :slack_channel, :start_date,
                                     :end_date, :metadata, :logo_url)
+  end
+
+  def filters_params
+    params.require(:filters).permit(:active_only)
   end
 end
