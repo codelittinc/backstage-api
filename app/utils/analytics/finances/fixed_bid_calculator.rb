@@ -17,6 +17,8 @@ module Analytics
         @executed_hours_hash = Hash.new(0)
         @paid_time_off_hours_hash = Hash.new(0)
 
+        @slug = Hash.new(0)
+
         calculate!
       end
 
@@ -53,7 +55,9 @@ module Analytics
             paid_time_off_hours: @paid_time_off_hours_hash[name],
 
             executed_cost: @executed_cost_hash[name],
-            expected_cost: @expected_cost_hash[name]
+            expected_cost: @expected_cost_hash[name],
+
+            slug: @slug[name]
           }
         end
       end
@@ -74,6 +78,8 @@ module Analytics
 
           @paid_time_off_hours_hash[user_name] = paid_time_off_hours(assignment)
           @expected_hours_hash[user_name] += expected_hours(assignment)
+
+          @slug[user_name] = assignment.user.slug
         end
       end
 

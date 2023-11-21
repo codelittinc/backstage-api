@@ -52,7 +52,6 @@ module Analytics
             end
           end
         end
-
         data
       end
 
