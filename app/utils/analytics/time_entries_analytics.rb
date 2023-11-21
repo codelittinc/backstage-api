@@ -53,8 +53,8 @@ module Analytics
         datasets: [
           { label: 'Worked', data: final_worked_hash.values },
           { label: 'Paid time off', data: vacation_hash.values },
-          { label: 'Sick leave', data: sick_leave_hash.values },
           { label: 'Over delivered', data: final_over_delivered_hash.values },
+          { label: 'Sick leave', data: sick_leave_hash.values },
           { label: 'Missing', data: final_missing_hash.values },
           { label: 'Errands', data: errands_hours_hash.values },
           { label: 'Expected Hours', data: expected_hours_hash.values }
