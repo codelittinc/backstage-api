@@ -61,7 +61,7 @@ module Analytics
       private
 
       def income
-        (@statement_of_work.hourly_revenue || 0) * (@statement_of_work.total_hours || 0) * months_difference
+        (@statement_of_work.total_revenue || 0) * months_difference
       end
 
       def months_difference
@@ -95,15 +95,15 @@ module Analytics
       end
 
       def assigned_executed_income(assignment)
-        hours = executed_hours(assignment)
-        hourly_statement = assignment.requirement.statement_of_work.hourly_revenue
-        hours * (hourly_statement || 0)
+        assignment_value(assignment)
       end
 
       def assigned_expected_income(assignment)
-        hours = expected_hours(assignment)
-        hourly_statement = assignment.requirement.statement_of_work.hourly_revenue
-        hours * (hourly_statement || 0)
+        assignment_value(assignment)
+      end
+
+      def assignment_value(assignment)
+        (assignment.coverage / @statement_of_work.requirements.sum(&:coverage)) * @statement_of_work.total_revenue
       end
     end
   end
