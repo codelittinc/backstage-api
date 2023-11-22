@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
-  let(:sow) { create(:statement_of_work, :with_fixed_bid) }
+  let(:project) { create(:project) }
+  let(:sow) { create(:statement_of_work, :with_fixed_bid, project:) }
   let(:start_date) { Date.parse('2023/11/29') }
   let(:end_date) { start_date + 6.days }
 
-  xdescribe '#data' do
+  describe '#data' do
     context 'when the user puts the information for the entire period' do
       it 'returns the dataset for that SOW' do
         user1 = create(:user)
@@ -28,7 +29,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -42,12 +43,12 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [0]
             },
             {
-              label: 'Sick leave',
-              data: [0]
-            },
-            {
               label: 'Over delivered',
               data: [0.0]
+            },
+            {
+              label: 'Sick leave',
+              data: [0]
             },
             {
               label: 'Missing',
@@ -122,7 +123,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user3, coverage: 0.5, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         sorted_data = {
           user1.id => [40.0, 0.0, 0, 0, 0.0, 0, 40.0],
@@ -143,12 +144,12 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: users.map { |user| sorted_data[user.id][2] }
             },
             {
-              label: 'Sick leave',
-              data: users.map { |user| sorted_data[user.id][3] }
-            },
-            {
               label: 'Over delivered',
               data: users.map { |user| sorted_data[user.id][4] }
+            },
+            {
+              label: 'Sick leave',
+              data: users.map { |user| sorted_data[user.id][3] }
             },
             {
               label: 'Missing',
@@ -184,7 +185,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -198,14 +199,13 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [0]
             },
             {
-              label: 'Sick leave',
-              data: [0]
-            },
-            {
               label: 'Over delivered',
               data: [0]
             },
-
+            {
+              label: 'Sick leave',
+              data: [0]
+            },
             {
               label: 'Missing',
               data: [5.0]
@@ -241,7 +241,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -255,11 +255,11 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [8.0]
             },
             {
-              label: 'Sick leave',
+              label: 'Over delivered',
               data: [0]
             },
             {
-              label: 'Over delivered',
+              label: 'Sick leave',
               data: [0]
             },
             {
@@ -298,7 +298,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -312,11 +312,11 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [2.0]
             },
             {
-              label: 'Sick leave',
+              label: 'Over delivered',
               data: [0]
             },
             {
-              label: 'Over delivered',
+              label: 'Sick leave',
               data: [0]
             },
             {
@@ -355,7 +355,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -369,14 +369,13 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [5.0]
             },
             {
-              label: 'Sick leave',
-              data: [0]
-            },
-            {
               label: 'Over delivered',
               data: [0]
             },
-
+            {
+              label: 'Sick leave',
+              data: [0]
+            },
             {
               label: 'Missing',
               data: [5.0]
@@ -416,7 +415,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -430,14 +429,13 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [5.0]
             },
             {
-              label: 'Sick leave',
-              data: [8.0]
-            },
-            {
               label: 'Over delivered',
               data: [0]
             },
-
+            {
+              label: 'Sick leave',
+              data: [8.0]
+            },
             {
               label: 'Missing',
               data: [0]
@@ -472,7 +470,7 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
         create(:assignment, requirement: requirement1, user: user1, coverage: 1, start_date:,
                             end_date:)
 
-        data = Analytics::TimeEntriesAnalytics.new(sow, start_date, end_date).data
+        data = Analytics::TimeEntriesAnalytics.new(project, start_date, end_date).data
         data_json = data.to_json
         expected_response_json = {
           labels: [user1.name],
@@ -486,12 +484,12 @@ RSpec.describe Analytics::TimeEntriesAnalytics, type: :service do
               data: [0]
             },
             {
-              label: 'Sick leave',
-              data: [0]
-            },
-            {
               label: 'Over delivered',
               data: [8.0]
+            },
+            {
+              label: 'Sick leave',
+              data: [0]
             },
             {
               label: 'Missing',
