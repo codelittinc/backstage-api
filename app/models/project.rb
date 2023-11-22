@@ -6,13 +6,11 @@
 #
 #  id                          :bigint           not null, primary key
 #  billable                    :boolean          default(TRUE), not null
-#  end_date                    :date
 #  logo_url                    :string
 #  metadata                    :json
 #  name                        :string
 #  slack_channel               :string
 #  slug                        :string
-#  start_date                  :date
 #  sync_source_control         :boolean          default(FALSE)
 #  sync_ticket_tracking_system :boolean          default(FALSE)
 #  created_at                  :datetime         not null
@@ -39,8 +37,6 @@ class Project < ApplicationRecord
   validates :name, presence: true
   validates :billable, inclusion: { in: [true, false] }
   validates :slack_channel, presence: true
-  validates :start_date, presence: true
-  validates :end_date, presence: true
 
   scope :active_on, ->(date) { where('start_date <= :date and end_date >= :date', date:) }
 

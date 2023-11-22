@@ -6,13 +6,11 @@
 #
 #  id                          :bigint           not null, primary key
 #  billable                    :boolean          default(TRUE), not null
-#  end_date                    :date
 #  logo_url                    :string
 #  metadata                    :json
 #  name                        :string
 #  slack_channel               :string
 #  slug                        :string
-#  start_date                  :date
 #  sync_source_control         :boolean          default(FALSE)
 #  sync_ticket_tracking_system :boolean          default(FALSE)
 #  created_at                  :datetime         not null
@@ -34,8 +32,6 @@ RSpec.describe Project, type: :model do
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:slack_channel) }
-    it { should validate_presence_of(:start_date) }
-    it { should validate_presence_of(:end_date) }
   end
 
   context 'associations' do
