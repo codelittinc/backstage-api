@@ -12,9 +12,7 @@ RSpec.describe ProjectsController, type: :controller do
       name: 'Project 1',
       customer_id: customer.id,
       billable: true,
-      slack_channel: 'project-1',
-      start_date: Time.zone.today,
-      end_date: Time.zone.today + 1.month
+      slack_channel: 'project-1'
     }
   end
 
@@ -23,9 +21,7 @@ RSpec.describe ProjectsController, type: :controller do
       customer_id: 0,
       name: '',
       billable: nil,
-      slack_channel: '',
-      start_date: '',
-      end_date: ''
+      slack_channel: ''
     }
   end
 
