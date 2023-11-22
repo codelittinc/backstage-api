@@ -7,7 +7,7 @@ module Clients
         def list
           issues_list = ::Request.get(list_url, customer_authorization)
           ids = issues_list['data'].pluck('gid')
-          work_items = ids.map do |id|
+          work_items = ids.map.with_index do |id, _index|
             ::Request.get(project_url(id), customer_authorization)
           end
 

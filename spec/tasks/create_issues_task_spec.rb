@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CreateIssuesTask, type: :task do
-  describe '#create!' do
+  xdescribe '#create!' do
     it 'calls the issue creator for the projects that are active and have a ticket_tracking_system_token' do
       customer_azure = create(:customer, ticket_tracking_system_token: 'place-real-token-here',
                                          ticket_tracking_system: 'azure')

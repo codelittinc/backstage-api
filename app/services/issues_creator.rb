@@ -7,6 +7,8 @@ class IssuesCreator < ApplicationService
   end
 
   def call
+    @project.issues.destroy_all
+
     issues = issues_client_class.new(@project).list
     issues.map do |issue|
       next unless issue.user

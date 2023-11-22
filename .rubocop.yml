@@ -32,3 +32,6 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - "db/**/*"
+
+Rails/BulkChangeTable:
+  Enabled: false
