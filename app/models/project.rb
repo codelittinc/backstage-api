@@ -38,17 +38,15 @@ class Project < ApplicationRecord
   validates :billable, inclusion: { in: [true, false] }
   validates :slack_channel, presence: true
 
-  scope :active_on, ->(date) { where('start_date <= :date and end_date >= :date', date:) }
-
   scope :active_in_period, lambda { |start_date, end_date|
     where(id: StatementOfWork.active_in_period(start_date, end_date).select(:project_id).distinct)
   }
 
   scope :with_ticket_system, lambda {
-                               joins(:customer)
-                                 .where.not(customers: { ticket_tracking_system_token: nil })
-                                 .where.not(customers: { ticket_tracking_system: nil })
-                             }
+    joins(:customer)
+      .where.not(customers: { ticket_tracking_system_token: nil })
+      .where.not(customers: { ticket_tracking_system: nil })
+  }
 
   def should_generate_new_friendly_id?
     true
