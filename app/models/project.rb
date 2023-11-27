@@ -11,8 +11,8 @@
 #  name                        :string
 #  slack_channel               :string
 #  slug                        :string
-#  sync_source_control         :boolean          default(FALSE)
-#  sync_ticket_tracking_system :boolean          default(FALSE)
+#  sync_source_control         :boolean          default(FALSE), not null
+#  sync_ticket_tracking_system :boolean          default(FALSE), not null
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  customer_id                 :bigint           not null

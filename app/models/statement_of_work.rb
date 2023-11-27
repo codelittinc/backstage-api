@@ -10,6 +10,7 @@
 #  hourly_revenue             :float
 #  limit_by_delivery_schedule :boolean          default(TRUE), not null
 #  model                      :string
+#  name                       :string
 #  start_date                 :datetime
 #  total_hours                :float
 #  total_revenue              :float
