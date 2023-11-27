@@ -20,6 +20,7 @@ module Analytics
 
       analytics.each do |project_analytics|
         totals = project_analytics[:data][:totals]
+
         sum_hash_values(merged_data[:totals].keys, merged_data[:totals], totals)
 
         details = project_analytics[:data][:details]
@@ -43,6 +44,7 @@ module Analytics
         project_merged_data[:expected_income] = totals[:total_expected_income]
         project_merged_data[:executed_cost] = totals[:total_executed_cost]
         project_merged_data[:expected_cost] = totals[:total_expected_cost]
+
         merged_data[:details] << project_merged_data
       end
 
