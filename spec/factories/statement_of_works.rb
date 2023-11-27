@@ -10,6 +10,7 @@
 #  hourly_revenue             :float
 #  limit_by_delivery_schedule :boolean          default(TRUE), not null
 #  model                      :string
+#  name                       :string
 #  start_date                 :datetime
 #  total_hours                :float
 #  total_revenue              :float
@@ -30,6 +31,7 @@ FactoryBot.define do
     project
     start_date { Time.zone.today - 6.months }
     end_date { Time.zone.today + 6.months }
+    name { FFaker::Lorem.sentence }
 
     trait :with_maintenance do
       model { 'maintenance' }
