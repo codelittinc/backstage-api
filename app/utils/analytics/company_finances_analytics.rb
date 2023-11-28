@@ -25,10 +25,9 @@ module Analytics
 
         details = project_analytics[:data][:details]
 
-        project_merged_data = {
-          name: project_analytics[:project].name,
-          slug: project_analytics[:project].slug
-        }
+        sow = project_analytics[:sow]
+
+        project_merged_data = { name: sow_name(sow), slug: sow.project.slug }
 
         details.each do |detail|
           Finances::ProjectCalculator::KEYS.each do |key|
@@ -53,6 +52,10 @@ module Analytics
 
     private
 
+    def sow_name(sow)
+      "#{sow.project.name} - #{sow.name} #{sow.start_date.strftime('%m/%d/%y')} - #{sow.end_date.strftime('%m/%d/%y')}"
+    end
+
     def sum_hash_values(keys, hash1, hash2)
       keys.each do |key|
         hash1[key] += hash2[key]
@@ -60,10 +63,10 @@ module Analytics
     end
 
     def analytics
-      Project.active_in_period(@start_date, @end_date).where(billable: true).map do |project|
+      StatementOfWork.active_in_period(@start_date, @end_date).map do |sow|
         {
-          project:,
-          data: Analytics::ProjectFinancesAnalytics.new(@start_date, @end_date, project).data
+          sow:,
+          data: Analytics::ProjectFinancesAnalytics.new(@start_date, @end_date, sow).data
         }
       end
     end
