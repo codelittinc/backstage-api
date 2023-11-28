@@ -63,12 +63,19 @@ module Analytics
     end
 
     def analytics
-      StatementOfWork.active_in_period(@start_date, @end_date).map do |sow|
+      statement_of_works.map do |sow|
         {
           sow:,
           data: Analytics::ProjectFinancesAnalytics.new(@start_date, @end_date, sow).data
         }
       end
+    end
+
+    def statement_of_works
+      StatementOfWork.active_in_period(@start_date, @end_date)
+                     .joins(:project)
+                     .order('projects.name': :asc,
+                            'statement_of_works.name': :asc)
     end
   end
 end
