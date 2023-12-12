@@ -13,8 +13,8 @@ module Analytics
         expected_cost
       ].freeze
 
-      def initialize(statement_of_work, start_date, end_date)
-        @statement_of_work = statement_of_work
+      def initialize(project, start_date, end_date)
+        @project = project
         @start_date = start_date
         @end_date = end_date
       end
@@ -58,9 +58,9 @@ module Analytics
       private
 
       def statements_of_work
-        return StatementOfWork.where(id: @statement_of_work.id) if @statement_of_work
+        statements = @project ? @project.statement_of_works : StatementOfWork.all
 
-        StatementOfWork.active_in_period(@start_date, @end_date)
+        statements.active_in_period(@start_date, @end_date)
       end
 
       def calculator(statement_of_work)
