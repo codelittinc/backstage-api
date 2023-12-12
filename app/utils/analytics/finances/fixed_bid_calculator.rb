@@ -12,11 +12,11 @@ module Analytics
       end
 
       def total_expected_cost
-        @expected_cost_hash.values.sum
+        @financial_item.sum(&:expected_cost)
       end
 
       def total_executed_cost
-        @executed_cost_hash.values.sum
+        @financial_item.sum(&:executed_cost)
       end
 
       def total_payments

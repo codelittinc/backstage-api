@@ -8,59 +8,24 @@ module Analytics
         @start_date = start_date
         @end_date = end_date
 
-        @names = {}
-        @expected_income_hash = Hash.new(0)
-        @executed_income_hash = Hash.new(0)
-
-        @expected_cost_hash = Hash.new(0)
-        @executed_cost_hash = Hash.new(0)
-
-        @expected_hours_hash = Hash.new(0)
-        @executed_hours_hash = Hash.new(0)
-        @paid_time_off_hours_hash = Hash.new(0)
-
-        @slug = Hash.new(0)
-
+        @financial_item = []
         calculate!
       end
 
       def details
-        @names.keys.map do |name|
-          {
-            name:,
-            executed_hours: @executed_hours_hash[name],
-            expected_hours: [@expected_hours_hash[name], 0].max,
-
-            executed_income: @executed_income_hash[name],
-            expected_income: @expected_income_hash[name],
-
-            paid_time_off_hours: @paid_time_off_hours_hash[name],
-
-            executed_cost: @executed_cost_hash[name],
-            expected_cost: @expected_cost_hash[name],
-
-            slug: @slug[name]
-          }
-        end
+        @financial_item
       end
 
       def calculate!
         assignments.each do |assignment|
-          user_name = assignment.user.name
-
-          @names[user_name] = user_name
-          @expected_income_hash[user_name] += assigned_expected_income(assignment)
-          @executed_income_hash[user_name] += assigned_executed_income(assignment)
-
-          @expected_cost_hash[user_name] += assignment_expected_cost(assignment)
-          @executed_cost_hash[user_name] += assignment_executed_cost(assignment)
-
-          @executed_hours_hash[user_name] += executed_hours(assignment)
-
-          @paid_time_off_hours_hash[user_name] = paid_time_off_hours(assignment)
-          @expected_hours_hash[user_name] += expected_hours(assignment)
-
-          @slug[user_name] = assignment.user.slug
+          financial_resource_assignment = financial_item_by_name(assignment.user.name, assignment.user.slug)
+          financial_resource_assignment.add_expected_income(assigned_expected_income(assignment))
+          financial_resource_assignment.add_executed_income(assigned_executed_income(assignment))
+          financial_resource_assignment.add_expected_cost(assignment_expected_cost(assignment))
+          financial_resource_assignment.add_executed_cost(assignment_executed_cost(assignment))
+          financial_resource_assignment.add_executed_hours(executed_hours(assignment))
+          financial_resource_assignment.add_expected_hours(expected_hours(assignment))
+          financial_resource_assignment.add_paid_time_off_hours(paid_time_off_hours(assignment))
         end
       end
 
@@ -76,16 +41,16 @@ module Analytics
       end
 
       def expected_hours(assignment)
-        [TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data - paid_time_off_hours(assignment),
-         0].max
+        hours = Analytics::TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data
+        [hours - paid_time_off_hours(assignment), 0].max
       end
 
       def paid_time_off_hours(assignment)
-        TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, TimeOffType.all).data
+        Analytics::TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, TimeOffType.all).data
       end
 
       def executed_hours(assignment)
-        TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).data
+        Analytics::TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).data
       end
 
       def assignment_expected_cost(assignment)
@@ -103,13 +68,24 @@ module Analytics
       end
 
       def assignment_executed_cost(assignment)
-        entries = TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).time_entries
+        entries = Analytics::TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).time_entries
         entries.map do |time_entry|
           date = time_entry.date
           salary = assignment.user.salary_on_date(date)
 
           time_entry.hours * (salary&.hourly_cost || 0)
         end.sum
+      end
+
+      def financial_item_by_name(name, slug)
+        financial_resource = @financial_item.find { |assignment| assignment.name == name }
+
+        return financial_resource if financial_resource
+
+        financial_resource = Analytics::Finances::Models::FinancialItem.new(name, slug)
+
+        @financial_item << financial_resource
+        financial_resource
       end
     end
   end

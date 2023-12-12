@@ -4,19 +4,19 @@ module Analytics
   module Finances
     class TimeAndMaterialsCalculator < FinancesCalculator
       def total_executed_income
-        @executed_income_hash.values.sum
+        @financial_item.sum(&:executed_income)
       end
 
       def total_expected_income
-        @expected_income_hash.values.sum
+        @financial_item.sum(&:expected_income)
       end
 
       def total_expected_cost
-        @expected_cost_hash.values.sum
+        @financial_item.sum(&:expected_cost)
       end
 
       def total_executed_cost
-        @executed_cost_hash.values.sum
+        @financial_item.sum(&:executed_cost)
       end
 
       def assigned_executed_income(assignment)
