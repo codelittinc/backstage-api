@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_13_195743) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_232744) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_195743) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.boolean "allow_revenue_overflow", default: false, null: false
     t.index ["project_id"], name: "index_statement_of_works_on_project_id"
   end
 

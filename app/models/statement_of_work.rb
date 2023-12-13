@@ -5,6 +5,7 @@
 # Table name: statement_of_works
 #
 #  id                         :bigint           not null, primary key
+#  allow_revenue_overflow     :boolean          default(FALSE), not null
 #  end_date                   :datetime
 #  hour_delivery_schedule     :string
 #  hourly_revenue             :float
