@@ -9,3 +9,9 @@ syncronize_time_entries:
   cron: "every day"
   class: "TimeEntriesJob"
   queue: default
+
+syncronize_financial_reports:
+  name: financial_reports_update_job, # must be uniq!
+  cron: "every day"
+  class: "FinancialReportsUpdateJob"
+  queue: default
