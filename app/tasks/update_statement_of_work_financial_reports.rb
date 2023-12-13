@@ -7,7 +7,7 @@ class UpdateStatementOfWorkFinancialReports
 
     StatementOfWorkFinancialReport.destroy_all
 
-    Project.find(2).statement_of_works.active_in_period(initial_date, today).each do |statement_of_work|
+    StatementOfWork.active_in_period(initial_date, today).each do |statement_of_work|
       start_date = [initial_date, statement_of_work.start_date].max.to_date
 
       (start_date..today).each do |end_date|
