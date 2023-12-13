@@ -19,6 +19,8 @@ module Analytics
         end
 
         def add_executed_income(income)
+          return income if @statement_of_work.allow_revenue_overflow?
+
           income_to_add = 0
           if (@total_executed_income + income + @executed_income_to_start_date) >= income_limit
             income_to_add = [income_limit - @total_executed_income - @executed_income_to_start_date, 0].max

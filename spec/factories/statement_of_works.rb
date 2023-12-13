@@ -5,6 +5,7 @@
 # Table name: statement_of_works
 #
 #  id                         :bigint           not null, primary key
+#  allow_revenue_overflow     :boolean          default(FALSE), not null
 #  end_date                   :datetime
 #  hour_delivery_schedule     :string
 #  hourly_revenue             :float
@@ -32,6 +33,7 @@ FactoryBot.define do
     start_date { Time.zone.today - 6.months }
     end_date { Time.zone.today + 6.months }
     name { FFaker::Lorem.sentence }
+    allow_revenue_overflow { false }
 
     trait :with_maintenance do
       model { 'maintenance' }
