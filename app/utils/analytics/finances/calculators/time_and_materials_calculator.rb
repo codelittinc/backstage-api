@@ -4,9 +4,12 @@ module Analytics
   module Finances
     module Calculators
       class TimeAndMaterialsCalculator < FinancesCalculator
-        def initialize(statement_of_work, start_date, end_date)
+        attr_reader :total_executed_income, :total_expected_income
+
+        def initialize(statement_of_work, start_date, end_date, executed_income_to_start_date = 0)
           @total_executed_income = 0
           @total_expected_income = 0
+          @executed_income_to_start_date = executed_income_to_start_date
 
           super(statement_of_work, start_date, end_date)
         end
@@ -15,11 +18,10 @@ module Analytics
           @statement_of_work.total_revenue
         end
 
-        attr_reader :total_executed_income, :total_expected_income
-
         def add_executed_income(income)
-          if @total_executed_income + income > income_limit
-            income_to_add = income_limit - @total_executed_income
+          income_to_add = 0
+          if (@total_executed_income + income + @executed_income_to_start_date) >= income_limit
+            income_to_add = [income_limit - @total_executed_income - @executed_income_to_start_date, 0].max
             @total_executed_income = income_limit
           else
             income_to_add = income
@@ -30,8 +32,8 @@ module Analytics
         end
 
         def add_expected_income(income)
-          if @total_expected_income + income > income_limit
-            income_to_add = income_limit - @total_expected_income
+          if @total_expected_income + income + @executed_income_to_start_date > income_limit
+            income_to_add = [income_limit - @total_expected_income - @executed_income_to_start_date, 0].max
             @total_expected_income = income_limit
           else
             income_to_add = income
