@@ -4,14 +4,15 @@ module Analytics
   module Finances
     module Models
       class FinancialStatementsOfWork < FinancialReport
-        def initialize(project, start_date, end_date, resource_level = true)
-          @project = project
+        def initialize(statement_of_works, start_date, end_date, resource_level = true)
+          @statement_of_works = statement_of_works
+
           @resource_level = resource_level
           super(start_date, end_date)
         end
 
         def calculate!
-          @project.statement_of_works.active_in_period(@start_date, @end_date).each do |statement_of_work|
+          @statement_of_works.each do |statement_of_work|
             statement_of_work_start_date = statement_of_work.start_date.to_datetime
 
             executed_income_to_start_date = 0
@@ -32,6 +33,12 @@ module Analytics
               name = financial_item_name(financial_item, statement_of_work)
               existing_item = financial_item_by_name(name, financial_item.slug)
               existing_item.merge(financial_item)
+
+              next if @resource_level
+
+              existing_item.executed_income = model_calculator.total_executed_income
+              existing_item.expected_income = model_calculator.total_expected_income
+              existing_item.slug = statement_of_work.project.slug
             end
           end
         end

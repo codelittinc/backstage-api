@@ -22,7 +22,8 @@ module Analytics
           income_to_add = 0
           if (@total_executed_income + income + @executed_income_to_start_date) >= income_limit
             income_to_add = [income_limit - @total_executed_income - @executed_income_to_start_date, 0].max
-            @total_executed_income = income_limit
+
+            @total_executed_income = income_to_add
           else
             income_to_add = income
             @total_executed_income += income
@@ -34,7 +35,7 @@ module Analytics
         def add_expected_income(income)
           if @total_expected_income + income + @executed_income_to_start_date > income_limit
             income_to_add = [income_limit - @total_expected_income - @executed_income_to_start_date, 0].max
-            @total_expected_income = income_limit
+            @total_expected_income = income_to_add
           else
             income_to_add = income
             @total_expected_income += income

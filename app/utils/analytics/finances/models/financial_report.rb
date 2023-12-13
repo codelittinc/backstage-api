@@ -4,11 +4,11 @@ module Analytics
   module Finances
     module Models
       class FinancialReport
-        attr_reader :total_executed_income,
-                    :total_expected_income,
-                    :total_executed_cost,
-                    :total_expected_cost,
-                    :financial_items
+        attr_accessor :total_executed_income,
+                      :total_expected_income,
+                      :total_executed_cost,
+                      :total_expected_cost,
+                      :financial_items
 
         def initialize(start_date, end_date)
           @total_executed_income = 0
