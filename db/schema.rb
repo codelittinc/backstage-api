@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_27_193434) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_195743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -137,6 +137,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_27_193434) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "statement_of_work_financial_reports", force: :cascade do |t|
+    t.integer "statement_of_work_id", null: false
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.float "total_executed_income"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["statement_of_work_id"], name: "index_sow_financial_reports_on_sow_id"
   end
 
   create_table "statement_of_works", force: :cascade do |t|

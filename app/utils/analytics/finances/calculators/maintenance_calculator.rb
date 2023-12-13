@@ -25,16 +25,12 @@ module Analytics
           month_diff
         end
 
-        def assigned_executed_income(assignment)
-          assignment_value(assignment)
+        def assigned_executed_income(_assignment)
+          0
         end
 
-        def assigned_expected_income(assignment)
-          assignment_value(assignment)
-        end
-
-        def assignment_value(assignment)
-          (assignment.coverage / @statement_of_work.requirements.sum(&:coverage)) * @statement_of_work.total_revenue
+        def assigned_expected_income(_assignment)
+          0
         end
       end
     end

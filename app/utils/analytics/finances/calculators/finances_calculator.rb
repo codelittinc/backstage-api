@@ -20,6 +20,7 @@ module Analytics
             financial_resource_assignment = financial_item_by_name(assignment.user.name, assignment.user.slug)
 
             expected_income = add_expected_income(assigned_expected_income(assignment))
+
             financial_resource_assignment.add_expected_income(expected_income)
 
             executed_income = add_executed_income(assigned_executed_income(assignment))
@@ -76,6 +77,7 @@ module Analytics
         def assignment_expected_cost(assignment)
           start_date = assignment.start_date
           end_date = assignment.end_date
+
           work_days = ([start_date, @start_date].max...[end_date, @end_date].min).select do |date|
             (1..5).cover?(date.wday)
           end
@@ -84,7 +86,7 @@ module Analytics
             salary = assignment.user.salary_on_date(work_day)
 
             8 * (salary&.hourly_cost || 0)
-          end.sum
+          end.sum * assignment.coverage
         end
 
         def assignment_executed_cost(assignment)
