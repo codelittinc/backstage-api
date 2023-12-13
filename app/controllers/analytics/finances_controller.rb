@@ -7,16 +7,18 @@ module Analytics
 
     def index
       @finances = Analytics::Finances::Models::FinancialStatementsOfWork.new(@statement_of_works, start_date, end_date,
-                                                                             false)
+                                                                             @project)
       @finances.financial_items = @finances.financial_items.sort_by(&:name)
     end
 
     private
 
     def set_statement_of_works
-      @statement_of_works = @project.statement_of_works.active_in_period(start_date, end_date) if @project
-
-      @statement_of_works = StatementOfWork.active_in_period(start_date, end_date)
+      @statement_of_works = if @project
+                              @project.statement_of_works.active_in_period(start_date, end_date)
+                            else
+                              StatementOfWork.active_in_period(start_date, end_date)
+                            end
     end
 
     def set_project
