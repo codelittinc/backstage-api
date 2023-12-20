@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_182232) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_184651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -194,12 +194,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_182232) do
   end
 
   create_table "time_and_materials_at_cost_contract_models", force: :cascade do |t|
-    t.boolean "hours_amount"
     t.boolean "allow_overflow"
     t.string "limit_by"
     t.float "management_factor"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "hours_amount"
   end
 
   create_table "time_and_materials_contract_models", force: :cascade do |t|

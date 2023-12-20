@@ -6,7 +6,7 @@
 #
 #  id                :bigint           not null, primary key
 #  allow_overflow    :boolean
-#  hours_amount      :boolean
+#  hours_amount      :float
 #  limit_by          :string
 #  management_factor :float
 #  created_at        :datetime         not null
