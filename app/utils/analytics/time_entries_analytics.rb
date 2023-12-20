@@ -24,12 +24,18 @@ module Analytics
       # Iterate over assignments to sum the hours for each user
       assignments.each do |assignment|
         user_name = assignment.user.name
-        worked_hash[user_name] += worked_hours(assignment)
-        missing_hash[user_name] += missing_hours(assignment)
-        vacation_hash[user_name] = vacation_hours(assignment)
-        sick_leave_hash[user_name] = sick_leave_hours(assignment)
-        over_delivered_hash[user_name] += over_delivered_hours(assignment)
-        expected_hours_hash[user_name] += expected_hours(assignment)
+        contract_model = assignment.contract_model
+        worked = contract_model.worked_hours(assignment, @start_date, @end_date)
+        expected = contract_model.expected_hours(assignment, @start_date, @end_date, false)
+        vacation = contract_model.vacation_hours(assignment, @start_date, @end_date)
+        sick_leave = contract_model.sick_leave_hours(assignment, @start_date, @end_date)
+
+        worked_hash[user_name] += worked
+        missing_hash[user_name] += contract_model.missing_hours(worked, expected, vacation, sick_leave)
+        vacation_hash[user_name] = vacation
+        sick_leave_hash[user_name] = sick_leave
+        over_delivered_hash[user_name] += contract_model.over_delivered_hours(worked, expected)
+        expected_hours_hash[user_name] += expected
       end
 
       final_worked_hash = Hash.new(0)
@@ -44,7 +50,8 @@ module Analytics
 
         final_missing_hash[user_name] = [missing_hash[user_name] - over_delivered_hash[user_name], 0].max
 
-        errands_hours_hash[user_name] = errands_hours(assignment, final_missing_hash[user_name])
+        errands_hours_hash[user_name] =
+          assignment.contract_model.errands_hours(assignment, @start_date, @end_date, final_missing_hash[user_name])
       end
 
       # Create the labels and datasets from the accumulated hashes
@@ -84,46 +91,8 @@ module Analytics
                       end
     end
 
-    def over_delivered_hours(assignment)
-      worked = worked_hours(assignment)
-      expected = expected_hours(assignment)
-
-      expected > worked ? 0 : worked - expected
-    end
-
     def clean_worked_hours(assignment)
       [worked_hours(assignment), expected_hours(assignment)].min
-    end
-
-    def worked_hours(assignment)
-      TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).data
-    end
-
-    def expected_hours(assignment)
-      TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data
-    end
-
-    def missing_hours(assignment)
-      worked = worked_hours(assignment)
-
-      [[expected_hours(assignment) - worked, 0].max - vacation_hours(assignment) - sick_leave_hours(assignment), 0].max
-    end
-
-    def vacation_hours(assignment)
-      vacation_type = TimeOffType.where(name: TimeOffType::VACATION_TYPE)
-      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
-    end
-
-    def errands_hours(assignment, missing_hours)
-      return 0 if missing_hours.zero?
-
-      vacation_type = TimeOffType.where(name: TimeOffType::ERRAND_TYPE)
-      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, vacation_type).data
-    end
-
-    def sick_leave_hours(assignment)
-      sick_leave_type = TimeOffType.find_by(name: TimeOffType::SICK_LEAVE_TYPE)
-      TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, sick_leave_type).data
     end
   end
 end

@@ -10,5 +10,15 @@
 #  updated_at     :datetime         not null
 #
 class FixedBidContractModel < ApplicationRecord
+  include Calculable
+
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
+
+  def assignment_executed_income(_assignment, _start_date, _end_date)
+    0
+  end
+
+  def assigned_expected_income(_assignment, _start_date, _end_date)
+    0
+  end
 end

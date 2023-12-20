@@ -3,7 +3,7 @@
 module Analytics
   module Finances
     module Calculators
-      class MaintenanceCalculator < FinancesCalculator
+      class RetainerCalculator < FinancesCalculator
         def total_executed_income
           income
         end

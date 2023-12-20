@@ -11,5 +11,15 @@
 #  updated_at         :datetime         not null
 #
 class RetainerContractModel < ApplicationRecord
+  include Calculable
+
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
+
+  def assignment_executed_income(_assignment, _start_date, _end_date)
+    0
+  end
+
+  def assignment_expected_income(_assignment, _start_date, _end_date)
+    0
+  end
 end

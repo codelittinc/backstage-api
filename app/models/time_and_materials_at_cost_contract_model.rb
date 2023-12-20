@@ -13,5 +13,7 @@
 #  updated_at        :datetime         not null
 #
 class TimeAndMaterialsAtCostContractModel < ApplicationRecord
+  include Calculable
+
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
 end
