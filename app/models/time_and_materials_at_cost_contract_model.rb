@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+# == Schema Information
+#
+# Table name: time_and_materials_at_cost_contract_models
+#
+#  id                :bigint           not null, primary key
+#  allow_overflow    :boolean
+#  hours_amount      :boolean
+#  limit_by          :string
+#  management_factor :float
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+class TimeAndMaterialsAtCostContractModel < ApplicationRecord
+end
