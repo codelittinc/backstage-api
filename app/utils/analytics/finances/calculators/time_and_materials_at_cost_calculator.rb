@@ -3,7 +3,7 @@
 module Analytics
   module Finances
     module Calculators
-      class TimeAndMaterialsCalculator < FinancesCalculator
+      class TimeAndMaterialsAtCostCalculator < FinancesCalculator
         attr_reader :total_executed_income, :total_expected_income
 
         def initialize(statement_of_work, start_date, end_date, executed_income_to_start_date = 0)

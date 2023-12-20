@@ -19,11 +19,11 @@ module Analytics
           assignments.each do |assignment|
             financial_resource_assignment = financial_item_by_name(assignment.user.name, assignment.user.slug)
 
-            expected_income = add_expected_income(assigned_expected_income(assignment))
+            expected_income = add_expected_income(assignment.expected_income_in_period(@start_date, @end_date))
 
             financial_resource_assignment.add_expected_income(expected_income)
 
-            executed_income = add_executed_income(assigned_executed_income(assignment))
+            executed_income = add_executed_income(assignment.executed_income_in_period(@start_date, @end_date))
             financial_resource_assignment.add_executed_income(executed_income)
 
             financial_resource_assignment.add_expected_cost(assignment_expected_cost(assignment))
@@ -42,14 +42,6 @@ module Analytics
           income
         end
 
-        def assigned_expected_income(_assignment)
-          raise NotImplementedError
-        end
-
-        def assigned_executed_income(_assignment)
-          raise NotImplementedError
-        end
-
         def assignments
           @assignments ||= Assignment.where(requirement: requirements)
                                      .active_in_period(@start_date, @end_date).joins(:user).order('users.first_name',
@@ -62,41 +54,23 @@ module Analytics
         end
 
         def expected_hours(assignment)
-          hours = Analytics::TimeEntries::ExpectedHours.new(assignment, @start_date, @end_date).data
-          [hours - paid_time_off_hours(assignment), 0].max
+          assignment.contract_model.expected_hours(assignment, @start_date, @end_date, true)
         end
 
         def paid_time_off_hours(assignment)
-          Analytics::TimeEntries::PaidTimeOffHours.new(assignment, @start_date, @end_date, TimeOffType.all).data
+          assignment.contract_model.paid_time_off_hours(assignment, @start_date, @end_date)
         end
 
         def executed_hours(assignment)
-          Analytics::TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).data
+          assignment.contract_model.worked_hours(assignment, @start_date, @end_date)
         end
 
         def assignment_expected_cost(assignment)
-          start_date = assignment.start_date
-          end_date = assignment.end_date
-
-          work_days = ([start_date, @start_date].max...[end_date, @end_date].min).select do |date|
-            (1..5).cover?(date.wday)
-          end
-
-          work_days.map do |work_day|
-            salary = assignment.user.salary_on_date(work_day)
-
-            8 * (salary&.hourly_cost || 0)
-          end.sum * assignment.coverage
+          assignment.expected_cost_in_period(@start_date, @end_date)
         end
 
         def assignment_executed_cost(assignment)
-          entries = Analytics::TimeEntries::CompleteWorkedHours.new(assignment, @start_date, @end_date).time_entries
-          entries.map do |time_entry|
-            date = time_entry.date
-            salary = assignment.user.salary_on_date(date)
-
-            time_entry.hours * (salary&.hourly_cost || 0)
-          end.sum
+          assignment.executed_cost_in_period(@start_date, @end_date)
         end
 
         def financial_item_by_name(name, slug)

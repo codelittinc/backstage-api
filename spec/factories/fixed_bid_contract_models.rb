@@ -11,7 +11,7 @@
 #
 FactoryBot.define do
   factory :fixed_bid_contract_model do
-    expected_revenue { 1.5 }
+    expected_revenue { 1000 }
     fixed_timeline { false }
     statement_of_work_id { 1 }
   end

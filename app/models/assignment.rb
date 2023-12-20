@@ -30,4 +30,38 @@ class Assignment < ApplicationRecord
   validates :coverage, presence: true
 
   scope :active_in_period, ->(start_date, end_date) { where('start_date <= ? AND end_date >= ?', end_date, start_date) }
+
+  def contract_model
+    requirement.statement_of_work.contract_model
+  end
+
+  def expected_cost_in_period(start_date_filter, end_date_filter)
+    work_days = ([start_date, start_date_filter].max...[end_date, end_date_filter].min).select do |date|
+      (1..5).cover?(date.wday)
+    end
+
+    work_days.map do |work_day|
+      salary = user.salary_on_date(work_day)
+
+      8 * (salary&.hourly_cost || 0)
+    end.sum * coverage
+  end
+
+  def executed_cost_in_period(start_date_filter, end_date_filter)
+    entries = Analytics::TimeEntries::CompleteWorkedHours.new(self, start_date_filter, end_date_filter).time_entries
+    entries.map do |time_entry|
+      date = time_entry.date
+      salary = user.salary_on_date(date)
+
+      time_entry.hours * (salary&.hourly_cost || 0)
+    end.sum
+  end
+
+  def expected_income_in_period(start_date_filter, end_date_filter)
+    contract_model.assignment_expected_income(self, start_date_filter, end_date_filter)
+  end
+
+  def executed_income_in_period(start_date_filter, end_date_filter)
+    contract_model.assignment_executed_income(self, start_date_filter, end_date_filter)
+  end
 end
