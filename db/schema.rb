@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_153224) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_175120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -139,6 +139,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_153224) do
     t.date "end_date"
     t.index ["profession_id"], name: "index_requirements_on_profession_id"
     t.index ["statement_of_work_id"], name: "index_requirements_on_statement_of_work_id"
+  end
+
+  create_table "retainer_contract_models", force: :cascade do |t|
+    t.boolean "charge_upfront", default: false, null: false
+    t.float "revenue_per_period"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "salaries", force: :cascade do |t|
