@@ -53,17 +53,23 @@ class MaintenanceContractModel < ApplicationRecord
     0
   end
 
+  def expected_income(start_date, end_date)
+    if delivery_period == 'weekly'
+      revenue_per_period * weeks_in_period(start_date, end_date)
+    else
+      revenue_per_period * months_in_period(start_date, end_date)
+    end
+  end
+
   private
 
   def weeks_in_period(start_date, end_date)
     (end_date - start_date).to_i / 7
   end
 
-  def months_in_period(_start_date, _end_date)
-    def months_in_period(start_date, end_date)
-      return 1 if start_date.month == end_date.month && start_date.year == end_date.year
+  def months_in_period(start_date, end_date)
+    return 1 if start_date.month == end_date.month && start_date.year == end_date.year
 
-      ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month)
-    end
+    ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month)
   end
 end

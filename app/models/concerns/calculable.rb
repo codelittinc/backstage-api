@@ -43,11 +43,11 @@ module Calculable
     [[expected_hours - worked_hours, 0].max - vacation_hours - sick_leave_hours, 0].max
   end
 
-  def assignment_expected_income(_assignment, start_date, end_date)
+  def assignment_expected_income(_assignment, _start_date, _end_date)
     raise NotImplementedError
   end
 
-  def assignment_executed_income(_assignment, start_date, end_date)
+  def assignment_executed_income(_assignment, _start_date, _end_date)
     raise NotImplementedError
   end
 end

@@ -12,8 +12,9 @@ module Analytics
             RetainerCalculator.new(statement_of_work, start_date, end_date)
           when 'TimeAndMaterialsContractModel'
             TimeAndMaterialsCalculator.new(statement_of_work, start_date, end_date, executed_income_to_start_date)
-          when 'TimeAndMaterialsAtCostCalculator'
-            TimeAndMaterialsAtCostCalculator.new(statement_of_work, start_date, end_date, executed_income_to_start_date)
+          when 'TimeAndMaterialsAtCostContractModel'
+            TimeAndMaterialsAtCostCalculator.new(statement_of_work, start_date, end_date,
+                                                 executed_income_to_start_date)
           when 'FixedBidContractModel'
             FixedBidCalculator.new(statement_of_work, start_date, end_date)
           end
