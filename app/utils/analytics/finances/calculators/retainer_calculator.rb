@@ -15,7 +15,7 @@ module Analytics
         private
 
         def income
-          (@statement_of_work.total_revenue || 0) * months_difference
+          @statement_of_work.contract_model.expected_income(@start_date, @end_date)
         end
 
         def months_difference
