@@ -6,6 +6,7 @@
 #
 #  id                         :bigint           not null, primary key
 #  allow_revenue_overflow     :boolean          default(FALSE), not null
+#  contract_model_type        :string
 #  end_date                   :datetime
 #  hour_delivery_schedule     :string
 #  hourly_revenue             :float
@@ -17,10 +18,12 @@
 #  total_revenue              :float
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  contract_model_id          :integer
 #  project_id                 :bigint           not null
 #
 # Indexes
 #
+#  index_sow_on_contract_model             (contract_model_id,contract_model_type)
 #  index_statement_of_works_on_project_id  (project_id)
 #
 # Foreign Keys

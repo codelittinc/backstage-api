@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_13_232744) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_20_153224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_232744) do
     t.index ["slug"], name: "index_customers_on_slug", unique: true
   end
 
+  create_table "fixed_bid_contract_models", force: :cascade do |t|
+    t.boolean "fixed_timeline", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -72,6 +78,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_232744) do
     t.string "title"
     t.index ["project_id"], name: "index_issues_on_project_id"
     t.index ["user_id"], name: "index_issues_on_user_id"
+  end
+
+  create_table "maintenance_contract_models", force: :cascade do |t|
+    t.string "delivery_period"
+    t.float "expected_hours_per_period"
+    t.float "revenue_per_period"
+    t.boolean "accumulate_hours", default: false, null: false
+    t.boolean "charge_upfront", default: false, null: false
+    t.float "hourly_cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payments", force: :cascade do |t|
@@ -163,7 +180,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_232744) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.boolean "allow_revenue_overflow", default: false, null: false
+    t.integer "contract_model_id"
+    t.string "contract_model_type"
+    t.index ["contract_model_id", "contract_model_type"], name: "index_sow_on_contract_model"
     t.index ["project_id"], name: "index_statement_of_works_on_project_id"
+  end
+
+  create_table "time_and_materials_contract_models", force: :cascade do |t|
+    t.float "hourly_price"
+    t.float "hours_amount"
+    t.boolean "allow_overflow", default: false, null: false
+    t.string "limit_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "time_entries", force: :cascade do |t|
