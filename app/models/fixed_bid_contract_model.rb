@@ -18,7 +18,7 @@ class FixedBidContractModel < ApplicationRecord
     0
   end
 
-  def assigned_expected_income(_assignment, _start_date, _end_date)
+  def assignment_expected_income(_assignment, _start_date, _end_date)
     0
   end
 end

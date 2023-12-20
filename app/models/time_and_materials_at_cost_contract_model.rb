@@ -16,4 +16,12 @@ class TimeAndMaterialsAtCostContractModel < ApplicationRecord
   include Calculable
 
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
+
+  def assignment_executed_income(assignment, start_date, end_date)
+    assignment.executed_cost_in_period(start_date, end_date) * (1 + management_factor)
+  end
+
+  def assignment_expected_income(assignment, start_date, end_date)
+    assignment.expected_cost_in_period(start_date, end_date) * (1 + management_factor)
+  end
 end
