@@ -44,6 +44,6 @@ class ProjectsController < ApplicationController
   end
 
   def filters_params
-    params.require(:filters).permit(:active_only)
+    params.fetch(:filters, {}).permit(:active_only)
   end
 end
