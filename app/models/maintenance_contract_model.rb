@@ -29,6 +29,14 @@ class MaintenanceContractModel < ApplicationRecord
     end
   end
 
+  def expected_time_entries(assignment, start_date, end_date, _include_paid_time_off)
+    # Retrieve the 'expected_hours' method from the 'Calculable' module
+    method_from_module = Calculable.instance_method(:expected_hours)
+
+    # Bind this method to the current instance and call it
+    method_from_module.bind(self).call(assignment, start_date, end_date, true)
+  end
+
   def paid_time_off_hours(_assignment, _start_date, _end_date)
     0
   end
@@ -68,8 +76,14 @@ class MaintenanceContractModel < ApplicationRecord
   end
 
   def months_in_period(start_date, end_date)
-    return 1 if start_date.month == end_date.month && start_date.year == end_date.year
+    total_days = (end_date - start_date).to_f
 
-    ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month)
+    # Average number of days in a month (approximately)
+    average_days_per_month = 30.44
+
+    # Calculate the difference in months as a float
+    (total_days / average_days_per_month).round
   end
 end
+
+999_005_617

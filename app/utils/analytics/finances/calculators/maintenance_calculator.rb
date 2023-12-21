@@ -18,13 +18,6 @@ module Analytics
           @statement_of_work.contract_model.expected_income(@start_date, @end_date)
         end
 
-        def months_difference
-          month_diff = ((@end_date.year * 12) + @end_date.month) - ((@start_date.year * 12) + @start_date.month)
-          month_diff += 1 if @start_date.day == 1 && @end_date.day == Date.new(@end_date.year, @end_date.month, -1).day
-
-          month_diff
-        end
-
         def assigned_executed_income(_assignment)
           0
         end
@@ -34,10 +27,7 @@ module Analytics
         end
 
         def expected_hours(assignment)
-          statement_of_work_total_hours = assignment.requirement.statement_of_work.total_hours
-          return super if statement_of_work_total_hours.zero?
-
-          assignment.requirement.statement_of_work.total_hours * assignment.coverage
+          @statement_of_work.contract_model.expected_hours(assignment, @start_date, @end_date, false)
         end
       end
     end

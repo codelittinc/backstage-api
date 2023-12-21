@@ -10,6 +10,10 @@ module Calculable
     [hours - paid_time_off_hours(assignment, start_date, end_date), 0].max
   end
 
+  def expected_time_entries(assignment, start_date, end_date, include_paid_time_off = false)
+    expected_hours(assignment, start_date, end_date, include_paid_time_off)
+  end
+
   def paid_time_off_hours(assignment, start_date, end_date)
     Analytics::TimeEntries::PaidTimeOffHours.new(assignment, start_date, end_date, TimeOffType.all).data
   end
