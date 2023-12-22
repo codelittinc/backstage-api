@@ -9,4 +9,4 @@ json.participants project.participants.map do |participant|
 end
 
 json.extract! project, :id, :name, :billable, :slack_channel, :metadata, :slug, :logo_url,
-              :sync_source_control, :sync_ticket_tracking_system
+              :sync_source_control, :sync_ticket_tracking_system, :logo_background_color

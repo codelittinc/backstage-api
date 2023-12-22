@@ -5,7 +5,7 @@
 # Table name: time_and_materials_at_cost_contract_models
 #
 #  id                :bigint           not null, primary key
-#  allow_overflow    :boolean
+#  allow_overflow    :boolean          default(FALSE), not null
 #  hours_amount      :float
 #  limit_by          :string
 #  management_factor :float

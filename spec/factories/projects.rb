@@ -6,6 +6,7 @@
 #
 #  id                          :bigint           not null, primary key
 #  billable                    :boolean          default(TRUE), not null
+#  logo_background_color       :string
 #  logo_url                    :string
 #  metadata                    :json
 #  name                        :string
