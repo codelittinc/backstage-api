@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_20_184651) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_22_150029) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_184651) do
     t.string "logo_url"
     t.boolean "sync_ticket_tracking_system", default: false, null: false
     t.boolean "sync_source_control", default: false, null: false
+    t.string "logo_background_color"
     t.index ["customer_id"], name: "index_projects_on_customer_id"
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
@@ -194,7 +195,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_20_184651) do
   end
 
   create_table "time_and_materials_at_cost_contract_models", force: :cascade do |t|
-    t.boolean "allow_overflow"
+    t.boolean "allow_overflow", default: false, null: false
     t.string "limit_by"
     t.float "management_factor"
     t.datetime "created_at", null: false
