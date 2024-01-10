@@ -26,7 +26,7 @@ module Analytics
         user_name = assignment.user.name
         contract_model = assignment.contract_model
         worked = contract_model.worked_hours(assignment, @start_date, @end_date)
-        expected = contract_model.expected_time_entries(assignment, @start_date, @end_date, false)
+        expected = contract_model.expected_time_entries(assignment, @start_date, @end_date, true)
         vacation = contract_model.vacation_hours(assignment, @start_date, @end_date)
         sick_leave = contract_model.sick_leave_hours(assignment, @start_date, @end_date)
 
