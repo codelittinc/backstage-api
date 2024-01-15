@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_150029) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_10_200303) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -175,19 +174,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_150029) do
   end
 
   create_table "statement_of_works", force: :cascade do |t|
-    t.string "model"
-    t.float "hourly_revenue"
-    t.float "total_revenue"
-    t.float "total_hours"
-    t.string "hour_delivery_schedule"
-    t.boolean "limit_by_delivery_schedule", default: true, null: false
+    t.float "contract_size"
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.boolean "allow_revenue_overflow", default: false, null: false
     t.integer "contract_model_id"
     t.string "contract_model_type"
     t.index ["contract_model_id", "contract_model_type"], name: "index_sow_on_contract_model"

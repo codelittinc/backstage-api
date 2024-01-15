@@ -15,7 +15,7 @@ module Analytics
         end
 
         def income_limit
-          @income_limit ||= @statement_of_work.total_revenue
+          @income_limit ||= @statement_of_work.contract_size
         end
 
         def add_executed_income(income)

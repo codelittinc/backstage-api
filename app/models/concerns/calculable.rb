@@ -5,6 +5,7 @@ module Calculable
 
   def expected_hours(assignment, start_date, end_date, include_paid_time_off = false)
     hours = Analytics::TimeEntries::ExpectedHours.new(assignment, start_date, end_date).data
+    # debugger if assignment.user.id == 11
     return hours if include_paid_time_off
 
     [hours - paid_time_off_hours(assignment, start_date, end_date), 0].max

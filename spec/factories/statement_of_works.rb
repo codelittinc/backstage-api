@@ -4,22 +4,16 @@
 #
 # Table name: statement_of_works
 #
-#  id                         :bigint           not null, primary key
-#  allow_revenue_overflow     :boolean          default(FALSE), not null
-#  contract_model_type        :string
-#  end_date                   :datetime
-#  hour_delivery_schedule     :string
-#  hourly_revenue             :float
-#  limit_by_delivery_schedule :boolean          default(TRUE), not null
-#  model                      :string
-#  name                       :string
-#  start_date                 :datetime
-#  total_hours                :float
-#  total_revenue              :float
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  contract_model_id          :integer
-#  project_id                 :bigint           not null
+#  id                  :bigint           not null, primary key
+#  contract_model_type :string
+#  contract_size       :float
+#  end_date            :datetime
+#  name                :string
+#  start_date          :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  contract_model_id   :integer
+#  project_id          :bigint           not null
 #
 # Indexes
 #
@@ -36,33 +30,30 @@ FactoryBot.define do
     start_date { Time.zone.today - 6.months }
     end_date { Time.zone.today + 6.months }
     name { FFaker::Lorem.sentence }
-    allow_revenue_overflow { false }
+    contract_size { 1000 }
 
     trait :with_maintenance do
-      model { 'maintenance' }
-      hourly_revenue { 100 }
-      total_hours { 120 }
-      total_revenue { 12_000 }
-      hour_delivery_schedule { 'monthly' }
-      limit_by_delivery_schedule { true }
+      after(:build) do |sow|
+        sow.contract_model = build(:maintenance_contract_model)
+      end
     end
 
     trait :with_time_and_materials do
-      model { 'time_and_materials' }
-      hourly_revenue { 100 }
-      total_hours { 120 }
-      total_revenue { 12_000 }
-      hour_delivery_schedule { 'contract_period' }
-      limit_by_delivery_schedule { true }
+      after(:build) do |sow|
+        sow.contract_model = build(:time_and_materials_contract_model, statement_of_work: sow)
+      end
     end
 
     trait :with_fixed_bid do
-      model { 'time_and_materials' }
-      hourly_revenue { nil }
-      total_hours { nil }
-      total_revenue { 12_000 }
-      hour_delivery_schedule { 'contract_period' }
-      limit_by_delivery_schedule { false }
+      after(:build) do |sow|
+        sow.contract_model = build(:fixed_bid_contract_model, statement_of_work: sow)
+      end
+    end
+
+    trait :with_time_and_materials_at_cost do
+      after(:build) do |sow|
+        sow.contract_model = build(:time_and_materials_at_cost_contract_model, statement_of_work: sow)
+      end
     end
   end
 end

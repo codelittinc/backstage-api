@@ -4,22 +4,16 @@
 #
 # Table name: statement_of_works
 #
-#  id                         :bigint           not null, primary key
-#  allow_revenue_overflow     :boolean          default(FALSE), not null
-#  contract_model_type        :string
-#  end_date                   :datetime
-#  hour_delivery_schedule     :string
-#  hourly_revenue             :float
-#  limit_by_delivery_schedule :boolean          default(TRUE), not null
-#  model                      :string
-#  name                       :string
-#  start_date                 :datetime
-#  total_hours                :float
-#  total_revenue              :float
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  contract_model_id          :integer
-#  project_id                 :bigint           not null
+#  id                  :bigint           not null, primary key
+#  contract_model_type :string
+#  contract_size       :float
+#  end_date            :datetime
+#  name                :string
+#  start_date          :datetime
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  contract_model_id   :integer
+#  project_id          :bigint           not null
 #
 # Indexes
 #
@@ -41,23 +35,21 @@ class StatementOfWork < ApplicationRecord
   # existing validations
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :model, presence: true, inclusion: { in: %w[maintenance time_and_materials fixed_bid] }
-  validates :total_revenue, numericality: { greater_than: 0 }
-  validates :hour_delivery_schedule, presence: true, inclusion: { in: %w[contract_period weekly monthly] }
+  validates :contract_size, numericality: { greater_than: 0 }
 
   # custom validation for date range
   validate :validate_date_range
 
-  scope :active_in_period, ->(start_date, end_date) { where('start_date <= ? AND end_date >= ?', end_date, start_date) }
-  scope :maintenance, -> { where(model: 'maintenance') }
-  scope :time_and_materials, -> { where(model: 'time_and_materials') }
+  scope :active_in_period, ->(start_date, end_date) { where("start_date <= ? AND end_date >= ?", end_date, start_date) }
+  scope :maintenance, -> { where(model: "maintenance") }
+  scope :time_and_materials, -> { where(model: "time_and_materials") }
 
   private
 
   def validate_date_range
     return unless start_date && end_date && start_date >= end_date
 
-    errors.add(:start_date, 'must be before end date')
-    errors.add(:end_date, 'must be after start date')
+    errors.add(:start_date, "must be before end date")
+    errors.add(:end_date, "must be after start date")
   end
 end
