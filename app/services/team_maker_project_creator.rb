@@ -75,7 +75,7 @@ class TeamMakerProjectCreator < ApplicationService
       coverage: team_maker_project_requirement.coverage,
       start_date: team_maker_project_requirement.starts_on,
       end_date: team_maker_project_requirement.ends_on,
-      profession: professions[team_maker_project_requirement.role],
+      profession: profession(team_maker_project_requirement.role),
       statement_of_work:
     )
   end
@@ -86,6 +86,11 @@ class TeamMakerProjectCreator < ApplicationService
       'Project Management' => Profession.find_by(name: 'Project Manager'),
       'Design' => Profession.find_by(name: 'Designer')
     }
+  end
+
+  def profession(name)
+    # default behavior in case we don't have the profession here.
+    professions[name] || Profession.find_by(name: 'Project Manager')
   end
 
   def find_user(email)
