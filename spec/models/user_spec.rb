@@ -11,6 +11,7 @@
 #  email         :string
 #  first_name    :string
 #  image_url     :string
+#  internal      :boolean          default(TRUE), not null
 #  last_name     :string
 #  seniority     :string
 #  slug          :string
@@ -39,6 +40,13 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:google_id) }
     it { is_expected.to validate_uniqueness_of(:google_id) }
     it { is_expected.to validate_inclusion_of(:seniority).in_array(%w[Intern Junior Midlevel Senior]) }
+
+    it 'does not validate uniqueness of google_id if the user is not internal' do
+      create(:user, internal: false, google_id: nil)
+      user2 = build(:user, internal: false, google_id: nil)
+
+      expect(user2.valid?).to be_truthy
+    end
 
     it 'validates the seniority' do
       user = create(:user)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.extract! user, :id, :active, :contract_type, :first_name,
-              :last_name, :email, :google_id, :slug, :image_url, :seniority, :profession_id, :country
+              :last_name, :email, :google_id, :slug, :image_url, :seniority, :profession_id, :country, :internal
 
 # Render the profession partial
 json.profession user.profession, partial: 'professions/profession', as: :profession
