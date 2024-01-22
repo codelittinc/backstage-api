@@ -35,11 +35,11 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  validates :email, presence: true, uniqueness: true,
-                    format: {
-                      with: /\A[\w+\-.]+@#{ENV.fetch('VALID_USER_DOMAIN', nil)}\z/i,
-                      message: "must be a #{ENV.fetch('VALID_USER_DOMAIN', nil)} account"
-                    }
+  validates :email, presence: true, uniqueness: true
+  validates :email, format: {
+    with: /\A[\w+\-.]+@#{ENV.fetch('VALID_USER_DOMAIN', nil)}\z/i,
+    message: "must be a #{ENV.fetch('VALID_USER_DOMAIN', nil)} account"
+  }, if: :internal?
 
   validates :google_id, presence: true, uniqueness: true, if: :internal?
   validates :google_id, absence: true, unless: :internal?
