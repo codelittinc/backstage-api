@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_22_150029) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_22_154129) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -286,6 +286,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_22_150029) do
     t.string "seniority"
     t.boolean "active", default: true, null: false
     t.string "country"
+    t.boolean "internal", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["google_id"], name: "index_users_on_google_id", unique: true
     t.index ["profession_id"], name: "index_users_on_profession_id"

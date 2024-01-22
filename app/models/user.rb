@@ -11,6 +11,7 @@
 #  email         :string
 #  first_name    :string
 #  image_url     :string
+#  internal      :boolean          default(TRUE), not null
 #  last_name     :string
 #  seniority     :string
 #  slug          :string
@@ -40,7 +41,8 @@ class User < ApplicationRecord
                       message: "must be a #{ENV.fetch('VALID_USER_DOMAIN', nil)} account"
                     }
 
-  validates :google_id, presence: true, uniqueness: true
+  validates :google_id, presence: true, uniqueness: true, if: :internal?
+  validates :google_id, absence: true, unless: :internal?
 
   VALID_SENIORITIES = %w[Intern Junior Midlevel Senior].freeze
   validates :seniority, inclusion: { in: VALID_SENIORITIES, allow_nil: true }

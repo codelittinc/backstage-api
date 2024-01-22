@@ -11,6 +11,7 @@
 #  email         :string
 #  first_name    :string
 #  image_url     :string
+#  internal      :boolean          default(TRUE), not null
 #  last_name     :string
 #  seniority     :string
 #  slug          :string
