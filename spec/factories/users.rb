@@ -41,6 +41,7 @@ FactoryBot.define do
     contract_type { FFaker::Lorem.word }
     seniority { %w[Intern Junior Midlevel Senior].sample }
     active { [true, false].sample }
+    internal { true }
 
     profession
 
