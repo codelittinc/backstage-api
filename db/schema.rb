@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_22_154129) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_23_170606) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -186,7 +187,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_22_154129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.boolean "allow_revenue_overflow", default: false, null: false
     t.integer "contract_model_id"
     t.string "contract_model_type"
     t.index ["contract_model_id", "contract_model_type"], name: "index_sow_on_contract_model"

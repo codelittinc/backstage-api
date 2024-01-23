@@ -5,7 +5,6 @@
 # Table name: statement_of_works
 #
 #  id                         :bigint           not null, primary key
-#  allow_revenue_overflow     :boolean          default(FALSE), not null
 #  contract_model_type        :string
 #  end_date                   :datetime
 #  hour_delivery_schedule     :string
