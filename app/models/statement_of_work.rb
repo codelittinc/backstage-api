@@ -7,7 +7,6 @@
 #  id                  :bigint           not null, primary key
 #  contract_model_type :string
 #  end_date            :datetime
-#  model               :string
 #  name                :string
 #  start_date          :datetime
 #  total_revenue       :float
@@ -36,15 +35,12 @@ class StatementOfWork < ApplicationRecord
   # existing validations
   validates :start_date, presence: true
   validates :end_date, presence: true
-  validates :model, presence: true, inclusion: { in: %w[maintenance time_and_materials fixed_bid] }
   validates :total_revenue, numericality: { greater_than: 0 }
 
   # custom validation for date range
   validate :validate_date_range
 
   scope :active_in_period, ->(start_date, end_date) { where('start_date <= ? AND end_date >= ?', end_date, start_date) }
-  scope :maintenance, -> { where(model: 'maintenance') }
-  scope :time_and_materials, -> { where(model: 'time_and_materials') }
 
   private
 

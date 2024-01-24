@@ -7,7 +7,6 @@
 #  id                  :bigint           not null, primary key
 #  contract_model_type :string
 #  end_date            :datetime
-#  model               :string
 #  name                :string
 #  start_date          :datetime
 #  total_revenue       :float
@@ -31,20 +30,12 @@ FactoryBot.define do
     start_date { Time.zone.today - 6.months }
     end_date { Time.zone.today + 6.months }
     name { FFaker::Lorem.sentence }
+    total_revenue { 12_000 }
 
     trait :with_maintenance do
-      model { 'maintenance' }
-      total_revenue { 12_000 }
-    end
-
-    trait :with_time_and_materials do
-      model { 'time_and_materials' }
-      total_revenue { 12_000 }
-    end
-
-    trait :with_fixed_bid do
-      model { 'time_and_materials' }
-      total_revenue { 12_000 }
+      after(:build) do |sow|
+        sow.contract_model = create(:maintenance_contract_model)
+      end
     end
   end
 end

@@ -14,10 +14,9 @@
 #
 FactoryBot.define do
   factory :time_and_materials_contract_model do
-    hourly_price { 1.5 }
-    hours_amount { 1.5 }
+    hourly_price { 100 }
+    hours_amount { 120 }
     allow_hour_overflow { false }
-    expected_revenue { 1.5 }
-    statement_of_work { nil }
+    expected_revenue { 12_000 }
   end
 end
