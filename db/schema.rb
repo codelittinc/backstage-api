@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_23_170606) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_23_171117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -180,7 +180,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_23_170606) do
     t.float "total_revenue"
     t.float "total_hours"
     t.string "hour_delivery_schedule"
-    t.boolean "limit_by_delivery_schedule", default: true, null: false
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "project_id", null: false
