@@ -8,7 +8,6 @@
 #  contract_model_type    :string
 #  end_date               :datetime
 #  hour_delivery_schedule :string
-#  hourly_revenue         :float
 #  model                  :string
 #  name                   :string
 #  start_date             :datetime
