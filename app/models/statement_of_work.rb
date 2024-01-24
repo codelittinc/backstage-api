@@ -10,7 +10,6 @@
 #  model               :string
 #  name                :string
 #  start_date          :datetime
-#  total_hours         :float
 #  total_revenue       :float
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
