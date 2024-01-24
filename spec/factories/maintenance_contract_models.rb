@@ -16,13 +16,11 @@
 #
 FactoryBot.define do
   factory :maintenance_contract_model do
-    delivery_period { 'MyString' }
-    expected_hours_per_period { 1.5 }
-    revenue_per_period { 1.5 }
-    expected_revenue { 1.5 }
     accumulate_hours { false }
     charge_upfront { false }
-    hourly_cost { 1.5 }
-    statement_of_work_id { 1 }
+    delivery_period { 'monthly' }
+    expected_hours_per_period { 120 }
+    revenue_per_period { 12_000 }
+    hourly_cost { 100 }
   end
 end

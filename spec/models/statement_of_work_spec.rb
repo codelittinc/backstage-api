@@ -7,7 +7,6 @@
 #  id                  :bigint           not null, primary key
 #  contract_model_type :string
 #  end_date            :datetime
-#  model               :string
 #  name                :string
 #  start_date          :datetime
 #  total_revenue       :float
