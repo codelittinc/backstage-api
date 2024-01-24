@@ -44,7 +44,7 @@ class StatementOfWorksController < ApplicationController
 
   def statement_of_work_params
     params.require(:statement_of_work).permit(:model, :hourly_revenue, :total_revenue, :total_hours,
-                                              :hour_delivery_schedule, :limit_by_delivery_schedule,
+                                              :hour_delivery_schedule,
                                               :start_date, :end_date, :name)
   end
 end

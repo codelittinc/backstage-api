@@ -4,21 +4,20 @@
 #
 # Table name: statement_of_works
 #
-#  id                         :bigint           not null, primary key
-#  contract_model_type        :string
-#  end_date                   :datetime
-#  hour_delivery_schedule     :string
-#  hourly_revenue             :float
-#  limit_by_delivery_schedule :boolean          default(TRUE), not null
-#  model                      :string
-#  name                       :string
-#  start_date                 :datetime
-#  total_hours                :float
-#  total_revenue              :float
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  contract_model_id          :integer
-#  project_id                 :bigint           not null
+#  id                     :bigint           not null, primary key
+#  contract_model_type    :string
+#  end_date               :datetime
+#  hour_delivery_schedule :string
+#  hourly_revenue         :float
+#  model                  :string
+#  name                   :string
+#  start_date             :datetime
+#  total_hours            :float
+#  total_revenue          :float
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  contract_model_id      :integer
+#  project_id             :bigint           not null
 #
 # Indexes
 #
