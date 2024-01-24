@@ -61,7 +61,7 @@ RSpec.describe StatementOfWorksController, type: :controller do
     context 'with valid params' do
       let(:new_attributes) do
         {
-          hour_delivery_schedule: 'weekly'
+          end_date: Time.zone.today + 2.days
         }
       end
 
@@ -70,7 +70,7 @@ RSpec.describe StatementOfWorksController, type: :controller do
         put :update,
             params: { id: statement_of_work.to_param, statement_of_work: new_attributes, project_id: project.id }
         statement_of_work.reload
-        expect(statement_of_work.hour_delivery_schedule).to eql('weekly')
+        expect(statement_of_work.end_date.to_date).to eql(Time.zone.today + 2.days)
       end
 
       it 'renders a JSON response with the statement_of_work' do
