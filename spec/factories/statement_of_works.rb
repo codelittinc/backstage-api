@@ -10,7 +10,6 @@
 #  model               :string
 #  name                :string
 #  start_date          :datetime
-#  total_hours         :float
 #  total_revenue       :float
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -35,19 +34,16 @@ FactoryBot.define do
 
     trait :with_maintenance do
       model { 'maintenance' }
-      total_hours { 120 }
       total_revenue { 12_000 }
     end
 
     trait :with_time_and_materials do
       model { 'time_and_materials' }
-      total_hours { 120 }
       total_revenue { 12_000 }
     end
 
     trait :with_fixed_bid do
       model { 'time_and_materials' }
-      total_hours { nil }
       total_revenue { 12_000 }
     end
   end

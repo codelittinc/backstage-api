@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_24_223542) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_24_224146) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -177,7 +177,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_223542) do
   create_table "statement_of_works", force: :cascade do |t|
     t.string "model"
     t.float "total_revenue"
-    t.float "total_hours"
     t.datetime "start_date"
     t.datetime "end_date"
     t.bigint "project_id", null: false
