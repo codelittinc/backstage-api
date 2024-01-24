@@ -37,7 +37,6 @@ FactoryBot.define do
 
     trait :with_maintenance do
       model { 'maintenance' }
-      hourly_revenue { 100 }
       total_hours { 120 }
       total_revenue { 12_000 }
       hour_delivery_schedule { 'monthly' }
@@ -45,7 +44,6 @@ FactoryBot.define do
 
     trait :with_time_and_materials do
       model { 'time_and_materials' }
-      hourly_revenue { 100 }
       total_hours { 120 }
       total_revenue { 12_000 }
       hour_delivery_schedule { 'contract_period' }
@@ -53,7 +51,6 @@ FactoryBot.define do
 
     trait :with_fixed_bid do
       model { 'time_and_materials' }
-      hourly_revenue { nil }
       total_hours { nil }
       total_revenue { 12_000 }
       hour_delivery_schedule { 'contract_period' }
