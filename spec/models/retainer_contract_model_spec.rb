@@ -6,7 +6,7 @@
 #
 #  id                        :bigint           not null, primary key
 #  charge_upfront            :boolean          default(FALSE), not null
-#  expected_hours_per_period :float
+#  expected_hours_per_period :float            default(0.0)
 #  revenue_per_period        :float
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
