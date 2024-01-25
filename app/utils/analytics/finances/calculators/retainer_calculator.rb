@@ -34,10 +34,10 @@ module Analytics
         end
 
         def expected_hours(assignment)
-          statement_of_work_total_hours = assignment.requirement.statement_of_work.total_hours
-          return super if statement_of_work_total_hours.zero?
+          statement_of_work_total_hours = assignment.requirement.statement_of_work.contract_model.expected_hours_per_period
+          return super if statement_of_work_total_hours.nil?
 
-          assignment.requirement.statement_of_work.total_hours * assignment.coverage
+          statement_of_work_total_hours * assignment.coverage
         end
       end
     end

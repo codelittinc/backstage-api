@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_24_225750) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_25_134919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -147,6 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_225750) do
     t.float "revenue_per_period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "expected_hours_per_period"
   end
 
   create_table "salaries", force: :cascade do |t|
