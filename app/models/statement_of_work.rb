@@ -32,6 +32,8 @@ class StatementOfWork < ApplicationRecord
   has_many :payments, dependent: :destroy
   belongs_to :contract_model, polymorphic: true, optional: true
 
+  accepts_nested_attributes_for :contract_model
+
   # existing validations
   validates :start_date, presence: true
   validates :end_date, presence: true
