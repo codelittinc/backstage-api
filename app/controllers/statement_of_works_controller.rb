@@ -5,13 +5,14 @@ class StatementOfWorksController < ApplicationController
   before_action :set_statement_of_work, only: %i[show update destroy]
 
   def index
-    @statement_of_works = @project.statement_of_works
+    @statement_of_works = @project.statement_of_works.order(:start_date)
   end
 
   def show; end
 
   def create
-    @statement_of_work = @project.statement_of_works.build(statement_of_work_params)
+    @statement_of_work = @project.statement_of_works.new(statement_of_work_params.except(:contract_model_attributes))
+    build_contract_model
 
     if @statement_of_work.save
       render :show, status: :created, location: [@project, @statement_of_work]
@@ -30,6 +31,7 @@ class StatementOfWorksController < ApplicationController
 
   def destroy
     @statement_of_work.destroy
+    head :no_content
   end
 
   private
@@ -43,8 +45,34 @@ class StatementOfWorksController < ApplicationController
   end
 
   def statement_of_work_params
-    params.require(:statement_of_work).permit(:model, :hourly_revenue, :total_revenue, :total_hours,
-                                              :hour_delivery_schedule,
-                                              :start_date, :end_date, :name)
+    params.require(:statement_of_work).permit(
+      :total_revenue, :start_date, :end_date, :name,
+      :contract_model_type, :contract_model_id,
+      contract_model_attributes: [
+        # For TimeAndMaterialsAtCostContractModel
+        :id, :allow_overflow, :hours_amount, :limit_by, :management_factor,
+        # For TimeAndMaterialsContractModel
+        :hourly_price,
+        # For MaintenanceContractModel
+        :accumulate_hours, :charge_upfront, :delivery_period, :expected_hours_per_period, :hourly_cost, :revenue_per_period,
+        # For FixedBidContractModel
+        :fixed_timeline,
+        # For the polymorphic association type
+        :type
+      ]
+    )
+  end
+
+  def build_contract_model
+    contract_model_params = statement_of_work_params[:contract_model_attributes]
+    return unless contract_model_params
+
+    contract_model_class = contract_model_params[:type].constantize
+
+    contract_model_params.delete(:type)
+
+    contract_model = contract_model_class.new(contract_model_params)
+
+    @statement_of_work.contract_model = contract_model
   end
 end

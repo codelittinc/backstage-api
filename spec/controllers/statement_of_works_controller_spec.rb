@@ -9,7 +9,9 @@ RSpec.describe StatementOfWorksController, type: :controller do
   let(:project) { create(:project) }
 
   let(:valid_attributes) do
-    attributes_for(:statement_of_work, :with_maintenance).merge(project_id: project.id)
+    obj = attributes_for(:statement_of_work, project_id: project.id)
+    obj[:contract_model_attributes] = attributes_for(:maintenance_contract_model, type: 'MaintenanceContractModel')
+    obj
   end
 
   let(:invalid_attributes) do
@@ -66,7 +68,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
       end
 
       it 'updates the requested statement_of_work' do
-        statement_of_work = StatementOfWork.create! valid_attributes
+        statement_of_work = create(:statement_of_work, :with_maintenance, project:)
+
         put :update,
             params: { id: statement_of_work.to_param, statement_of_work: new_attributes, project_id: project.id }
         statement_of_work.reload
@@ -74,7 +77,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
       end
 
       it 'renders a JSON response with the statement_of_work' do
-        statement_of_work = StatementOfWork.create! valid_attributes
+        statement_of_work = create(:statement_of_work, :with_maintenance, project:)
+
         put :update,
             params: { id: statement_of_work.to_param, statement_of_work: new_attributes, project_id: project.id }
         expect(response).to have_http_status(:ok)
@@ -83,7 +87,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
     context 'with invalid params' do
       it 'renders a JSON response with errors for the statement_of_work' do
-        statement_of_work = StatementOfWork.create! valid_attributes
+        statement_of_work = create(:statement_of_work, :with_maintenance, project:)
+
         put :update,
             params: { id: statement_of_work.to_param, statement_of_work: invalid_attributes, project_id: project.id }
         expect(response).to have_http_status(:unprocessable_entity)
@@ -93,7 +98,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested statement_of_work' do
-      statement_of_work = StatementOfWork.create! valid_attributes
+      statement_of_work = create(:statement_of_work, :with_maintenance, project:)
+
       expect do
         delete :destroy, params: { id: statement_of_work.to_param, project_id: project.id }
       end.to change(StatementOfWork, :count).by(-1)

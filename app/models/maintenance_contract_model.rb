@@ -85,5 +85,3 @@ class MaintenanceContractModel < ApplicationRecord
     (total_days / average_days_per_month).round
   end
 end
-
-999_005_617
