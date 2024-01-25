@@ -41,8 +41,8 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_inclusion_of(:seniority).in_array(%w[Intern Junior Midlevel Senior]) }
 
     it 'does not validate uniqueness of google_id if the user is not internal' do
-      create(:user, internal: false, google_id: nil)
-      user2 = build(:user, internal: false, google_id: nil)
+      create(:user, internal: true, google_id: '123')
+      user2 = create(:user, internal: true, google_id: '123')
 
       expect(user2.valid?).to be_truthy
     end
