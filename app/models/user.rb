@@ -23,7 +23,6 @@
 # Indexes
 #
 #  index_users_on_email          (email) UNIQUE
-#  index_users_on_google_id      (google_id) UNIQUE
 #  index_users_on_profession_id  (profession_id)
 #  index_users_on_slug           (slug) UNIQUE
 #

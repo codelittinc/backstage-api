@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_25_134919) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_25_200817) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "assignments", force: :cascade do |t|
@@ -147,7 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_25_134919) do
     t.float "revenue_per_period"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "expected_hours_per_period"
+    t.float "expected_hours_per_period", default: 0.0
   end
 
   create_table "salaries", force: :cascade do |t|
@@ -283,7 +282,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_25_134919) do
     t.string "country"
     t.boolean "internal", default: true, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["google_id"], name: "index_users_on_google_id", unique: true
     t.index ["profession_id"], name: "index_users_on_profession_id"
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
