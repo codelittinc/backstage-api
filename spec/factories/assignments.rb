@@ -25,7 +25,10 @@
 #
 FactoryBot.define do
   factory :assignment do
-    coverage { 1.5 }
-    requirement { nil }
+    coverage { 1.0 }
+    requirement
+    user
+    start_date { Time.zone.today - 1.month }
+    end_date { Time.zone.today + 1.month }
   end
 end
