@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
 class RequirementsController < ApplicationController
-  before_action :set_project
-  before_action :set_statement_of_work
   before_action :set_requirement, only: %i[show update destroy]
 
   def index
-    @requirements = @statement_of_work.requirements
+    project = Project.find(requirements_filter[:project_id])
+    statement_of_works_ids = project.statement_of_works.map(&:id)
+    @requirements = Requirement.where(statement_of_work_id: statement_of_works_ids).active_in_period(
+      requirements_filter[:start_date], requirements_filter[:end_date]
+    )
   end
 
   def show; end
 
   def create
-    @requirement = @statement_of_work.requirements.new(requirement_params)
+    @requirement = Requirement.new(requirement_params)
 
     if @requirement.save
       render :show, status: :created
@@ -35,19 +37,15 @@ class RequirementsController < ApplicationController
 
   private
 
-  def set_project
-    @project = Project.find(params[:project_id])
-  end
-
-  def set_statement_of_work
-    @statement_of_work = @project.statement_of_works.find(params[:statement_of_work_id])
-  end
-
   def set_requirement
-    @requirement = @statement_of_work.requirements.find(params[:id])
+    @requirement = Requirement.find(params[:id])
   end
 
   def requirement_params
-    params.require(:requirement).permit(:profession_id, :coverage)
+    params.require(:requirement).permit(:profession_id, :coverage, :statement_of_work_id, :start_date, :end_date)
+  end
+
+  def requirements_filter
+    params.permit(:project_id, :start_date, :end_date)
   end
 end

@@ -28,5 +28,7 @@ FactoryBot.define do
     profession
     statement_of_work factory: %i[statement_of_work with_maintenance]
     coverage { 1.0 }
+    start_date { Time.zone.today - 1.month }
+    end_date { Time.zone.today + 1.month }
   end
 end
