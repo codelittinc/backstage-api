@@ -42,7 +42,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'creates the requirements' do
       VCR.use_cassette('clients#team-maker#list') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(Requirement, :count).by(8)
@@ -51,7 +51,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
 
     it 'does not duplicate the requirement' do
       VCR.use_cassette('clients#team-maker#does-not-duplicate') do
-        StatementOfWork.all.each do |sow|
+        StatementOfWork.find_each do |sow|
           TeamMakerProjectCreator.new(sow).call
           TeamMakerProjectCreator.new(sow).call
         end
@@ -63,7 +63,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'creates the assignments' do
       VCR.use_cassette('clients#team-maker#list') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(Assignment, :count).by(9)
@@ -73,7 +73,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'does not duplicate the assignments' do
       VCR.use_cassette('clients#team-maker#does-not-duplicate') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
             sow.reload
             TeamMakerProjectCreator.new(sow).call
@@ -85,7 +85,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'creates the assignments time off entries' do
       VCR.use_cassette('clients#team-maker#list') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(TimeOff, :count).by(152)
@@ -95,7 +95,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'does not duplicate the time off entries' do
       VCR.use_cassette('clients#team-maker#does-not-duplicate') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
             TeamMakerProjectCreator.new(sow).call
           end
@@ -106,7 +106,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'creates the time entries' do
       VCR.use_cassette('clients#team-maker#list') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(TimeEntry, :count).by(405)
@@ -116,7 +116,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
     it 'does not duplicate the time entries' do
       VCR.use_cassette('clients#team-maker#does-not-duplicate') do
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(TimeEntry, :count).by(405)
@@ -128,7 +128,7 @@ RSpec.describe TeamMakerProjectCreator, type: :service do
         create(:statement_of_work, :with_maintenance, id: 100)
 
         expect do
-          StatementOfWork.all.each do |sow|
+          StatementOfWork.find_each do |sow|
             TeamMakerProjectCreator.new(sow).call
           end
         end.to change(Requirement, :count).by(8)

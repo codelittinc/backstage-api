@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 
   def index
     active_only = filters_params[:active_only] == 'true'
-    @projects = Project.all.order(:name)
+    @projects = Project.order(:name)
     @projects = @projects.active_in_period(Time.zone.today, Time.zone.today) if active_only
   end
 
