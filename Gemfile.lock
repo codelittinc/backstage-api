@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/codelittinc/ruby_notifications_client.git
+  revision: c5cc3748708ae1bcc23f53dfe33ec467646b4068
+  specs:
+    ruby_notifications_client (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -326,6 +332,7 @@ DEPENDENCIES
   rubocop
   rubocop-factory_bot
   rubocop-rails
+  ruby_notifications_client!
   sassc-rails
   shoulda-matchers
   sidekiq
