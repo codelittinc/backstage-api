@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: %i[show update destroy]
 
   def index
-    @customers = Customer.all
+    @customers = Customer.order(:name)
   end
 
   def show; end
