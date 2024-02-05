@@ -10,7 +10,8 @@ RSpec.describe StatementOfWorksController, type: :controller do
 
   let(:valid_attributes) do
     obj = attributes_for(:statement_of_work, project_id: project.id)
-    obj[:contract_model_attributes] = attributes_for(:maintenance_contract_model, type: 'MaintenanceContractModel')
+    obj[:contract_model_attributes] =
+      attributes_for(:maintenance_contract_model, contract_model_type: 'MaintenanceContractModel')
     obj
   end
 
