@@ -12,7 +12,7 @@ class StatementOfWorksController < ApplicationController
 
   def create
     @statement_of_work = @project.statement_of_works.new(statement_of_work_params.except(:contract_model_attributes))
-    build_contract_model
+    update_or_build_contract_model
 
     if @statement_of_work.save
       render :show, status: :created, location: [@project, @statement_of_work]
@@ -22,10 +22,14 @@ class StatementOfWorksController < ApplicationController
   end
 
   def update
-    if @statement_of_work.update(statement_of_work_params)
-      render :show, status: :ok, location: [@project, @statement_of_work]
-    else
-      render json: @statement_of_work.errors, status: :unprocessable_entity
+    ApplicationRecord.transaction do
+      update_or_build_contract_model
+
+      if @statement_of_work.update(statement_of_work_params.except(:contract_model_attributes))
+        render :show, status: :ok, location: [@project, @statement_of_work]
+      else
+        render json: @statement_of_work.errors, status: :unprocessable_entity
+      end
     end
   end
 
@@ -58,21 +62,28 @@ class StatementOfWorksController < ApplicationController
         # For FixedBidContractModel
         :fixed_timeline,
         # For the polymorphic association type
-        :type
+        :contract_model_type
       ]
     )
   end
 
-  def build_contract_model
+  def update_or_build_contract_model
     contract_model_params = statement_of_work_params[:contract_model_attributes]
     return unless contract_model_params
 
-    contract_model_class = contract_model_params[:type].constantize
+    # Extract the type and id from params and then remove the type field
+    contract_model_type = contract_model_params[:contract_model_type]
 
-    contract_model_params.delete(:type)
+    contract_model_params.delete(:contract_model_type)
+    contract_model_id = contract_model_params[:id]
 
-    contract_model = contract_model_class.new(contract_model_params)
-
-    @statement_of_work.contract_model = contract_model
+    # Find or initialize the contract model
+    if contract_model_id
+      contract_model = contract_model_type.constantize.find(contract_model_id)
+      contract_model.assign_attributes(contract_model_params)
+    else
+      contract_model = contract_model_type.constantize.new(contract_model_params)
+      @statement_of_work.contract_model = contract_model
+    end
   end
 end
