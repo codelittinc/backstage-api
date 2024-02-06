@@ -27,4 +27,8 @@ class Customer < ApplicationRecord
   encrypts :source_control_token
   encrypts :notifications_token
   encrypts :ticket_tracking_system_token
+
+  def should_generate_new_friendly_id?
+    true
+  end
 end
