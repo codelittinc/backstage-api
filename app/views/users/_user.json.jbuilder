@@ -10,7 +10,7 @@ json.profession user.profession, partial: 'professions/profession', as: :profess
 json.permissions user.permissions, partial: 'permissions/permission', as: :permission
 
 # Render the salaries partial for each salary
-json.salaries user.salaries, partial: 'salaries/salary', as: :salary
+# json.salaries user.salaries, partial: 'salaries/salary', as: :salary
 
 # Render the user_service_identifiers partial for each identifier
 json.user_service_identifiers user.user_service_identifiers,
