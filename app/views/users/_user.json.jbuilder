@@ -15,3 +15,5 @@ json.permissions user.permissions, partial: 'permissions/permission', as: :permi
 # Render the user_service_identifiers partial for each identifier
 json.user_service_identifiers user.user_service_identifiers,
                               partial: 'user_service_identifiers/user_service_identifier', as: :user_service_identifier
+
+json.user_skills user.user_skills, partial: 'user_skills/user_skill', as: :user_skill
