@@ -84,7 +84,8 @@ class TeamMakerProjectCreator < ApplicationService
     @professions ||= {
       'Engineering' => Profession.find_by(name: 'Engineer'),
       'Project Management' => Profession.find_by(name: 'Project Manager'),
-      'Design' => Profession.find_by(name: 'Designer')
+      'Design' => Profession.find_by(name: 'Designer'),
+      'UAT' => Profession.find_by(name: 'UX Researcher')
     }
   end
 
