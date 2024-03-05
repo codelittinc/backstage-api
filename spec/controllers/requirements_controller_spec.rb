@@ -17,13 +17,29 @@ RSpec.describe RequirementsController, type: :controller do
   end
 
   describe 'GET #index' do
-    context 'when there are requirements in the period' do
-      it 'returns the requirements' do
-        create_list(:requirement, 2, statement_of_work:)
+    let(:secondary_statement_of_work) { create(:statement_of_work, project:) }
+
+    before do
+      create_list(:requirement, 2, statement_of_work:)
+      create_list(:requirement, 5, statement_of_work: secondary_statement_of_work)
+    end
+
+    context 'when given the project id' do
+      it 'returns all the requirements of that project' do
         get :index,
             params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days, project_id: project.id }
 
-        expect(response.parsed_body.size).to eq(2)
+        expect(response.parsed_body.size).to eq(7)
+      end
+    end
+
+    context 'when given the statement of work id' do
+      it 'returns all the requirements of that statement of work' do
+        get :index,
+            params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days,
+                      statement_of_work_id: secondary_statement_of_work.id }
+
+        expect(response.parsed_body.size).to eq(5)
       end
     end
   end

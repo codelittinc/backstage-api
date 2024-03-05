@@ -4,8 +4,16 @@ class RequirementsController < ApplicationController
   before_action :set_requirement, only: %i[show update destroy]
 
   def index
-    project = Project.find(requirements_filter[:project_id])
-    statement_of_works_ids = project.statement_of_works.map(&:id)
+    if requirements_filter[:project_id].present?
+      project = Project.find(requirements_filter[:project_id])
+      statement_of_works_ids = project.statement_of_works.map(&:id)
+    elsif requirements_filter[:statement_of_work_id].present?
+      statement_of_works_ids = [requirements_filter[:statement_of_work_id]]
+    else
+      render json: { error: 'project_id or statement_of_work_id is required' }, status: :bad_request
+      return
+    end
+
     @requirements = Requirement.where(statement_of_work_id: statement_of_works_ids).active_in_period(
       requirements_filter[:start_date], requirements_filter[:end_date]
     )
@@ -46,6 +54,6 @@ class RequirementsController < ApplicationController
   end
 
   def requirements_filter
-    params.permit(:project_id, :start_date, :end_date)
+    params.permit(:project_id, :statement_of_work_id, :start_date, :end_date)
   end
 end
