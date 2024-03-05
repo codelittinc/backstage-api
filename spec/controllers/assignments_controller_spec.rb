@@ -13,15 +13,34 @@ RSpec.describe AssignmentsController, type: :controller do
   end
 
   describe 'GET #index' do
-    it 'returns a success response' do
-      requirement = create(:requirement)
-      project = requirement.statement_of_work.project
+    let(:project) { create(:project) }
+    let(:statement_of_work) { create(:statement_of_work, :with_maintenance, project:) }
+    let(:secondary_statement_of_work) { create(:statement_of_work, project:) }
+    let(:requirement) { create(:requirement, statement_of_work:) }
+    let(:secondary_requirement) { create(:requirement, statement_of_work: secondary_statement_of_work) }
 
+    before do
       create_list(:assignment, 2, coverage: 0.5, requirement:)
-      get :index,
-          params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days, project_id: project.id }
+      create_list(:assignment, 5, coverage: 0.5, requirement: secondary_requirement)
+    end
 
-      expect(response.parsed_body.size).to eq(2)
+    context 'when given the project id' do
+      it 'returns all the assignments of that project' do
+        get :index,
+            params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days, project_id: project.id }
+
+        expect(response.parsed_body.size).to eq(7)
+      end
+    end
+
+    context 'when given the statement of work id' do
+      it 'returns all the requirements of that statement of work' do
+        get :index,
+            params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days,
+                      statement_of_work_id: secondary_statement_of_work.id }
+
+        expect(response.parsed_body.size).to eq(5)
+      end
     end
   end
 
