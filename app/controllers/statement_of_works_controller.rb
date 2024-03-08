@@ -5,7 +5,7 @@ class StatementOfWorksController < ApplicationController
   before_action :set_statement_of_work, only: %i[show update destroy]
 
   def index
-    @statement_of_works = @project.statement_of_works.order(:start_date)
+    @statement_of_works = @project.statement_of_works.order(:start_date).reverse
   end
 
   def show; end
