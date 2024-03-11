@@ -3,18 +3,14 @@
 class TimeEntriesController < ApplicationController
   before_action :set_time_entry, only: %i[show update destroy]
 
-  # GET /time_entries
-  # GET /time_entries.json
   def index
-    @time_entries = TimeEntry.all
+    @time_entries = TimeEntry.where(statement_of_work_id: filter_params[:statement_of_work_ids]).active_in_period(
+      filter_params[:start_date], filter_params[:end_date]
+    )
   end
 
-  # GET /time_entries/1
-  # GET /time_entries/1.json
   def show; end
 
-  # POST /time_entries
-  # POST /time_entries.json
   def create
     @time_entry = TimeEntry.new(time_entry_params)
 
@@ -25,8 +21,6 @@ class TimeEntriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /time_entries/1
-  # PATCH/PUT /time_entries/1.json
   def update
     if @time_entry.update(time_entry_params)
       render :show, status: :ok, location: @time_entry
@@ -35,21 +29,21 @@ class TimeEntriesController < ApplicationController
     end
   end
 
-  # DELETE /time_entries/1
-  # DELETE /time_entries/1.json
   def destroy
     @time_entry.destroy
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_time_entry
     @time_entry = TimeEntry.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def time_entry_params
-    params.fetch(:time_entry, {})
+    params.fetch(:time_entry).permit(:statement_of_work_id, :user_id, :date, :hours)
+  end
+
+  def filter_params
+    params.require(:filters).permit(:start_date, :end_date, statement_of_work_ids: [])
   end
 end

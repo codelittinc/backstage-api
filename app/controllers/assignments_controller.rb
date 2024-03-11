@@ -7,11 +7,8 @@ class AssignmentsController < ApplicationController
     if assignments_filter[:project_id].present?
       project = Project.find(assignments_filter[:project_id])
       statement_of_works_ids = project.statement_of_works.map(&:id)
-    elsif assignments_filter[:statement_of_work_id].present?
-      statement_of_works_ids = [assignments_filter[:statement_of_work_id]]
-    else
-      render json: { error: 'project_id or statement_of_work_id is required' }, status: :bad_request
-      return
+    elsif assignments_filter[:statement_of_work_ids].present?
+      statement_of_works_ids = assignments_filter[:statement_of_work_ids]
     end
 
     requirements = Requirement.where(statement_of_work_id: statement_of_works_ids).active_in_period(
@@ -56,6 +53,6 @@ class AssignmentsController < ApplicationController
   end
 
   def assignments_filter
-    params.permit(:project_id, :statement_of_work_id, :start_date, :end_date)
+    params.require(:filters).permit(:project_id, :start_date, :end_date, statement_of_work_ids: [])
   end
 end
