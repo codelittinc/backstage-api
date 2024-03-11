@@ -26,7 +26,7 @@ FactoryBot.define do
   factory :time_entry do
     date { '2023-10-29' }
     hours { 8 }
-    user
-    statement_of_work
+    user { FactoryBot.create(:user) }
+    statement_of_work { FactoryBot.create(:statement_of_work) }
   end
 end

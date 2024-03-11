@@ -28,4 +28,6 @@ class TimeEntry < ApplicationRecord
 
   validates :hours, presence: true
   validates :date, presence: true
+
+  scope :active_in_period, ->(start_date, end_date) { where('date <= ? AND date >= ?', end_date, start_date) }
 end
