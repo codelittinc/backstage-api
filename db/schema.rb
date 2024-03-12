@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_12_175232) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_12_200929) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -127,6 +127,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_12_175232) do
     t.boolean "sync_source_control", default: false, null: false
     t.string "logo_background_color"
     t.index ["customer_id"], name: "index_projects_on_customer_id"
+    t.index ["name"], name: "index_projects_on_name", unique: true
     t.index ["slug"], name: "index_projects_on_slug", unique: true
   end
 
