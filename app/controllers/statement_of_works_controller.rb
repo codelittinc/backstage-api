@@ -47,7 +47,7 @@ class StatementOfWorksController < ApplicationController
   private
 
   def set_project
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find(params[:project_id]) if params[:project_id]
   end
 
   def set_statement_of_work
