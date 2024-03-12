@@ -14,8 +14,9 @@
 #
 # Indexes
 #
-#  index_time_entries_on_statement_of_work_id  (statement_of_work_id)
-#  index_time_entries_on_user_id               (user_id)
+#  index_time_entries_on_date_and_user_id_and_sow_id  (date,user_id,statement_of_work_id) UNIQUE
+#  index_time_entries_on_statement_of_work_id         (statement_of_work_id)
+#  index_time_entries_on_user_id                      (user_id)
 #
 # Foreign Keys
 #

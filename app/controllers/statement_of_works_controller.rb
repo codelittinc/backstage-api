@@ -5,7 +5,13 @@ class StatementOfWorksController < ApplicationController
   before_action :set_statement_of_work, only: %i[show update destroy]
 
   def index
-    @statement_of_works = @project.statement_of_works.order(:start_date).reverse
+    if @project
+      @statement_of_works = @project.statement_of_works
+    elsif filter_params[:start_date].present? && filter_params[:end_date].present?
+      @statement_of_works = StatementOfWork.active_in_period(filter_params[:start_date], filter_params[:end_date])
+    end
+
+    @statement_of_works = @statement_of_works.order(:start_date).reverse
   end
 
   def show; end
@@ -15,7 +21,7 @@ class StatementOfWorksController < ApplicationController
     update_or_build_contract_model
 
     if @statement_of_work.save
-      render :show, status: :created, location: [@project, @statement_of_work]
+      render :show, status: :created, location: [@statement_of_work]
     else
       render json: @statement_of_work.errors, status: :unprocessable_entity
     end
@@ -26,7 +32,7 @@ class StatementOfWorksController < ApplicationController
       update_or_build_contract_model
 
       if @statement_of_work.update(statement_of_work_params.except(:contract_model_attributes))
-        render :show, status: :ok, location: [@project, @statement_of_work]
+        render :show, status: :ok, location: [@statement_of_work]
       else
         render json: @statement_of_work.errors, status: :unprocessable_entity
       end
@@ -41,7 +47,7 @@ class StatementOfWorksController < ApplicationController
   private
 
   def set_project
-    @project = Project.friendly.find(params[:project_id])
+    @project = Project.friendly.find_by(id: params[:project_id])
   end
 
   def set_statement_of_work
@@ -65,6 +71,10 @@ class StatementOfWorksController < ApplicationController
         :contract_model_type
       ]
     )
+  end
+
+  def filter_params
+    params.require(:filters).permit(:start_date, :end_date)
   end
 
   def update_or_build_contract_model

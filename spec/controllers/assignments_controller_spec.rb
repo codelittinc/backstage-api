@@ -27,7 +27,8 @@ RSpec.describe AssignmentsController, type: :controller do
     context 'when given the project id' do
       it 'returns all the assignments of that project' do
         get :index,
-            params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days, project_id: project.id }
+            params: { filters: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days,
+                                 project_id: project.id } }
 
         expect(response.parsed_body.size).to eq(7)
       end
@@ -36,8 +37,8 @@ RSpec.describe AssignmentsController, type: :controller do
     context 'when given the statement of work id' do
       it 'returns all the requirements of that statement of work' do
         get :index,
-            params: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days,
-                      statement_of_work_id: secondary_statement_of_work.id }
+            params: { filters: { start_date: Time.zone.today - 6.days, end_date: Time.zone.today + 6.days,
+                                 statement_of_work_ids: [secondary_statement_of_work.id] } }
 
         expect(response.parsed_body.size).to eq(5)
       end

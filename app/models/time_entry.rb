@@ -14,8 +14,9 @@
 #
 # Indexes
 #
-#  index_time_entries_on_statement_of_work_id  (statement_of_work_id)
-#  index_time_entries_on_user_id               (user_id)
+#  index_time_entries_on_date_and_user_id_and_sow_id  (date,user_id,statement_of_work_id) UNIQUE
+#  index_time_entries_on_statement_of_work_id         (statement_of_work_id)
+#  index_time_entries_on_user_id                      (user_id)
 #
 # Foreign Keys
 #
@@ -28,6 +29,8 @@ class TimeEntry < ApplicationRecord
 
   validates :hours, presence: true
   validates :date, presence: true
+
+  validates :date, uniqueness: { scope: %i[user_id statement_of_work_id] }
 
   scope :active_in_period, ->(start_date, end_date) { where('date <= ? AND date >= ?', end_date, start_date) }
 end

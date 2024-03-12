@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   resources :requirements
-  resources :projects do
-    resources :statement_of_works
-  end
+  resources :projects
+
+  resources :statement_of_works
 
   namespace :analytics do
     resources :time_entries, only: [:index]
