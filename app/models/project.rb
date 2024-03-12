@@ -21,6 +21,7 @@
 # Indexes
 #
 #  index_projects_on_customer_id  (customer_id)
+#  index_projects_on_name         (name) UNIQUE
 #  index_projects_on_slug         (slug) UNIQUE
 #
 # Foreign Keys
@@ -35,7 +36,7 @@ class Project < ApplicationRecord
   has_many :issues, dependent: :destroy
   has_many :statement_of_works, dependent: :destroy
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :billable, inclusion: { in: [true, false] }
   validates :slack_channel, presence: true
 

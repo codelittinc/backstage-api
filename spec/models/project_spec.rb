@@ -21,6 +21,7 @@
 # Indexes
 #
 #  index_projects_on_customer_id  (customer_id)
+#  index_projects_on_name         (name) UNIQUE
 #  index_projects_on_slug         (slug) UNIQUE
 #
 # Foreign Keys
