@@ -16,4 +16,8 @@ class Permission < ApplicationRecord
 
   validates :target, presence: true
   validates :ability, presence: true
+
+  def name
+    "#{target} - #{ability}"
+  end
 end
