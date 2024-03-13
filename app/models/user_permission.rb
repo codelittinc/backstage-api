@@ -28,6 +28,8 @@ class UserPermission < ApplicationRecord
   validates :user, presence: { message: 'must be present' }
   validates :permission, presence: { message: 'must be present' }
 
+  validates :user_id, uniqueness: { scope: :permission_id, message: 'already has this permission' }
+
   def name
     [user&.email, permission&.name].join(' - ')
   end

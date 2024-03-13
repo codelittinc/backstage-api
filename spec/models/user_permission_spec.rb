@@ -27,5 +27,16 @@ RSpec.describe UserPermission, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
     it { should belong_to(:permission) }
+
+    it 'validates uniqueness of user_id scoped to permission_id' do
+      permission = create(:permission)
+      user1 = create(:user)
+
+      user_permission1 = create(:user_permission, user: user1, permission:)
+      expect(user_permission1).to be_valid
+      user_permission2 = build(:user_permission, user: user1, permission:)
+      user_permission2.save
+      expect(user_permission2).to be_invalid
+    end
   end
 end
