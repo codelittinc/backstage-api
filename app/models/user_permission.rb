@@ -27,4 +27,8 @@ class UserPermission < ApplicationRecord
 
   validates :user, presence: { message: 'must be present' }
   validates :permission, presence: { message: 'must be present' }
+
+  def name
+    [user&.email, permission&.name].join(' - ')
+  end
 end
