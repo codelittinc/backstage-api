@@ -2,8 +2,9 @@
 
 module Analytics
   class TimeEntriesAnalytics
-    def initialize(project, start_date, end_date)
+    def initialize(project, statement_of_work, start_date, end_date)
       @project = project
+      @statement_of_work = statement_of_work
       @start_date = start_date.to_datetime.beginning_of_day
       @end_date = end_date.to_datetime.end_of_day
       @worked_hours_cache = {} # Cache for memoization
@@ -83,12 +84,13 @@ module Analytics
 
       @requirements = if @project
                         Requirement.where(id: @project.statement_of_works.map(&:requirements)
-                                            .flatten.map(&:id)).active_in_period(
-                                              @start_date, @end_date
-                                            )
+                                            .flatten.map(&:id))
+                      elsif @statement_of_work
+                        Requirement.where(id: @statement_of_work.requirements.map(&:id))
                       else
-                        Requirement.all.active_in_period(@start_date, @end_date)
+                        Requirement.all
                       end
+      @requirements.active_in_period(@start_date, @end_date)
     end
 
     def clean_worked_hours(assignment)

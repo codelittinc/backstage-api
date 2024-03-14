@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StatementOfWorksController < ApplicationController
-  before_action :set_project
+  before_action :set_project, only: %i[index create]
   before_action :set_statement_of_work, only: %i[show update destroy]
 
   def index
@@ -51,7 +51,7 @@ class StatementOfWorksController < ApplicationController
   end
 
   def set_statement_of_work
-    @statement_of_work = @project.statement_of_works.find(params[:id])
+    @statement_of_work = StatementOfWork.find(params[:id])
   end
 
   def statement_of_work_params
