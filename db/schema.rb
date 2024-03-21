@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_12_200929) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_21_110927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -20,8 +20,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_12_200929) do
     t.bigint "requirement_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.bigint "user_id", null: false
     t.index ["requirement_id"], name: "index_assignments_on_requirement_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
@@ -137,8 +137,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_12_200929) do
     t.float "coverage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.index ["profession_id"], name: "index_requirements_on_profession_id"
     t.index ["statement_of_work_id"], name: "index_requirements_on_statement_of_work_id"
   end
