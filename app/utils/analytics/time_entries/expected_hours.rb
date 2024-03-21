@@ -16,8 +16,12 @@ module Analytics
       end
 
       def entries
-        days = ([@start_date, @assignment.start_date].max..[@end_date, @assignment.end_date].min).filter do |d|
-          !d.sunday? && !d.saturday?
+        start_date = [@start_date, @assignment.start_date].max
+        end_date = [@end_date, @assignment.end_date].min
+
+        # Convert the range into an array of dates
+        days = (start_date.to_date..end_date.to_date).to_a.select do |d|
+          d.wday.between?(1, 5) # Exclude Saturday (6) and Sunday (0)
         end
 
         days.map do |day|
