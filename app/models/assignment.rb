@@ -36,15 +36,17 @@ class Assignment < ApplicationRecord
   end
 
   def expected_cost_in_period(start_date_filter, end_date_filter)
-    work_days = ([start_date, start_date_filter].max...[end_date, end_date_filter].min).select do |date|
-      (1..5).cover?(date.wday)
+    period_start = [start_date, start_date_filter].max
+    period_end = [end_date, end_date_filter].min
+
+    work_days = (period_start.to_date...period_end.to_date).to_a.select do |date|
+      date.wday.between?(1, 5)
     end
 
-    work_days.map do |work_day|
+    work_days.sum do |work_day|
       salary = user.salary_on_date(work_day)
-
       8 * (salary&.hourly_cost || 0)
-    end.sum * coverage
+    end * coverage
   end
 
   def executed_cost_in_period(start_date_filter, end_date_filter)
