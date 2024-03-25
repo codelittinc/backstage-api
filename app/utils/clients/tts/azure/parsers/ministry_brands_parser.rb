@@ -40,7 +40,11 @@ module Clients
             'Task'
           end
 
-          def issue_id
+          def reported_at
+            json.dig('fields', 'System.CreatedDate')
+          end
+
+          def tts_id
             json['id'].to_s
           end
         end

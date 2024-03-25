@@ -8,6 +8,7 @@ module Clients
           issues_list = ::Request.post(url, customer_authorization, body)
           urls = issues_list['workItems'].pluck('url')
           work_items = urls.map { |url| ::Request.get(url, customer_authorization) }
+
           parsed_items = work_items.map do |work_item|
             parser.new(work_item, project)
           end
@@ -16,7 +17,7 @@ module Clients
         end
 
         def filtered_items(parsed_items)
-          parsed_items.select { |item| item.issue_type == 'Product Backlog Item' }
+          parsed_items
         end
 
         def parser
