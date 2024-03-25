@@ -7,16 +7,21 @@ class IssuesCreator < ApplicationService
   end
 
   def call
-    @project.issues.destroy_all
+    ActiveRecord::Base.transaction do
+      @project.issues.destroy_all
 
-    issues = issues_client_class.new(@project).list
-    issues.map do |issue|
-      next unless issue.user
+      issues = issues_client_class.new(@project).list
+      issues.map do |issue|
+        next unless issue.user
 
-      Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
-                    closed_date: issue.closed_date, issue_id: issue.issue_id, title: issue.title,
-                    issue_type: issue.issue_type)
+        Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
+                      closed_date: issue.closed_date, title: issue.title,
+                      issue_type: issue.issue_type, reported_at: issue.reported_at, tts_id: issue.tts_id)
+      end
     end
+  rescue StandardError => e
+    Rails.logger.error("Failed to process issues due to error: #{e.message}")
+    raise
   end
 
   private

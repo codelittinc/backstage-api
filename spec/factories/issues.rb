@@ -8,12 +8,14 @@
 #  closed_date :datetime
 #  effort      :float
 #  issue_type  :string
+#  reported_at :datetime
 #  state       :string
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  issue_id    :string
 #  project_id  :bigint           not null
+#  tts_id      :string
 #  user_id     :bigint           not null
 #
 # Indexes
