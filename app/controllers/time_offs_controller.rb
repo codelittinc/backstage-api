@@ -15,10 +15,10 @@ class TimeOffsController < ApplicationController
     msg = success ? { id: time_off&.id } : 'The time of request creation failed'
 
     render json: msg, status: success ? :ok : :unprocessable_entity
-    rescue StandardError => e
-      logger.fatal "Error: TimeOffCreator: #{e.message}, Params: #{time_off_params}"
-    
-      render json: { message: e.message }, status: :internal_server_error
+  rescue StandardError => e
+    logger.fatal "Error: TimeOffCreator: #{e.message}, Params: #{time_off_params}"
+
+    render json: { message: e.message }, status: :internal_server_error
   end
 
   def destroy
