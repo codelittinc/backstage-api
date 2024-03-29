@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::API
   before_action :set_default_response_format
-
   before_action :authenticate
   attr_reader :current_user
 

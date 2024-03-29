@@ -13,6 +13,7 @@ class TimeOffType < ApplicationRecord
   VACATION_TYPE = 'vacation'
   SICK_LEAVE_TYPE = 'sick leave'
   ERRAND_TYPE = 'errand'
+  UNPAID_LEAVE = 'unpaid leave'
 
-  validates :name, presence: true, inclusion: { in: [VACATION_TYPE, SICK_LEAVE_TYPE, ERRAND_TYPE] }
+  validates :name, presence: true, inclusion: { in: [VACATION_TYPE, SICK_LEAVE_TYPE, ERRAND_TYPE, UNPAID_LEAVE] }
 end
