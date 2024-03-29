@@ -72,6 +72,19 @@ class User < ApplicationRecord
              identifiers:)
   }
 
+  def self.by_name(full_name)
+    name_parts = full_name.split
+    first_name = name_parts.first
+    last_name_parts = name_parts[1..].join(' ')
+    query = User.where('unaccent(lower(first_name)) = unaccent(lower(?))', first_name.downcase)
+
+    last_names_condition = last_name_parts.split.map do |part|
+      "unaccent(lower(last_name)) LIKE unaccent(lower('%#{part}%'))"
+    end.join(' OR ')
+
+    query.where(last_names_condition)
+  end
+
   def should_generate_new_friendly_id?
     true
   end

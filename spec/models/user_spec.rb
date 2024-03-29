@@ -103,4 +103,19 @@ RSpec.describe User, type: :model do
       expect(User.by_external_identifier(user.email).first).to eql(user)
     end
   end
+
+  context '#by_name' do
+    let(:full_name) { 'Pedro Vieira Guimarães' }
+
+    context 'when the user exists' do
+      it 'returns the user by the name' do
+        user = create(:user, first_name: 'Pedro', last_name: 'Vieira')
+        expect(User.by_name(full_name).first).to eql(user)
+      end
+    end
+
+    it 'returns an active record query' do
+      expect(User.by_name(full_name)).to be_an(ActiveRecord::Relation)
+    end
+  end
 end

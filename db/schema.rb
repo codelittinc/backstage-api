@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_25_040617) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_29_180055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
+  enable_extension "unaccent"
 
   create_table "assignments", force: :cascade do |t|
     t.float "coverage"
