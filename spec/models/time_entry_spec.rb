@@ -35,4 +35,25 @@ RSpec.describe TimeEntry, type: :model do
     it { should belong_to(:statement_of_work) }
     it { should belong_to(:user) }
   end
+
+  context 'assignments' do
+    it 'is valid if there is an assignment active for the sow' do
+      start_date = Time.zone.today - 1.day
+      end_date = Time.zone.today + 1.day
+
+      assignment = create(:assignment, start_date:, end_date:)
+      sow_id = assignment.requirement.statement_of_work.id
+      time_entry = TimeEntry.new(date: Time.zone.today, hours: 8, statement_of_work_id: sow_id, user_id: assignment.user.id)
+
+      expect(time_entry).to be_valid
+    end
+
+    it 'is invalid if there is no assignment active for the sow' do
+      user = create(:user)
+      sow = create(:statement_of_work)
+      time_entry = TimeEntry.new(date: Time.zone.today, hours: 8, statement_of_work_id: sow.id, user_id: user.id)
+
+      expect(time_entry).not_to be_valid
+    end
+  end
 end
