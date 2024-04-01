@@ -31,23 +31,23 @@ class TimeEntry < ApplicationRecord
   validates :date, presence: true
 
   validates :date, uniqueness: { scope: %i[user_id statement_of_work_id] }
-  validate :assignment_must_exist_in_period
+#  validate :assignment_must_exist_in_period
 
   scope :active_in_period, ->(start_date, end_date) { where('date <= ? AND date >= ?', end_date, start_date) }
 
-  def assignment_must_exist_in_period
-    assignment_exists = Assignment.joins(:requirement)
-                                  .where(user_id:)
-                                  .where(requirements: { statement_of_work_id: })
-                                  .exists?(['? >= assignments.start_date AND ? <= assignments.end_date', date, date])
-
-    # If not, add an error.
-    return if assignment_exists
-
-    errors.add(:base,
-               "There is no valid assignment for the user
-                and statement of work in this period: #{user.name}
-                 date:#{date} for the SOW: #{statement_of_work.name}
-                  in the project #{statement_of_work.project.name}")
-  end
+#  def assignment_must_exist_in_period
+#    assignment_exists = Assignment.joins(:requirement)
+#                                  .where(user_id:)
+#                                  .where(requirements: { statement_of_work_id: })
+#                                  .exists?(['? >= assignments.start_date AND ? <= assignments.end_date', date, date])
+#
+#    # If not, add an error.
+#    return if assignment_exists
+#
+#    errors.add(:base,
+#               "There is no valid assignment for the user
+#                and statement of work in this period: #{user.name}
+#                 date:#{date} for the SOW: #{statement_of_work.name}
+#                  in the project #{statement_of_work.project.name}")
+#  end
 end
