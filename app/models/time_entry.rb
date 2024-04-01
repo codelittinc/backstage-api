@@ -45,6 +45,9 @@ class TimeEntry < ApplicationRecord
     return if assignment_exists
 
     errors.add(:base,
-               'There is no valid assignment for the user and statement of work in this period.')
+               "There is no valid assignment for the user
+                and statement of work in this period: #{user.name}
+                 date:#{date} for the SOW: #{statement_of_work.name}
+                  in the project #{statement_of_work.project.name}")
   end
 end
