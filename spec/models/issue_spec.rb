@@ -5,6 +5,7 @@
 # Table name: issues
 #
 #  id          :bigint           not null, primary key
+#  bug         :boolean          default(FALSE), not null
 #  closed_date :datetime
 #  effort      :float
 #  issue_type  :string
@@ -16,17 +17,15 @@
 #  issue_id    :string
 #  project_id  :bigint           not null
 #  tts_id      :string
-#  user_id     :bigint           not null
+#  user_id     :bigint
 #
 # Indexes
 #
 #  index_issues_on_project_id  (project_id)
-#  index_issues_on_user_id     (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (project_id => projects.id)
-#  fk_rails_...  (user_id => users.id)
 #
 require 'rails_helper'
 

@@ -12,12 +12,12 @@ class IssuesCreator < ApplicationService
 
       issues = issues_client_class.new(@project).list
       issues.map do |issue|
-        next unless issue.user
+        next unless issue.valid?
 
         Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
                       closed_date: issue.closed_date, title: issue.title,
-                      issue_type: issue.issue_type, reported_at: issue.reported_at, tts_id: issue.tts_id)
-      end
+                      issue_type: issue.issue_type, reported_at: issue.reported_at, tts_id: issue.tts_id, bug: issue.bug?)
+      end.compact
     end
   rescue StandardError => e
     Rails.logger.error("Failed to process issues due to error: #{e.message}")

@@ -12,6 +12,10 @@ module Clients
             @project = project
           end
 
+          def valid?
+            !title.match?(/\[QA\]/i)
+          end
+
           def effort
             json['fields']['Microsoft.VSTS.Scheduling.Effort']&.to_i
           end
@@ -34,10 +38,12 @@ module Clients
           end
 
           def issue_type
-            return 'Bug' if title.match?(/.*Bug.*/i)
-            return 'Product Backlog Item' if json.dig('fields', 'System.WorkItemType') == 'Product Backlog Item'
+            work_item_type = json.dig('fields', 'System.WorkItemType')
 
-            'Task'
+            return 'PBI' if work_item_type == 'Product Backlog Item'
+            return 'feature' if work_item_type == 'Feature'
+
+            'task' if work_item_type == 'Task'
           end
 
           def reported_at
@@ -46,6 +52,10 @@ module Clients
 
           def tts_id
             json['id'].to_s
+          end
+
+          def bug?
+            title.match?(/.*Bug.*/i)
           end
         end
       end

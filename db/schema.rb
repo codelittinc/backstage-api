@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_29_180055) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_10_162146) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -68,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_180055) do
 
   create_table "issues", force: :cascade do |t|
     t.float "effort"
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.string "state"
     t.datetime "closed_date"
     t.datetime "created_at", null: false
@@ -79,8 +78,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_180055) do
     t.string "title"
     t.datetime "reported_at"
     t.string "tts_id"
+    t.boolean "bug", default: false, null: false
     t.index ["project_id"], name: "index_issues_on_project_id"
-    t.index ["user_id"], name: "index_issues_on_user_id"
   end
 
   create_table "maintenance_contract_models", force: :cascade do |t|
@@ -298,7 +297,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_29_180055) do
   add_foreign_key "assignments", "users"
   add_foreign_key "certifications", "users"
   add_foreign_key "issues", "projects"
-  add_foreign_key "issues", "users"
   add_foreign_key "payments", "statement_of_works"
   add_foreign_key "projects", "customers"
   add_foreign_key "requirements", "professions"
