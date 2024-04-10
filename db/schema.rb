@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_10_162146) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_10_173008) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -46,6 +47,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_162146) do
     t.string "ticket_tracking_system"
     t.index ["name"], name: "index_customers_on_name", unique: true
     t.index ["slug"], name: "index_customers_on_slug", unique: true
+  end
+
+  create_table "dynamic_datasets", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_dynamic_datasets_on_project_id"
   end
 
   create_table "fixed_bid_contract_models", force: :cascade do |t|
@@ -297,6 +307,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_162146) do
   add_foreign_key "assignments", "requirements"
   add_foreign_key "assignments", "users"
   add_foreign_key "certifications", "users"
+  add_foreign_key "dynamic_datasets", "projects"
   add_foreign_key "issues", "projects"
   add_foreign_key "payments", "statement_of_works"
   add_foreign_key "projects", "customers"
