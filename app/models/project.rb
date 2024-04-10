@@ -35,6 +35,7 @@ class Project < ApplicationRecord
   belongs_to :customer
   has_many :issues, dependent: :destroy
   has_many :statement_of_works, dependent: :destroy
+  has_many :dynamic_datasets, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :billable, inclusion: { in: [true, false] }

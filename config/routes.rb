@@ -4,6 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
+  resources :dynamic_datasets
   resources :time_offs, only: [:create]
   post 'time_off/destroy', to: 'time_offs#destroy'
   resources :time_entries

@@ -13,6 +13,10 @@ module Clients
             @asana_users = asana_users
           end
 
+          def valid?
+            true
+          end
+
           def effort
             json.dig('data', 'custom_fields').find { |field| field['name'] == 'Story Points' }['number_value']
           end
@@ -41,6 +45,16 @@ module Clients
           def issue_type; end
 
           def issue_id; end
+
+          def reported_at; end
+
+          def tts_id; end
+
+          def parent_tts_id; end
+
+          def bug?
+            false
+          end
         end
       end
     end
