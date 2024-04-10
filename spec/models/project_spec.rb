@@ -39,5 +39,6 @@ RSpec.describe Project, type: :model do
   context 'associations' do
     it { should have_many(:issues).dependent(:destroy) }
     it { should have_many(:statement_of_works).dependent(:destroy) }
+    it { should have_many(:dynamic_datasets).dependent(:destroy) }
   end
 end
