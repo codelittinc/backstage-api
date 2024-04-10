@@ -57,6 +57,10 @@ module Clients
           def bug?
             title.match?(/.*Bug.*/i)
           end
+
+          def parent_tts_id
+            json.dig('fields', 'System.Parent')
+          end
         end
       end
     end

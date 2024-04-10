@@ -79,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_162146) do
     t.datetime "reported_at"
     t.string "tts_id"
     t.boolean "bug", default: false, null: false
+    t.string "parent_tts_id"
     t.index ["project_id"], name: "index_issues_on_project_id"
   end
 

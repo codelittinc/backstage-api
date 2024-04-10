@@ -7,7 +7,10 @@ module Clients
         def list
           issues_list = ::Request.post(url, customer_authorization, body)
           urls = issues_list['workItems'].pluck('url')
-          work_items = urls.map { |url| ::Request.get(url, customer_authorization) }
+          work_items = urls.each_with_index.map do |url, i|
+            url_expansion = "#{url}?api-version=6.0&$expand=relations"
+            ::Request.get(url_expansion, customer_authorization)
+          end
 
           parsed_items = work_items.map do |work_item|
             parser.new(work_item, project)
