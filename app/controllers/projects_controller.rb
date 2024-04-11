@@ -41,7 +41,8 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:id, :name, :customer_id, :billable, :slack_channel, :metadata, :logo_url,
-                                    :logo_background_color, :sync_source_control, :sync_ticket_tracking_system)
+                                    :logo_background_color, :sync_source_control, :sync_ticket_tracking_system,
+                                    :display_code_metrics, :display_tasks_metrics)
   end
 
   def filters_params

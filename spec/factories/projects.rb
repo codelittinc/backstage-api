@@ -6,6 +6,8 @@
 #
 #  id                          :bigint           not null, primary key
 #  billable                    :boolean          default(TRUE), not null
+#  display_code_metrics        :boolean          default(FALSE), not null
+#  display_tasks_metrics       :boolean          default(FALSE), not null
 #  logo_background_color       :string
 #  logo_url                    :string
 #  metadata                    :json

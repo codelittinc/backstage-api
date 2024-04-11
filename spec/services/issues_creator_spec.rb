@@ -19,7 +19,11 @@ RSpec.describe IssuesCreator, type: :service do
 
       let(:project) do
         create(:project, customer:,
-                         metadata: { azure_project_name: '1ES', area_path: '1ES\\DDC UI Refresh\\2023' })
+                         metadata: { azure_project_name: '1ES', area_paths: [
+                           '1ES\\DDC UI Refresh\\2023',
+                           '1ES\\DDC UI Refresh\\2024',
+                           '1ES\\DDC UI Refresh'
+                         ] })
       end
 
       it 'creates a list of issues' do
@@ -38,9 +42,13 @@ RSpec.describe IssuesCreator, type: :service do
           feature = issues.find { |issue| issue.tts_id == '163794' }
           expect(feature.issue_type).to eq('feature')
           pbi = issues.find { |issue| issue.tts_id == '168900' }
-          expect(pbi.issue_type).to eq('PBI')
+          expect(pbi.issue_type).to eq('product_backlog_item')
           task = issues.find { |issue| issue.tts_id == '169223' }
           expect(task.issue_type).to eq('task')
+          epic = issues.find { |issue| issue.tts_id == '160528' }
+          expect(epic.issue_type).to eq('epic')
+          release = issues.find { |issue| issue.tts_id == '165516' }
+          expect(release.issue_type).to eq('release')
           bug = issues.find { |issue| issue.tts_id == '168646' }
           expect(bug.bug).to be_truthy
         end
