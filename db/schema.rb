@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_10_173008) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_11_183807) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -51,10 +50,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_173008) do
 
   create_table "dynamic_datasets", force: :cascade do |t|
     t.string "name"
-    t.string "code"
+    t.text "code"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
     t.index ["project_id"], name: "index_dynamic_datasets_on_project_id"
   end
 
@@ -90,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_173008) do
     t.string "tts_id"
     t.boolean "bug", default: false, null: false
     t.string "parent_tts_id"
+    t.string "board_column"
     t.index ["project_id"], name: "index_issues_on_project_id"
   end
 
@@ -139,6 +140,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_10_173008) do
     t.boolean "sync_ticket_tracking_system", default: false, null: false
     t.boolean "sync_source_control", default: false, null: false
     t.string "logo_background_color"
+    t.boolean "display_tasks_metrics", default: false, null: false
+    t.boolean "display_code_metrics", default: false, null: false
     t.index ["customer_id"], name: "index_projects_on_customer_id"
     t.index ["name"], name: "index_projects_on_name", unique: true
     t.index ["slug"], name: "index_projects_on_slug", unique: true

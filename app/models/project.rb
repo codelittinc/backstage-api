@@ -6,6 +6,8 @@
 #
 #  id                          :bigint           not null, primary key
 #  billable                    :boolean          default(TRUE), not null
+#  display_code_metrics        :boolean          default(FALSE), not null
+#  display_tasks_metrics       :boolean          default(FALSE), not null
 #  logo_background_color       :string
 #  logo_url                    :string
 #  metadata                    :json
@@ -40,6 +42,35 @@ class Project < ApplicationRecord
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :billable, inclusion: { in: [true, false] }
   validates :slack_channel, presence: true
+
+  validate :validate_display_tasks_metrics
+  validate :validate_sync_ticket_tracking_system
+  validate :validate_sync_source_control
+  validate :validate_display_code_metrics
+
+  def validate_display_tasks_metrics
+    return unless display_tasks_metrics && !sync_ticket_tracking_system
+
+    errors.add(:display_tasks_metrics, 'cannot be true if sync_ticket_tracking_system is false')
+  end
+
+  def validate_display_code_metrics
+    return unless display_code_metrics && !sync_source_control
+
+    errors.add(:display_tasks_metrics, 'cannot be true if sync_source_control is false')
+  end
+
+  def validate_sync_ticket_tracking_system
+    return unless sync_ticket_tracking_system && customer.source_control_token.blank?
+
+    errors.add(:sync_ticket_tracking_system, "can't be true if customer's source_control_token is empty")
+  end
+
+  def validate_sync_source_control
+    return unless sync_source_control && customer.source_control_token.blank?
+
+    errors.add(:sync_source_control, "can't be true if customer's source_control_token is empty")
+  end
 
   scope :active_in_period, lambda { |start_date, end_date|
     where(id: StatementOfWork.active_in_period(start_date, end_date).select(:project_id).distinct)

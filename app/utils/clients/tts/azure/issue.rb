@@ -5,11 +5,19 @@ module Clients
     module Azure
       class Issue < Client
         def list
-          issues_list = ::Request.post(url, customer_authorization, body)
-          urls = issues_list['workItems'].pluck('url')
-          work_items = urls.map do |url|
+          work_items = issues_urls.map do |url|
             url_expansion = "#{url}?api-version=6.0&$expand=relations"
-            ::Request.get(url_expansion, customer_authorization)
+            attempts = 0
+
+            begin
+              response = ::Request.get(url_expansion, customer_authorization)
+            rescue StandardError => e
+              attempts += 1
+              retry if attempts < 5
+              raise "Failed to get response for URL #{url} after 5 attempts: #{e.message}"
+            end
+
+            response
           end
 
           parsed_items = work_items.map do |work_item|
@@ -31,14 +39,20 @@ module Clients
           "#{customer_url}/#{project_name}/_apis/wit/wiql?api-version=6.0"
         end
 
-        def body
-          area_path = project.metadata['area_path']
-
+        def body(area_path)
           {
             'query' => 'SELECT [System.Id], [System.Title], [System.WorkItemType], [System.BoardColumn] ' \
                        'FROM workitems ' \
                        "WHERE [System.TeamProject] = '#{project_name}' AND [System.AreaPath] = '#{area_path}'"
           }
+        end
+
+        def issues_urls
+          area_paths = project.metadata['area_paths']
+          area_paths.map do |area_path|
+            issues_list = ::Request.post(url, customer_authorization, body(area_path))
+            issues_list['workItems'].pluck('url')
+          end.flatten
         end
 
         def project_name

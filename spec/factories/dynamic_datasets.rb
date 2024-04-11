@@ -5,8 +5,9 @@
 # Table name: dynamic_datasets
 #
 #  id         :bigint           not null, primary key
-#  code       :string
+#  code       :text
 #  name       :string
+#  order      :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  project_id :bigint           not null

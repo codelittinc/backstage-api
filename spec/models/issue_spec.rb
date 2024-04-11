@@ -5,6 +5,7 @@
 # Table name: issues
 #
 #  id            :bigint           not null, primary key
+#  board_column  :string
 #  bug           :boolean          default(FALSE), not null
 #  closed_date   :datetime
 #  effort        :float

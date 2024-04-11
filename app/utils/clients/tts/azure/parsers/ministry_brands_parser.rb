@@ -40,10 +40,7 @@ module Clients
           def issue_type
             work_item_type = json.dig('fields', 'System.WorkItemType')
 
-            return 'PBI' if work_item_type == 'Product Backlog Item'
-            return 'feature' if work_item_type == 'Feature'
-
-            'task' if work_item_type == 'Task'
+            work_item_type.downcase.gsub(' ', '_')
           end
 
           def reported_at
@@ -60,6 +57,10 @@ module Clients
 
           def parent_tts_id
             json.dig('fields', 'System.Parent')
+          end
+
+          def board_column
+            json.dig('fields', 'System.BoardColumn')
           end
         end
       end
