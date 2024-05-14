@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_11_203958) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_13_143928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -130,6 +130,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_11_203958) do
     t.boolean "bug", default: false, null: false
     t.string "parent_tts_id"
     t.string "board_column"
+    t.string "sprint"
     t.index ["project_id"], name: "index_issues_on_project_id"
   end
 

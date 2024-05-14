@@ -41,9 +41,16 @@ module Clients
 
         def body(area_path)
           {
-            'query' => 'SELECT [System.Id], [System.Title], [System.WorkItemType], [System.BoardColumn] ' \
-                       'FROM workitems ' \
-                       "WHERE [System.TeamProject] = '#{project_name}' AND [System.AreaPath] = '#{area_path}'"
+            'query' => "SELECT
+                         [System.Id],
+                         [System.Title],
+                         [System.WorkItemType],
+                         [System.BoardColumn],
+                         [System.IterationPath]
+                       FROM workitems
+                       WHERE
+                         [System.TeamProject] = '#{project_name}' AND
+                         [System.AreaPath] = '#{area_path}'"
           }
         end
 
