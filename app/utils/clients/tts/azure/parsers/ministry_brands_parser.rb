@@ -62,6 +62,10 @@ module Clients
           def board_column
             json.dig('fields', 'System.BoardColumn')
           end
+
+          def sprint
+            json.dig('fields', 'System.IterationPath')
+          end
         end
       end
     end

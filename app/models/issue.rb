@@ -11,6 +11,7 @@
 #  effort        :float
 #  issue_type    :string
 #  reported_at   :datetime
+#  sprint        :string
 #  state         :string
 #  title         :string
 #  created_at    :datetime         not null
