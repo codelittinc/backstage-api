@@ -17,7 +17,8 @@ class IssuesCreator < ApplicationService
         Issue.create!(project: @project, effort: issue.effort, user: issue.user, state: issue.state,
                       closed_date: issue.closed_date, title: issue.title,
                       issue_type: issue.issue_type, reported_at: issue.reported_at, tts_id: issue.tts_id, bug: issue.bug?,
-                      parent_tts_id: issue.parent_tts_id, board_column: issue.board_column, sprint: issue.sprint)
+                      parent_tts_id: issue.parent_tts_id, board_column: issue.board_column, sprint: issue.sprint,
+                      sprint_start_date: issue.sprint_start_date, sprint_end_date: issue.sprint_end_date)
       end.compact
     end
   rescue StandardError => e
