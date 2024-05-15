@@ -21,7 +21,7 @@ module Clients
           end
 
           parsed_items = work_items.map do |work_item|
-            parser.new(work_item, project)
+            parser.new(work_item, project, iteractions)
           end
 
           filtered_items(parsed_items)
@@ -64,6 +64,14 @@ module Clients
 
         def project_name
           project.metadata['azure_project_name']
+        end
+
+        def iteractions
+          return @iteractions if @iteractions
+
+          iterations_url = "#{customer_url}/#{project_name}/_apis/work/teamsettings/iterations?api-version=6.0"
+          response = ::Request.get(iterations_url, customer_authorization)
+          @iteractions = response['value']
         end
       end
     end

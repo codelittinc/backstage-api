@@ -5,11 +5,12 @@ module Clients
     module Azure
       module Parsers
         class MinistryBrandsParser
-          attr_reader :json, :project
+          attr_reader :json, :project, :iterations
 
-          def initialize(json, project)
+          def initialize(json, project, iterations)
             @json = json
             @project = project
+            @iterations = iterations
           end
 
           def valid?
