@@ -15,7 +15,8 @@ class AssignmentsController < ApplicationController
       assignments_filter[:start_date], assignments_filter[:end_date]
     )
 
-    @assignments = Assignment.where(requirement: requirements)
+    @assignments = Assignment.where(requirement: requirements).active_in_period(assignments_filter[:start_date],
+                                                                                assignments_filter[:end_date])
   end
 
   def show; end
