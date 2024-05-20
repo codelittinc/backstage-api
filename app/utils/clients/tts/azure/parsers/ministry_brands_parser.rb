@@ -65,7 +65,16 @@ module Clients
           end
 
           def sprint
-            json.dig('fields', 'System.IterationPath')
+            path = json.dig('fields', 'System.IterationPath')
+            iterations.find { |iteration| iteration['path'] == path }&.dig('name')
+          end
+
+          def sprint_start_date
+            iterations.find { |iteration| iteration['name'] == sprint }&.dig('attributes', 'startDate')
+          end
+
+          def sprint_end_date
+            iterations.find { |iteration| iteration['name'] == sprint }&.dig('attributes', 'endDate')
           end
         end
       end
