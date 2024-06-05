@@ -3,11 +3,21 @@
 class ApplicationController < ActionController::API
   before_action :set_default_response_format
   before_action :authenticate
-  attr_reader :current_user
+  attr_reader :current_user, :current_project
 
   def authenticate
-    return user_invalid! unless authorization_header
+    if authorization_header
+      authenticate_user
+    elsif project_auth_key
+      authenticate_project
+    else
+      user_invalid!
+    end
+  end
 
+  private
+
+  def authenticate_user
     user = User.find_or_initialize_by({
                                         email: user_auth_params['email'],
                                         google_id: user_auth_params['google_id']
@@ -15,8 +25,14 @@ class ApplicationController < ActionController::API
     return user_invalid! unless user.valid?
 
     save_user!(user)
-
     @current_user = user
+  end
+
+  def authenticate_project
+    project_auth = ProjectAuth.find_by(key: project_auth_key)
+    return user_invalid! unless project_auth
+
+    @current_project = project_auth.project
   end
 
   def save_user!(user)
@@ -29,7 +45,7 @@ class ApplicationController < ActionController::API
   end
 
   def user_invalid!
-    render_error('Invalid user', :unauthorized)
+    render_error('Invalid user or project', :unauthorized)
   end
 
   def render_error(message, status)
@@ -43,6 +59,10 @@ class ApplicationController < ActionController::API
 
   def authorization_header
     request.headers['Authorization']
+  end
+
+  def project_auth_key
+    request.headers['Project-Auth-Key']
   end
 
   def user_auth_params
