@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_15_131152) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_05_181504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -72,6 +72,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_15_131152) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_certifications_on_user_id"
+  end
+
+  create_table "customer_api_auths", force: :cascade do |t|
+    t.string "auth_key"
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_api_auths_on_customer_id"
+  end
+
+  create_table "customer_service_auths", force: :cascade do |t|
+    t.string "auth_key"
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_service_auths_on_customer_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -354,6 +370,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_15_131152) do
   add_foreign_key "assignments", "requirements"
   add_foreign_key "assignments", "users"
   add_foreign_key "certifications", "users"
+  add_foreign_key "customer_api_auths", "customers"
+  add_foreign_key "customer_service_auths", "customers"
   add_foreign_key "dynamic_datasets", "projects"
   add_foreign_key "issues", "projects"
   add_foreign_key "payments", "statement_of_works"

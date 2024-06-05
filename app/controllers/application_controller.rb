@@ -6,8 +6,18 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def authenticate
-    return user_invalid! unless authorization_header
+    if authorization_header
+      authenticate_user
+    elsif customer_service_auth_key
+      authenticate_customer_service
+    else
+      user_invalid!
+    end
+  end
 
+  private
+
+  def authenticate_user
     user = User.find_or_initialize_by({
                                         email: user_auth_params['email'],
                                         google_id: user_auth_params['google_id']
@@ -15,8 +25,14 @@ class ApplicationController < ActionController::API
     return user_invalid! unless user.valid?
 
     save_user!(user)
-
     @current_user = user
+  end
+
+  def authenticate_customer_service
+    customer_service_auth = CustomerServiceAuth.find_by(auth_key: customer_service_auth_key)
+    return user_invalid! unless customer_service_auth
+
+    @current_user = customer_service_auth.customer
   end
 
   def save_user!(user)
@@ -43,6 +59,10 @@ class ApplicationController < ActionController::API
 
   def authorization_header
     request.headers['Authorization']
+  end
+
+  def customer_service_auth_key
+    request.headers['Customer-Service-Auth-Key']
   end
 
   def user_auth_params
