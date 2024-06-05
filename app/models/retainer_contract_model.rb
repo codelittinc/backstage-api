@@ -34,7 +34,7 @@ class RetainerContractModel < ApplicationRecord
     0
   end
 
-  def expected_hours(assignment, start_date, end_date, _include_paid_time_off: false)
+  def expected_hours(assignment, start_date, end_date, _include_paid_time_off = false)
     statement_of_work_total_hours = assignment.requirement.statement_of_work.contract_model.expected_hours_per_period
     statement_of_work_total_hours * assignment.coverage * months_in_period(start_date, end_date)
   end
