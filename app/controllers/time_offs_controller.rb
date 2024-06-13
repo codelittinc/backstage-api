@@ -10,7 +10,7 @@ class TimeOffsController < ApplicationController
     end
 
     time_off = TimeOffBuilder.call(text, start_datetime, end_datetime)
-    time_off&.save
+    time_off&.save!
     success = time_off&.persisted?
     msg = success ? { id: time_off&.id } : 'The time of request creation failed'
 
@@ -44,6 +44,6 @@ class TimeOffsController < ApplicationController
   end
 
   def time_off_params
-    params.require(:webhook_time_off).permit(:text, :start_datetime, :end_datetime).to_h
+    params.permit(:text, :start_datetime, :end_datetime).to_h
   end
 end

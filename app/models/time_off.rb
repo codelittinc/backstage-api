@@ -14,8 +14,9 @@
 #
 # Indexes
 #
-#  index_time_offs_on_time_off_type_id  (time_off_type_id)
-#  index_time_offs_on_user_id           (user_id)
+#  index_time_offs_on_time_off_type_id    (time_off_type_id)
+#  index_time_offs_on_unique_combination  (starts_at,ends_at,time_off_type_id,user_id) UNIQUE
+#  index_time_offs_on_user_id             (user_id)
 #
 # Foreign Keys
 #
@@ -28,6 +29,10 @@ class TimeOff < ApplicationRecord
 
   validates :starts_at, presence: true
   validates :ends_at, presence: true
+
+  validates :user_id,
+            uniqueness: { scope: %i[starts_at ends_at time_off_type_id],
+                          message: 'Time off with the same start and end times already exists for this user and time off type' }
 
   scope :active_in_period, ->(start_date, end_date) { where('starts_at <= ? AND ends_at >= ?', end_date, start_date) }
 end

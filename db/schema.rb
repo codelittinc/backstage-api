@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_05_183622) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_13_151647) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -299,6 +299,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_05_183622) do
     t.datetime "ends_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["starts_at", "ends_at", "time_off_type_id", "user_id"], name: "index_time_offs_on_unique_combination", unique: true
     t.index ["time_off_type_id"], name: "index_time_offs_on_time_off_type_id"
     t.index ["user_id"], name: "index_time_offs_on_user_id"
   end

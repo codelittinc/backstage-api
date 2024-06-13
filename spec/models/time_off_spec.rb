@@ -14,8 +14,9 @@
 #
 # Indexes
 #
-#  index_time_offs_on_time_off_type_id  (time_off_type_id)
-#  index_time_offs_on_user_id           (user_id)
+#  index_time_offs_on_time_off_type_id    (time_off_type_id)
+#  index_time_offs_on_unique_combination  (starts_at,ends_at,time_off_type_id,user_id) UNIQUE
+#  index_time_offs_on_user_id             (user_id)
 #
 # Foreign Keys
 #
