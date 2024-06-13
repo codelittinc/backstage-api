@@ -46,6 +46,14 @@ RSpec.describe ProjectsController, type: :controller do
 
       expect(response.parsed_body['customer']['id']).to eq(project.customer.id)
     end
+
+    it 'returns a report key if it has a project_report' do
+      project = Project.create! valid_attributes
+      project.project_report = ProjectReport.create!(project:, key: '123')
+
+      get :show, params: { id: project.to_param }, format: :json
+      expect(response.parsed_body['report_key']).to eq('123')
+    end
   end
 
   describe 'POST #create' do

@@ -38,7 +38,7 @@ class Project < ApplicationRecord
   has_many :issues, dependent: :destroy
   has_many :statement_of_works, dependent: :destroy
   has_many :dynamic_datasets, dependent: :destroy
-  has_one :project_report
+  has_one :project_report, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :billable, inclusion: { in: [true, false] }
