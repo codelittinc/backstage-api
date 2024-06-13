@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: project_auths
+# Table name: project_reports
 #
 #  id         :bigint           not null, primary key
 #  key        :string
@@ -12,13 +12,13 @@
 #
 # Indexes
 #
-#  index_project_auths_on_project_id  (project_id)
+#  index_project_reports_on_project_id  (project_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (project_id => projects.id)
 #
-class ProjectAuth < ApplicationRecord
+class ProjectReport < ApplicationRecord
   belongs_to :project
 
   before_create :generate_key, unless: :key_present?

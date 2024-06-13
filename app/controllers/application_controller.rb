@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_project
-    project_auth = ProjectAuth.find_by(key: project_auth_key)
+    project_auth = ProjectReport.find_by(key: project_auth_key)
     return user_invalid! unless project_auth
 
     @current_project = project_auth.project
