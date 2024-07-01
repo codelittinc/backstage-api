@@ -16,6 +16,17 @@ class RetainerContractModel < ApplicationRecord
 
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
 
+  def contract_total_hours
+    expected_hours_per_period * months_in_period(statement_of_work.start_date, statement_of_work.end_date)
+  end
+
+  def consumed_hours
+    assignments = statement_of_work.requirements.map(&:assignments).flatten
+    assignments.sum do |assignment|
+      worked_hours(assignment, statement_of_work.start_date, statement_of_work.end_date)
+    end
+  end
+
   def expected_income(start_date, end_date)
     revenue_per_period * months_in_period(start_date, end_date)
   end
@@ -23,7 +34,7 @@ class RetainerContractModel < ApplicationRecord
   def months_in_period(start_date, end_date)
     return 1 if start_date.month == end_date.month && start_date.year == end_date.year
 
-    ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month)
+    ((end_date.year * 12) + end_date.month) - ((start_date.year * 12) + start_date.month) + 1
   end
 
   def assignment_executed_income(_assignment, _start_date, _end_date)
