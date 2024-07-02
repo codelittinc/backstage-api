@@ -20,13 +20,6 @@ class RetainerContractModel < ApplicationRecord
     expected_hours_per_period * months_in_period(statement_of_work.start_date, statement_of_work.end_date)
   end
 
-  def consumed_hours
-    assignments = statement_of_work.requirements.map(&:assignments).flatten
-    assignments.sum do |assignment|
-      worked_hours(assignment, statement_of_work.start_date, statement_of_work.end_date)
-    end
-  end
-
   def expected_income(start_date, end_date)
     revenue_per_period * months_in_period(start_date, end_date)
   end

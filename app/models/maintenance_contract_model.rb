@@ -21,6 +21,10 @@ class MaintenanceContractModel < ApplicationRecord
 
   validates :delivery_period, inclusion: { in: %w[weekly monthly] }
 
+  def contract_total_hours
+    expected_hours(nil, statement_of_work.start_date.to_date, statement_of_work.end_date.to_date)
+  end
+
   def expected_hours(_assignment, start_date, end_date, _include_paid_time_off = false)
     if delivery_period == 'weekly'
       expected_hours_per_period * weeks_in_period(start_date, end_date)
