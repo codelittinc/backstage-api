@@ -44,4 +44,11 @@ RSpec.describe Project, type: :model do
     it { should have_many(:dynamic_datasets).dependent(:destroy) }
     it { should have_one(:project_report) }
   end
+
+  context 'callbacks' do
+    it 'creates a project report before creating a project' do
+      project = create(:project)
+      expect(project.project_report).to be_present
+    end
+  end
 end

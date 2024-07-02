@@ -48,6 +48,11 @@ class Project < ApplicationRecord
   validate :validate_sync_ticket_tracking_system
   validate :validate_sync_source_control
   validate :validate_display_code_metrics
+  after_create :create_project_report
+
+  def create_project_report
+    build_project_report.save
+  end
 
   def validate_display_tasks_metrics
     return unless display_tasks_metrics && !sync_ticket_tracking_system
