@@ -14,6 +14,10 @@ class FixedBidContractModel < ApplicationRecord
 
   has_one :statement_of_work, as: :contract_model, dependent: :destroy
 
+  def contract_total_hours
+    consumed_hours
+  end
+
   def assignment_executed_income(_assignment, _start_date, _end_date)
     0
   end

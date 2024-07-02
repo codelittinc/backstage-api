@@ -3,6 +3,17 @@
 module Calculable
   extend ActiveSupport::Concern
 
+  def contract_total_hours
+    raise NotImplementedError
+  end
+
+  def consumed_hours
+    assignments = statement_of_work.requirements.map(&:assignments).flatten
+    assignments.sum do |assignment|
+      worked_hours(assignment, statement_of_work.start_date, statement_of_work.end_date)
+    end
+  end
+
   def expected_hours(assignment, start_date, end_date, include_paid_time_off = false)
     hours = Analytics::TimeEntries::ExpectedHours.new(assignment, start_date, end_date).data
     return hours if include_paid_time_off

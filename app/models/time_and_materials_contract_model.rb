@@ -19,6 +19,10 @@ class TimeAndMaterialsContractModel < ApplicationRecord
 
   validates :limit_by, inclusion: { in: %w[hours contract_size] }
 
+  def contract_total_hours
+    hours_amount
+  end
+
   def assignment_executed_income(assignment, start_date, end_date)
     hours = worked_hours(assignment, start_date, end_date)
     hours * (hourly_price || 0)
