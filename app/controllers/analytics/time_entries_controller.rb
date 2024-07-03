@@ -8,7 +8,6 @@ module Analytics
     def index
       @time_entries = Analytics::TimeEntriesAnalytics.new(@project, @statement_of_work, params[:start_date],
                                                           params[:end_date]).data
-
       render json: @time_entries
     end
 

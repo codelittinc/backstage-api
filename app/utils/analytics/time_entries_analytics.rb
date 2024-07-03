@@ -82,11 +82,11 @@ module Analytics
     def requirements
       return @requirements if @requirements
 
-      @requirements = if @project
+      @requirements = if @statement_of_work
+                        Requirement.where(id: @statement_of_work.requirements.map(&:id))
+                      elsif @project
                         Requirement.where(id: @project.statement_of_works.map(&:requirements)
                                             .flatten.map(&:id))
-                      elsif @statement_of_work
-                        Requirement.where(id: @statement_of_work.requirements.map(&:id))
                       else
                         Requirement.all
                       end
