@@ -66,11 +66,12 @@ class User < ApplicationRecord
   end
 
   scope :by_external_identifier, lambda { |identifiers|
-    identifiers = [identifiers].flatten.compact.map(&:downcase)
-    joins('LEFT JOIN user_service_identifiers ON users.id = user_service_identifiers.user_id')
-      .where('lower(users.email) IN (:identifiers) OR lower(user_service_identifiers.identifier) IN (:identifiers)',
-             identifiers:)
-  }
+                                   identifiers = [identifiers].flatten.compact.map(&:to_s).map(&:downcase)
+                                   joins('LEFT JOIN user_service_identifiers ON users.id = user_service_identifiers.user_id')
+                                     .where('lower(users.email) IN (:identifiers) OR lower(user_service_identifiers.identifier) IN
+                                      (:identifiers) OR CAST(users.id AS TEXT) IN (:identifiers)',
+                                            identifiers:)
+                                 }
 
   def self.by_name(full_name)
     name_parts = full_name.split
