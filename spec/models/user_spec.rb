@@ -102,6 +102,12 @@ RSpec.describe User, type: :model do
       user = create(:user, email: 'bruce.wayne@codelitt.com')
       expect(User.by_external_identifier(user.email).first).to eql(user)
     end
+
+    it 'returns the user by the user id' do
+      user = create(:user, email: 'bruce.wayne@codelitt.com')
+
+      expect(User.by_external_identifier(user.id).first).to eql(user)
+    end
   end
 
   context '#by_name' do
