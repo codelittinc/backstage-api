@@ -93,9 +93,18 @@ class Project < ApplicationRecord
   end
 
   def participants
-    users = statement_of_works.active_in_period(Time.zone.today,
-                                                Time.zone.today).map(&:requirements)
-                              .flatten.map(&:assignments).flatten.map(&:user).flatten
-    User.where(id: users.map(&:id)).distinct
+    date = Time.zone.today
+
+    # Get the active statement of works in the given period
+    active_sows = statement_of_works.active_in_period(date, date)
+
+    # Find all the related requirements that are active in the period while keeping it as an ActiveRecord relation
+    active_requirements = Requirement.where(statement_of_work_id: active_sows.pluck(:id))
+                                     .active_in_period(date, date)
+
+    # Get the users related to assignments from the active requirements
+    User.joins(assignments: :requirement)
+        .where(assignments: { requirement_id: active_requirements.pluck(:id) })
+        .distinct
   end
 end
