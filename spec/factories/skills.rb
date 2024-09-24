@@ -9,6 +9,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_skills_on_lower_name  (lower((name)::text)) UNIQUE
+#
 FactoryBot.define do
   factory :skill do
     name { FFaker::Skill.tech_skill }
