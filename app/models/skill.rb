@@ -9,9 +9,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_skills_on_lower_name  (lower((name)::text)) UNIQUE
+#
 class Skill < ApplicationRecord
   has_many :user_skills, dependent: :destroy
   has_many :users, through: :user_skills
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
 end

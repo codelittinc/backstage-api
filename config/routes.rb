@@ -2,7 +2,7 @@
 
 require 'sidekiq/web'
 require 'sidekiq/cron/web'
-
+# rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
   resources :dynamic_datasets
   resources :time_offs, only: [:create]
@@ -38,4 +38,10 @@ Rails.application.routes.draw do
   resources :skills, only: [:index]
   resources :issues, only: [:index]
   resources :permissions, only: [:index]
+  resources :user_skills, only: [:index] do
+    collection do
+      patch :bulk_update
+    end
+  end
 end
+# rubocop:enable Metrics/BlockLength

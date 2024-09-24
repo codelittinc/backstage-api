@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_13_164100) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_23_192947) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "unaccent"
 
@@ -230,6 +229,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_13_164100) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text)", name: "index_skills_on_lower_name", unique: true
   end
 
   create_table "statement_of_work_financial_reports", force: :cascade do |t|
