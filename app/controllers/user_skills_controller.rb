@@ -10,17 +10,6 @@ class UserSkillsController < ApplicationController
     render json: @user_skills
   end
 
-  # POST /user_skills
-  def create
-    @user_skill = UserSkill.new(user_skill_params)
-
-    if @user_skill.save
-      render json: @user_skill, status: :created, location: @user_skill
-    else
-      render json: @user_skill.errors, status: :unprocessable_entity
-    end
-  end  
-
   # PATCH/PUT /user_skills
   def bulk_update
     ApplicationRecord.transaction do
@@ -56,6 +45,8 @@ class UserSkillsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_skills_list_params
+    return [] if params.dig(:params, :user_skills).blank?
+
     params.require(:params).require(:user_skills).map do |skill|
       skill.permit(:last_applied_in_year, :level, :years_of_experience, :skill_id)
     end
