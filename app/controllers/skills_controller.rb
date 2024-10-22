@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 class SkillsController < ApplicationController
+
   def index
-    @skills = Skill.all
+    @skills = Skill.all.sort_by(&:name)
   end
 
   def create
     @skill = Skill.new(skill_params)
 
     if @skill.save
-      render json: @skill, status: :created, location: @skill
+      render json: @skill, status: :created
     else
       render json: @skill.errors, status: :unprocessable_entity
     end
