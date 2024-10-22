@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :users
   resources :customers
   resources :professions, only: [:index]
-  resources :skills, only: [:index]
+  resources :skills, only: [:index, :create]
   resources :issues, only: [:index]
   resources :permissions, only: [:index]
   resources :user_skills, only: [:index] do
