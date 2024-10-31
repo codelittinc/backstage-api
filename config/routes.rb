@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :user_skills, only: [:index] do
     collection do
       patch :bulk_update
+      get :search
     end
   end
 end

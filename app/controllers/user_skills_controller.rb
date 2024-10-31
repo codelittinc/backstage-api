@@ -36,6 +36,14 @@ class UserSkillsController < ApplicationController
     head :not_found
   end
 
+  # GET /user_skills/search?query=:query
+  def search
+    return render json: [] if params[:query].blank?
+    query = params[:query].split(/[\s,]+/).map(&:downcase)
+    users = UserSkill.joins(:skill).where('LOWER(skills.name) IN (?)', query).pluck(:user_id).uniq
+    render json: User.where(id: users)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
