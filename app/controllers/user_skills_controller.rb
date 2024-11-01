@@ -5,7 +5,7 @@ class UserSkillsController < ApplicationController
 
   # GET /user_skills?user_id=:id
   def index
-    @user_skills = UserSkill.where(user_id: params['user_id'])
+    @user_skills = UserSkill.where(user_id: params['user_id']).joins(:skill).select('user_skills.*', 'skills.name as skill_name')
 
     render json: @user_skills
   end
