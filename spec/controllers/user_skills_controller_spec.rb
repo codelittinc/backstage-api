@@ -3,9 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe UserSkillsController, type: :controller do
-  let(:user) { double("User", id: 1) }
-  let(:skill) { double("Skill", id: 1, name: 'Ruby') }
-  let(:user_skill) { double("UserSkill", id: 1, user_id: user.id, skill_id: skill.id, years_of_experience: 3, last_applied_in_year: 2021, level: 'beginner') }
+  let(:user) { double('User', id: 1) }
+  let(:skill) { double('Skill', id: 1, name: 'Ruby') }
+  let(:user_skill) do
+    double('UserSkill', id: 1, user_id: user.id, skill_id: skill.id, years_of_experience: 3, last_applied_in_year: 2021,
+                        level: 'beginner')
+  end
 
   before do
     # Mocking UserSkill model interactions

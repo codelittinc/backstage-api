@@ -13,16 +13,14 @@ class UserSkillsController < ApplicationController
     ApplicationRecord.transaction do
       # Remove all existing skills for the user
       UserSkill.where(user_id: params.dig(:params, :user_id)).destroy_all
-  
+
       # Permit and process the new list of user skills
       user_skills_list_params.each do |user_skill|
         new_skill = UserSkill.new(user_skill.merge(user_id: params.dig(:params, :user_id)))
-        unless new_skill.save
-          raise ActiveRecord::Rollback
-        end
+        raise ActiveRecord::Rollback unless new_skill.save
       end
     end
-  
+
     render json: { message: 'Skills updated successfully' }, status: :ok
   end
 
@@ -32,14 +30,6 @@ class UserSkillsController < ApplicationController
     head :no_content
   rescue ActiveRecord::RecordNotFound
     head :not_found
-  end
-
-  # GET /user_skills/search?query=:query
-  def search
-    return render json: [] if params[:query].blank?
-    query = params[:query].split(/[\s,]+/).map(&:downcase)
-    users = UserSkill.joins(:skill).where('LOWER(skills.name) IN (?)', query).pluck(:user_id).uniq
-    render json: User.where(id: users)
   end
 
   private

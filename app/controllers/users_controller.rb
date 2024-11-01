@@ -5,11 +5,15 @@ class UsersController < ApplicationController
 
   def index
     query = params['query']&.split(',')
+    skills_filter = params['filter_by_skills']&.split(/[\s,]+/)&.map(&:downcase)
+
     @users = if query
                User.by_external_identifier(query)
              else
                User.all
              end
+
+    @users = @users.joins(:skills).where('LOWER(skills.name) IN (?)', skills_filter) if skills_filter.present?
     @users = @users.order(:first_name, :last_name)
   end
 
