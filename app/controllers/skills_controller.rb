@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class SkillsController < ApplicationController
-
   def index
     @skills = Skill.all.sort_by(&:name)
   end
@@ -17,7 +16,6 @@ class SkillsController < ApplicationController
   end
 
   private
-
 
   # Only allow a trusted parameter "white list" through.
   def skill_params
