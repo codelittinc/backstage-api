@@ -1,5 +1,5 @@
 #MAINTAINER Kaio Magalhaes, Inc.
 
 touch .env
-docker-compose up -d
+docker compose up -d
 docker exec -it backstage-api bash

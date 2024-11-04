@@ -2,7 +2,7 @@ if [ -f ./latest.dump ]; then
     rm ./latest.dump
 fi
 
-docker-compose up -d
+docker compose up -d
 docker stop backstage-api
 docker stop backstage-sidekiq
 heroku pg:backups:capture --app prod-backstage-api
