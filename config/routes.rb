@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :time_entries, only: [:index]
     resources :finances, only: [:index]
     resources :project_progress, only: [:index]
+    resources :skills, only: [:index]
   end
 
   resources :users
