@@ -20,7 +20,6 @@ class ApplicationController < ActionController::API
   def authenticate_user
     user = User.find_or_initialize_by({
                                         email: user_auth_params['email'],
-                                        google_id: user_auth_params['google_id']
                                       })
     return user_invalid! unless user.valid?
 
@@ -41,6 +40,7 @@ class ApplicationController < ActionController::API
       user.last_name = user_auth_params['last_name']
     end
     user.image_url = user_auth_params['image_url']
+    user.google_id = user_auth_params['google_id']
     user.save!
   end
 
