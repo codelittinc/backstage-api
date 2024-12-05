@@ -11,7 +11,7 @@ module Analytics
     private
 
     def search_skills
-      return Skill.all unless params[:search].present?
+      return Skill.all if params[:search].blank?
 
       Skill.where('name ILIKE ?', "%#{params[:search]}%")
     end
