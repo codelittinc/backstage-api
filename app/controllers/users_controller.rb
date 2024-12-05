@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     query = params['query']&.split(',')
     skills_filter = params['filter_by_skills']&.split(/[\s,]+/)&.map(&:downcase)
+    only_internal = params['only_internal']
 
     @users = if query
                User.by_external_identifier(query)
@@ -16,6 +17,8 @@ class UsersController < ApplicationController
     if skills_filter.present?
       @users = @users.joins(:skills).where('LOWER(skills.name) LIKE ANY (ARRAY[?])', skills_filter.map { |s| "%#{s}%" })
     end
+
+    @users = @users.where(internal: true) if only_internal.present?
     @users = @users.order(:first_name, :last_name)
   end
 
