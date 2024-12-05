@@ -13,7 +13,9 @@ class UsersController < ApplicationController
                User.all
              end
 
-    @users = @users.joins(:skills).where('LOWER(skills.name) IN (?)', skills_filter) if skills_filter.present?
+    if skills_filter.present?
+      @users = @users.joins(:skills).where('LOWER(skills.name) LIKE ANY (ARRAY[?])', skills_filter.map { |s| "%#{s}%" })
+    end
     @users = @users.order(:first_name, :last_name)
   end
 
