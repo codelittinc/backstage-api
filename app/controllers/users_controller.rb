@@ -15,7 +15,9 @@ class UsersController < ApplicationController
              end
 
     if skills_filter.present?
-      @users = @users.joins(:skills).where('LOWER(skills.name) LIKE ANY (ARRAY[?])', skills_filter.map { |s| "%#{s}%" })
+      @users = @users.joins(:skills)
+                     .where('LOWER(skills.name) LIKE ANY (ARRAY[?])', skills_filter.map { |s| "%#{s}%" })
+                     .distinct
     end
 
     @users = @users.where(internal: true) if only_internal.present?
