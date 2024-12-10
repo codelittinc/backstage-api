@@ -9,6 +9,9 @@ class RequirementsController < ApplicationController
       statement_of_works_ids = project.statement_of_works.map(&:id)
     elsif requirements_filter[:statement_of_work_id].present?
       statement_of_works_ids = [requirements_filter[:statement_of_work_id]]
+    elsif requirements_filter[:assignments_ids].present?
+      assignments = Assignment.where(id: requirements_filter[:assignments_ids])
+      statement_of_works_ids = assignments.map(&:statement_of_work_id).uniq
     else
       render json: { error: 'project_id or statement_of_work_id is required' }, status: :bad_request
       return
@@ -54,6 +57,6 @@ class RequirementsController < ApplicationController
   end
 
   def requirements_filter
-    params.permit(:project_id, :statement_of_work_id, :start_date, :end_date)
+    params.permit(:project_id, :statement_of_work_id, :start_date, :end_date, :assignments_ids)
   end
 end
