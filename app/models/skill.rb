@@ -4,10 +4,11 @@
 #
 # Table name: skills
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                :bigint           not null, primary key
+#  name              :string
+#  professional_area :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
 #
 # Indexes
 #
@@ -18,4 +19,5 @@ class Skill < ApplicationRecord
   has_many :users, through: :user_skills
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :professional_area, presence: true, inclusion: { in: %w[design engineering] }
 end

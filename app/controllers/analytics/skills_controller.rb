@@ -21,6 +21,7 @@ module Analytics
       @skills.map do |skill|
         {
           name: skill.name,
+          professional_area: skill.professional_area,
           level: UserSkill::VALID_LEVELS.map do |level|
             {
               name: level,
