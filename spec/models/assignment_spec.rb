@@ -7,6 +7,7 @@
 #  id             :bigint           not null, primary key
 #  coverage       :float
 #  end_date       :datetime
+#  feedback       :text
 #  start_date     :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

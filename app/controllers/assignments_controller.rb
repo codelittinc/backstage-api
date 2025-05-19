@@ -17,6 +17,7 @@ class AssignmentsController < ApplicationController
 
     @assignments = Assignment.where(requirement: requirements).active_in_period(assignments_filter[:start_date],
                                                                                 assignments_filter[:end_date])
+                             .order(start_date: :desc)
   end
 
   def show; end
@@ -50,7 +51,7 @@ class AssignmentsController < ApplicationController
   end
 
   def assignment_params
-    params.require(:assignment).permit(:coverage, :requirement_id, :start_date, :end_date, :user_id)
+    params.require(:assignment).permit(:coverage, :requirement_id, :start_date, :end_date, :user_id, :feedback)
   end
 
   def assignments_filter
