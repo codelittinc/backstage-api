@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:active, :internal, :contract_type, :email, :first_name, :last_name, :image_url,
-                                 :seniority, :google_id, :profession_id, :country,
+                                 :seniority, :google_id, :profession_id, :country, :history,
                                  user_service_identifiers_attributes: %i[id identifier service_name customer_id],
                                  salaries_attributes: %i[yearly_salary start_date])
   end

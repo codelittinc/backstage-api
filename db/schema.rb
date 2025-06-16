@@ -356,6 +356,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_19_152750) do
     t.boolean "active", default: true, null: false
     t.string "country"
     t.boolean "internal", default: true, null: false
+    t.text "history"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profession_id"], name: "index_users_on_profession_id"
     t.index ["slug"], name: "index_users_on_slug", unique: true

@@ -1,0 +1,20 @@
+# Docker Compose Rules
+# All database and Rails commands should be run inside the Docker container using:
+# docker compose exec app <command>
+
+# Common commands:
+# - Database migrations: docker compose exec app rails db:migrate
+# - Rails console: docker compose exec app rails console
+# - Rails server: docker compose exec app rails server
+# - Bundle install: docker compose exec app bundle install
+# - RSpec tests: docker compose exec app bundle exec rspec
+
+# Available services:
+# - app: Main Rails application (container_name: backstage-api)
+# - db: PostgreSQL database (container_name: backstage-db)
+# - redis: Redis server (container_name: backstage-redis)
+# - sidekiq: Background job processor (container_name: backstage-sidekiq)
+# - box: Bundle gems volume (container_name: backstage-bundle-box)
+
+# Note: The application uses Docker Compose for development environment.
+# Make sure all services are running with 'docker compose up' before executing commands.
