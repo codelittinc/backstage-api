@@ -10,6 +10,7 @@
 #  country       :string
 #  email         :string
 #  first_name    :string
+#  history       :text
 #  image_url     :string
 #  internal      :boolean          default(TRUE), not null
 #  last_name     :string

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 json.extract! user, :id, :active, :contract_type, :first_name,
-              :last_name, :email, :google_id, :slug, :image_url, :seniority, :profession_id, :country, :internal
+              :last_name, :email, :google_id, :slug, :image_url, :seniority, :profession_id, :country, :internal, :history
 
 # Render the permissions partial for each permission
 json.permissions user.permissions, partial: 'permissions/permission', as: :permission
