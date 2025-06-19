@@ -21,6 +21,10 @@ gem 'jbuilder'
 
 gem 'ruby_notifications_client', git: 'https://github.com/codelittinc/ruby_notifications_client.git'
 
+# Google authentication
+gem 'google-id-token'
+gem 'jwt'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
