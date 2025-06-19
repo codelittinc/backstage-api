@@ -18,14 +18,45 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_user
-    user = User.find_or_initialize_by({
-                                        email: user_auth_params['email'],
-                                        google_id: user_auth_params['google_id']
-                                      })
-    return user_invalid! unless user.valid?
+    token = extract_token_from_header
+    return user_invalid! unless token
 
-    save_user!(user)
+    validator = GoogleTokenValidator.new(token)
+    return user_invalid! unless validator.valid?
+
+    google_payload = validator.payload
+    return user_invalid! unless google_payload
+
+    user = find_or_initialize_user(google_payload)
+    return user_invalid! unless user&.valid?
+
+    save_user_safely(user)
     @current_user = user
+  end
+
+  def extract_token_from_header
+    authorization_header.gsub('Bearer ', '')
+  end
+
+  def find_or_initialize_user(google_payload)
+    user = User.find_or_initialize_by(email: google_payload['email'])
+    update_user_from_payload(user, google_payload)
+    user
+  end
+
+  def update_user_from_payload(user, google_payload)
+    user.email = google_payload['email']
+    user.first_name = google_payload['given_name']
+    user.last_name = google_payload['family_name']
+    user.image_url = google_payload['picture']
+    user.google_id = google_payload['sub']
+  end
+
+  def save_user_safely(user)
+    user.save!
+  rescue StandardError => e
+    Rails.logger.error { "Failed to save user: #{e.message}" }
+    false
   end
 
   def authenticate_project
